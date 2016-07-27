@@ -1,0 +1,7 @@
+nao_app_homepage:
+    path:     /
+    defaults: { _controller: NAOAppBundle:Home:index }
+
+nao_app_adminpage:
+    path:     /admin
+    defaults: { _controller: NAOAppBundle:Admin:index }

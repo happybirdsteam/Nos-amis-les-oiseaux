@@ -1,0 +1,27 @@
+{% extends "NAOAppBundle::layout.html.twig" %}
+
+{% block title %} {{ parent() }} {% endblock %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
+{% block body %}
+    <h1>HOME PAGE</h1>
+
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+    {% endif %}
+
+    {% if is_granted("ROLE_OBSERVER") %}
+        <p>J'ai accès à la partie observateur !</p>
+    {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN")) %}
+        <p>J'ai accès à la partie observateur et naturaliste</p>
+    {% else %}
+        <p>J'ai accès à la partie présentation du site !</p>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %} {{ parent() }} {% endblock %}

@@ -1,0 +1,7 @@
+nao_app:
+    resource: "@NAOAppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+nao_user:
+    resource: "@NAOUserBundle/Resources/config/routing.yml"
+    prefix:   /
