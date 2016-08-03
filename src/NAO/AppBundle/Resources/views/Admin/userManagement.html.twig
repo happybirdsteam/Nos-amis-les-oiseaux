@@ -17,7 +17,9 @@
         {% for user in adminList %}
             <li>
                 Admin | {{ user.username }} | {{ user.email }} |
-                <a href="{{ path('nao_app_user_delete', {'id' : user.id}) }}">Supprimer</a>
+                {% if is_granted("ROLE_SUPER_ADMIN") %}
+                    <a href="{{ path('nao_app_user_delete', {'id' : user.id}) }}">Supprimer</a>
+                {% endif %}
                 <a href="{{ path('nao_app_user_promote', {'id' : user.id}) }}">Promouvoir</a>
                 <a href="{{ path('nao_app_user_demote', {'id' : user.id}) }}">Rétrograder</a>
             </li>
