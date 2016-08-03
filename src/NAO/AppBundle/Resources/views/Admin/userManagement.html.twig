@@ -1,0 +1,54 @@
+{% extends "NAOAppBundle::Admin/index.html.twig" %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+
+{% block title %} Liste des utilisateurs {% endblock %}
+
+{% block container %}
+    <h3>Liste des utilisateurs</h3>
+
+    {% for flash_message in app.session.flashBag.get('info') %}
+        <div class="flash-notice">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
+    <ul class="list-group">
+        {% for user in adminList %}
+            <li>
+                Admin | {{ user.username }} | {{ user.email }} |
+                <a href="{{ path('nao_app_user_delete', {'id' : user.id}) }}">Supprimer</a>
+                <a href="{{ path('nao_app_user_promote', {'id' : user.id}) }}">Promouvoir</a>
+                <a href="{{ path('nao_app_user_demote', {'id' : user.id}) }}">Rétrograder</a>
+            </li>
+        {% else %}
+            <li>Aucun admin n'a été trouvé.</li>
+        {% endfor %}
+    </ul>
+
+    <ul class="list-group">
+        {% for user in naturalistList %}
+            <li>
+                Naturaliste | {{ user.username }} | {{ user.email }} |
+                <a href="{{ path('nao_app_user_delete', {'id' : user.id}) }}">Supprimer</a>
+                <a href="{{ path('nao_app_user_promote', {'id' : user.id}) }}">Promouvoir</a>
+                <a href="{{ path('nao_app_user_demote', {'id' : user.id}) }}">Rétrograder</a>
+            </li>
+        {% else %}
+            <li>Aucun naturaliste n'a été trouvé.</li>
+        {% endfor %}
+    </ul>
+
+    <ul class="list-group">
+        {% for user in observerList %}
+            <li>
+                Observateur | {{ user.username }} | {{ user.email }} |
+                <a href="{{ path('nao_app_user_delete', {'id' : user.id}) }}">Supprimer</a>
+                <a href="{{ path('nao_app_user_promote', {'id' : user.id}) }}">Promouvoir</a>
+                <a href="{{ path('nao_app_user_demote', {'id' : user.id}) }}">Rétrograder</a>
+            </li>
+        {% else %}
+            <li>Aucun observateur n'a été trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
