@@ -27,3 +27,7 @@ nao_app_user_demote:
     defaults: { _controller: NAOAppBundle:Admin:demote }
     requirements:
         id:   \d+
+
+nao_app_observation_add:
+    path:     /observation
+    defaults: { _controller: NAOAppBundle:Observation:observation }
