@@ -3,6 +3,7 @@
 namespace NAO\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Observation
@@ -40,6 +41,14 @@ class Observation
      * @ORM\JoinColumn(nullable=false)
      */
      private $bird;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "image/*" })
+     */
+    private $image;
+
 
     /**
      * Get id
@@ -121,5 +130,29 @@ class Observation
     public function getBird()
     {
         return $this->bird;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Observation
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
