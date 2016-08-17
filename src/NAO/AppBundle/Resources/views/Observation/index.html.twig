@@ -5,9 +5,54 @@
 {% block stylesheets %} {{ parent() }} {% endblock %}
 
 {% block body %}
+    <div id="mapid"></div>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
 {% endblock %}
 
-{% block javascripts %} {{ parent() }} {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script>
+        function initMap(position){
+            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+
+            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+            // create the tile layer with correct attribution
+            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+
+            var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+
+            var osm = L.tileLayer(tuileUrl, {
+                minZoom: 8,
+                maxZoom: 17,
+                attribution: attrib
+            });
+
+            var popup = L.popup();
+
+            function onClickAddMarker(e){
+                popup
+                        .setLatLng(e.latlng)
+                        .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
+                        .openOn(map);
+                marker
+                        .setLatLng(e.latlng)
+                        .update();
+                $('#observation_latlng').val(e.latlng);
+            }
+
+            osm.addTo(map);
+
+            map.on('click', onClickAddMarker);
+        }
+
+        $(document).ready(function(){
+            if(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(initMap);
+        });
+
+    </script>
+{% endblock %}

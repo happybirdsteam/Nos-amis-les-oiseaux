@@ -21,6 +21,7 @@ class ObservationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add("latlng", TextType::class)
             ->add('comment', TextareaType::class)
             ->add('bird', EntityType::class, array(
                 'class' => 'NAO\UserBundle\Entity\NaoAves',

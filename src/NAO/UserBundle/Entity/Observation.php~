@@ -49,6 +49,11 @@ class Observation
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $latlng;
+
 
     /**
      * Get id
@@ -130,5 +135,29 @@ class Observation
     public function getBird()
     {
         return $this->bird;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Observation
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
