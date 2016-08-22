@@ -37,8 +37,9 @@ class Observation
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NAO\AppBundle\Entity\NaoAves")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="bird", type="string", length=255)
      */
     private $bird;
 
@@ -54,6 +55,10 @@ class Observation
      */
     private $latlng;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="NAO\UserBundle\Entity\User", cascade={"persist"})
+     */
+    private $user;
 
     /**
      * Get id
@@ -161,14 +166,15 @@ class Observation
         return $this->latlng;
     }
 
+
     /**
      * Set bird
      *
-     * @param \NAO\AppBundle\Entity\NaoAves $bird
+     * @param string $bird
      *
      * @return Observation
      */
-    public function setBird(\NAO\AppBundle\Entity\NaoAves $bird)
+    public function setBird($bird)
     {
         $this->bird = $bird;
 
@@ -178,10 +184,35 @@ class Observation
     /**
      * Get bird
      *
-     * @return \NAO\AppBundle\Entity\NaoAves
+     * @return string
      */
     public function getBird()
     {
         return $this->bird;
+    }
+
+
+    /**
+     * Set user
+     *
+     * @param \NAO\UserBundle\Entity\User $user
+     *
+     * @return Observation
+     */
+    public function setUser(\NAO\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \NAO\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

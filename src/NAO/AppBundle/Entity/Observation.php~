@@ -37,8 +37,9 @@ class Observation
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NAO\AppBundle\Entity\NaoAves")
-     * @ORM\JoinColumn(nullable=false)
+     * @var string
+     *
+     * @ORM\Column(name="bird", type="string", length=255)
      */
     private $bird;
 
@@ -54,6 +55,10 @@ class Observation
      */
     private $latlng;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="NAO\UserBundle\Entity\User", cascade={"persist"})
+     */
+    private $user;
 
     /**
      * Get id
@@ -64,5 +69,127 @@ class Observation
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Observation
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return Observation
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Observation
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set latlng
+     *
+     * @param string $latlng
+     *
+     * @return Observation
+     */
+    public function setLatlng($latlng)
+    {
+        $this->latlng = $latlng;
+
+        return $this;
+    }
+
+    /**
+     * Get latlng
+     *
+     * @return string
+     */
+    public function getLatlng()
+    {
+        return $this->latlng;
+    }
+
+
+    /**
+     * Set bird
+     *
+     * @param string $bird
+     *
+     * @return Observation
+     */
+    public function setBird($bird)
+    {
+        $this->bird = $bird;
+
+        return $this;
+    }
+
+    /**
+     * Get bird
+     *
+     * @return string
+     */
+    public function getBird()
+    {
+        return $this->bird;
+    }
+
+    
+}

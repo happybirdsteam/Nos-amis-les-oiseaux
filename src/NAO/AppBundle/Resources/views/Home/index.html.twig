@@ -14,10 +14,16 @@
         <a href="{{ path('fos_user_security_login') }}">Connexion</a>
     {% endif %}
 
+    {% for flash_message in app.session.flashBag.get('info') %}
+        <div class="flash-notice alert alert-info">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
     {% if is_granted("ROLE_OBSERVER") %}
-        <p>J'ai accès à la partie observateur</p>
+        {% include 'NAOAppBundle::Home/createObservation.html.twig' %}
     {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
-        <p>J'ai accès à la partie observateur et naturaliste</p>
+        {% include 'NAOAppBundle::Home/createObservation.html.twig' %}
     {% else %}
         <p>J'ai accès à la partie présentation du site !</p>
     {% endif %}
