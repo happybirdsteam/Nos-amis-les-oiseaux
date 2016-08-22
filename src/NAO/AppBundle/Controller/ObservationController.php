@@ -2,10 +2,11 @@
 
 namespace NAO\AppBundle\Controller;
 
-use NAO\UserBundle\Entity\Observation;
-use NAO\UserBundle\Form\ObservationType;
+use NAO\AppBundle\Entity\Observation;
+use NAO\AppBundle\Form\ObservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ObservationController extends Controller
 {
@@ -47,5 +48,21 @@ class ObservationController extends Controller
         return $this->render('NAOAppBundle:Observation:index.html.twig', array(
             'form' => $form->createView()
         ));
+    }
+
+    public function ajaxBirdAction(Request $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            $term = $request->get('motcle');
+            $array= $this->getDoctrine()
+                ->getManager()
+                ->getRepository('NAOAppBundle:NaoAves')
+                ->findBird($term);
+
+            $response = new Response(json_encode($array));
+            $response -> headers -> set('Content-Type', 'application/json');
+            return $response;
+        }
     }
 }

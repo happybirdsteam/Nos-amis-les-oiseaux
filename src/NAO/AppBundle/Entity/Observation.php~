@@ -1,0 +1,68 @@
+<?php
+
+namespace NAO\AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Observation
+ *
+ * @ORM\Table(name="observation")
+ * @ORM\Entity(repositoryClass="NAO\AppBundle\Repository\ObservationRepository")
+ */
+class Observation
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=255)
+     */
+    private $comment;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="NAO\AppBundle\Entity\NaoAves")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bird;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\File(mimeTypes={ "image/*" })
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $latlng;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}
+

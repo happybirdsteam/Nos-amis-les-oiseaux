@@ -1,6 +1,6 @@
 <?php
 
-namespace NAO\UserBundle\Repository;
+namespace NAO\AppBundle\Repository;
 
 /**
  * ObservationRepository

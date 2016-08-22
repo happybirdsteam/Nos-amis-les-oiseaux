@@ -1,6 +1,6 @@
 <?php
 
-namespace NAO\UserBundle\Entity;
+namespace NAO\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Observation
  *
  * @ORM\Table(name="observation")
- * @ORM\Entity(repositoryClass="NAO\UserBundle\Repository\ObservationRepository")
+ * @ORM\Entity(repositoryClass="NAO\AppBundle\Repository\ObservationRepository")
  */
 class Observation
 {
@@ -37,10 +37,10 @@ class Observation
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NAO\UserBundle\Entity\NaoAves")
+     * @ORM\ManyToOne(targetEntity="NAO\AppBundle\Entity\NaoAves")
      * @ORM\JoinColumn(nullable=false)
      */
-     private $bird;
+    private $bird;
 
     /**
      * @ORM\Column(type="string")
@@ -114,30 +114,6 @@ class Observation
     }
 
     /**
-     * Set bird
-     *
-     * @param \NAO\UserBundle\Entity\NaoAves $bird
-     *
-     * @return Observation
-     */
-    public function setBird(\NAO\UserBundle\Entity\NaoAves $bird)
-    {
-        $this->bird = $bird;
-
-        return $this;
-    }
-
-    /**
-     * Get bird
-     *
-     * @return \NAO\UserBundle\Entity\NaoAves
-     */
-    public function getBird()
-    {
-        return $this->bird;
-    }
-
-    /**
      * Set image
      *
      * @param string $image
@@ -183,5 +159,29 @@ class Observation
     public function getLatlng()
     {
         return $this->latlng;
+    }
+
+    /**
+     * Set bird
+     *
+     * @param \NAO\AppBundle\Entity\NaoAves $bird
+     *
+     * @return Observation
+     */
+    public function setBird(\NAO\AppBundle\Entity\NaoAves $bird)
+    {
+        $this->bird = $bird;
+
+        return $this;
+    }
+
+    /**
+     * Get bird
+     *
+     * @return \NAO\AppBundle\Entity\NaoAves
+     */
+    public function getBird()
+    {
+        return $this->bird;
     }
 }

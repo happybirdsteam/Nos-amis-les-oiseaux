@@ -1,6 +1,6 @@
 <?php
 
-namespace NAO\UserBundle\Form;
+namespace NAO\AppBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -23,14 +23,7 @@ class ObservationType extends AbstractType
         $builder
             ->add("latlng", TextType::class)
             ->add('comment', TextareaType::class)
-            ->add('bird', EntityType::class, array(
-                'class' => 'NAO\UserBundle\Entity\NaoAves',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('a')
-                        ->orderBy('a.lbNom', 'ASC');
-                },
-                'choice_label'  => 'lbNom'
-            ))
+            ->add('bird', TextType::class)
             ->add('image', FileType::class, array(
                 'label' => 'Image'
             ))
@@ -44,7 +37,7 @@ class ObservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'NAO\UserBundle\Entity\Observation'
+            'data_class' => 'NAO\AppBundle\Entity\Observation'
         ));
     }
 }

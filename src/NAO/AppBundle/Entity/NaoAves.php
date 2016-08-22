@@ -1,6 +1,6 @@
 <?php
 
-namespace NAO\UserBundle\Entity;
+namespace NAO\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,10 +8,19 @@ use Doctrine\ORM\Mapping as ORM;
  * NaoAves
  *
  * @ORM\Table(name="nao_aves")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NAO\AppBundle\Repository\NaoAvesRepository")
  */
 class NaoAves
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
     /**
      * @var string
      *
@@ -236,16 +245,16 @@ class NaoAves
      */
     private $aphiaId;
 
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return int
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set regne
@@ -1013,15 +1022,5 @@ class NaoAves
     public function getAphiaId()
     {
         return $this->aphiaId;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

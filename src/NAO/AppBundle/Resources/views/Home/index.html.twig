@@ -15,7 +15,7 @@
     {% endif %}
 
     {% if is_granted("ROLE_OBSERVER") %}
-        <p>J'ai accès à la partie observateur !</p>
+        <p>J'ai accès à la partie observateur</p>
     {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
         <p>J'ai accès à la partie observateur et naturaliste</p>
     {% else %}

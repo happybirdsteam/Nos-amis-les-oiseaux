@@ -31,3 +31,7 @@ nao_app_user_demote:
 nao_app_observation_add:
     path:     /observation
     defaults: { _controller: NAOAppBundle:Observation:observation }
+
+nao_app_observation_ajax_bird:
+    path:     /observation/ajaxbird
+    defaults: { _controller: NAOAppBundle:Observation:ajaxBird }

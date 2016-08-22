@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.10
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost:3306
--- Généré le :  Mer 17 Août 2016 à 14:27
--- Version du serveur :  5.5.42-log
--- Version de PHP :  7.0.0
+-- Client :  127.0.0.1
+-- Généré le :  Jeu 18 Août 2016 à 20:46
+-- Version du serveur :  5.7.9
+-- Version de PHP :  5.6.16
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,8 +26,9 @@ SET time_zone = "+00:00";
 -- Structure de la table `nao_aves`
 --
 
-CREATE TABLE `nao_aves` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `nao_aves`;
+CREATE TABLE IF NOT EXISTS `nao_aves` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `REGNE` varchar(8) DEFAULT NULL,
   `PHYLUM` varchar(8) DEFAULT NULL,
   `CLASSE` varchar(4) DEFAULT NULL,
@@ -59,7 +60,8 @@ CREATE TABLE `nao_aves` (
   `WF` varchar(1) DEFAULT NULL,
   `PF` varchar(6) DEFAULT NULL,
   `CLI` varchar(6) DEFAULT NULL,
-  `APHIA_ID` varchar(6) DEFAULT NULL
+  `APHIA_ID` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2944 DEFAULT CHARSET=utf8;
 
 --
@@ -3038,8 +3040,9 @@ INSERT INTO `nao_aves` (`id`, `REGNE`, `PHYLUM`, `CLASSE`, `ORDRE`, `FAMILLE`, `
 -- Structure de la table `nao_user`
 --
 
-CREATE TABLE `nao_user` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `nao_user`;
+CREATE TABLE IF NOT EXISTS `nao_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
   `username_canonical` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(180) COLLATE utf8_unicode_ci NOT NULL,
@@ -3055,8 +3058,23 @@ CREATE TABLE `nao_user` (
   `password_requested_at` datetime DEFAULT NULL,
   `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
   `credentials_expired` tinyint(1) NOT NULL,
-  `credentials_expire_at` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `credentials_expire_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_62B4C67192FC23A8` (`username_canonical`),
+  UNIQUE KEY `UNIQ_62B4C671A0D96FBF` (`email_canonical`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `nao_user`
+--
+
+INSERT INTO `nao_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`) VALUES
+(3, 'admin', 'admin', 'admin@nao.fr', 'admin@nao.fr', 1, 'hv6kr0gvemg4g40ccsc8cww4w80ksgc', 'LJUPWqLkR7HTE5nFGT3KgW4fBO4eoywFYzXT8UDrJBVw/JWs9TWLi6HB8+2lkNrEX2jIEptW089Xa63IlA45SA==', '2016-08-18 16:56:35', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
+(4, 'observer', 'observer', 'observer@nao.fr', 'observer@nao.fr', 1, 'tnmnrg89xhcwwc40o08w40s00o8s4oo', 'mtGXgPGU2DesON0BD1UNG2Y7uwQrh0gLfSvoOa8W03Kgfe59yyUVdVu8ReXnGft8Ppg03MwUEKJN+femgK1nAQ==', '2016-08-03 16:55:06', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_OBSERVER";}', 0, NULL),
+(5, 'naturalist', 'naturalist', 'naturalist@nao.fr', 'naturalist@nao.fr', 1, '7ygihp2u0nkscc8ggkowwogwswww8o4', 'v0MH9q8d0tKmkrG0tAMETAyCxlfgdylVxThpn6ByoDJpiINQEiNwiXs3Zx2Gx+rcIWYmB/aLpBDE4OlWc8PVOg==', '2016-07-27 10:36:23', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:15:"ROLE_NATURALIST";}', 0, NULL),
+(14, 'nathalie', 'nathalie', 'nathalie@gmail.com', 'nathalie@gmail.com', 1, '34xdoy2efdus48wc0oc0wkc00ksogws', 'WxcVLBmhbHwyK2SCztAqhBf5kHWdRPGlPBf/QJL51eCHMGOg78pbTGhQEgzUOlbvAk/zhSMK3MCVPPsijlqjxg==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:15:"ROLE_NATURALIST";}', 0, NULL),
+(15, 'hugo', 'hugo', 'hugo@gmail.com', 'hugo@gmail.com', 1, 'jyd1kda28w00wsokog08cwwsk44k8wo', 'A7MJKS33u0s+I1pjv3xm/FHaBBWkxSOMfmpZfZF62pdre8fsPL12OxZ+WxeNPshrMU+G4C1Z2KqSmM3sGPyghw==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_OBSERVER";}', 0, NULL),
+(16, 'superadmin', 'superadmin', 'superadmin@gmail.com', 'superadmin@gmail.com', 1, 'ctapuovz7hko8kwsogk84c8c4cwwwck', 'n7QiaWh0zx6Q503Bf3aTGZXF3Y2zgppIk6uYML4fd511IY6JKuhN6A23vQusJy5WjMgCuGA1ILEGrvraO3UQrQ==', '2016-08-03 16:49:42', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:16:"ROLE_SUPER_ADMIN";}', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -3064,13 +3082,16 @@ CREATE TABLE `nao_user` (
 -- Structure de la table `observation`
 --
 
-CREATE TABLE `observation` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `observation`;
+CREATE TABLE IF NOT EXISTS `observation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `bird_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `comment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `latlng` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `latlng` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_C576DBE0E813F9` (`bird_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -3080,50 +3101,6 @@ CREATE TABLE `observation` (
 INSERT INTO `observation` (`id`, `bird_id`, `date`, `comment`, `image`, `latlng`) VALUES
 (1, 982, '2016-08-10 11:01:48', 'bird', '386336ca84b7fd51806e4051eff138ed.jpeg', '');
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `nao_aves`
---
-ALTER TABLE `nao_aves`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `nao_user`
---
-ALTER TABLE `nao_user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIQ_62B4C67192FC23A8` (`username_canonical`),
-  ADD UNIQUE KEY `UNIQ_62B4C671A0D96FBF` (`email_canonical`);
-
---
--- Index pour la table `observation`
---
-ALTER TABLE `observation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_C576DBE0E813F9` (`bird_id`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `nao_aves`
---
-ALTER TABLE `nao_aves`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2944;
---
--- AUTO_INCREMENT pour la table `nao_user`
---
-ALTER TABLE `nao_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `observation`
---
-ALTER TABLE `observation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- Contraintes pour les tables exportées
 --

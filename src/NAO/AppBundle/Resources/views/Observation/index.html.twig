@@ -55,4 +55,32 @@
         });
 
     </script>
+    <script>
+        // AUTO-COMPLETE BIRD INPUT
+        $(function() {
+            $('#observation_bird').autocomplete({
+                source : function(requete, reponse){
+                    var motcle = $('#observation_bird').val();
+                    var DATA = 'motcle=' + motcle;
+
+                    $.ajax({
+                        type:"POST",
+                        url : "{{ path('nao_app_observation_ajax_bird') }}",
+                        dataType : 'json',
+                        data : DATA,
+
+                        success : function(donnee){
+                            reponse($.map(donnee, function(objet){
+                                return objet;
+                            }));
+                        }
+                    });
+                }
+            });
+        });
+
+        window.onload = function() {
+            $('#observation_bird').val('');
+        };
+    </script>
 {% endblock %}
