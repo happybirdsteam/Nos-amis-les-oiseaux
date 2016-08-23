@@ -5,8 +5,8 @@
 {% block stylesheets %} {{ parent() }} {% endblock %}
 
 {% block body %}
-    <h1>HOME PAGE</h1>
-
+    {{ parent() }}
+    <div class="home_logger">
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
         <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
     {% else %}
@@ -26,8 +26,8 @@
         {% include 'NAOAppBundle::Home/createObservation.html.twig' %}
     {% else %}
         <p>J'ai accès à la partie présentation du site !</p>
+        <p>Le formulaire n'a pas encore été dév.</p>
     {% endif %}
-
+    </div>
 {% endblock %}
-
 {% block javascripts %} {{ parent() }} {% endblock %}
