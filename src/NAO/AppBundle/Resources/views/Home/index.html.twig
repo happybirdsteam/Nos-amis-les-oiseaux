@@ -7,12 +7,16 @@
 {% block body %}
     {{ parent() }}
     <div class="home_logger">
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        <h2>Partagez votre passion des oiseaux ! </h2>
+
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <a class="bouton" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
     {% else %}
-        <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-    {% endif %}
+        <div class="boutons_accueil">
+        <a class="bouton" href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <a class="bouton" href="{{ path('fos_user_registration_register') }}">Inscription</a>
+        </div>
+        {% endif %}
 
     {% for flash_message in app.session.flashBag.get('info') %}
         <div class="flash-notice alert alert-info">
@@ -25,8 +29,6 @@
     {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
         {% include 'NAOAppBundle::Home/createObservation.html.twig' %}
     {% else %}
-        <p>J'ai accès à la partie présentation du site !</p>
-        <p>Le formulaire n'a pas encore été dév.</p>
     {% endif %}
     </div>
 {% endblock %}
