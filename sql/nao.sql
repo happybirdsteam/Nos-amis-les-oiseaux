@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 22 Août 2016 à 13:29
+-- Généré le :  Jeu 01 Septembre 2016 à 19:42
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -3069,7 +3069,7 @@ CREATE TABLE IF NOT EXISTS `nao_user` (
 --
 
 INSERT INTO `nao_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`) VALUES
-(3, 'admin', 'admin', 'admin@nao.fr', 'admin@nao.fr', 1, 'hv6kr0gvemg4g40ccsc8cww4w80ksgc', 'LJUPWqLkR7HTE5nFGT3KgW4fBO4eoywFYzXT8UDrJBVw/JWs9TWLi6HB8+2lkNrEX2jIEptW089Xa63IlA45SA==', '2016-08-22 13:23:12', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
+(3, 'admin', 'admin', 'admin@nao.fr', 'admin@nao.fr', 1, 'hv6kr0gvemg4g40ccsc8cww4w80ksgc', 'LJUPWqLkR7HTE5nFGT3KgW4fBO4eoywFYzXT8UDrJBVw/JWs9TWLi6HB8+2lkNrEX2jIEptW089Xa63IlA45SA==', '2016-09-01 19:41:06', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL),
 (4, 'observer', 'observer', 'observer@nao.fr', 'observer@nao.fr', 1, 'tnmnrg89xhcwwc40o08w40s00o8s4oo', 'mtGXgPGU2DesON0BD1UNG2Y7uwQrh0gLfSvoOa8W03Kgfe59yyUVdVu8ReXnGft8Ppg03MwUEKJN+femgK1nAQ==', '2016-08-22 13:24:06', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:13:"ROLE_OBSERVER";}', 0, NULL),
 (5, 'naturalist', 'naturalist', 'naturalist@nao.fr', 'naturalist@nao.fr', 1, '7ygihp2u0nkscc8ggkowwogwswww8o4', 'v0MH9q8d0tKmkrG0tAMETAyCxlfgdylVxThpn6ByoDJpiINQEiNwiXs3Zx2Gx+rcIWYmB/aLpBDE4OlWc8PVOg==', '2016-08-22 13:24:59', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:15:"ROLE_NATURALIST";}', 0, NULL),
 (14, 'nathalie', 'nathalie', 'nathalie@gmail.com', 'nathalie@gmail.com', 1, '34xdoy2efdus48wc0oc0wkc00ksogws', 'WxcVLBmhbHwyK2SCztAqhBf5kHWdRPGlPBf/QJL51eCHMGOg78pbTGhQEgzUOlbvAk/zhSMK3MCVPPsijlqjxg==', NULL, 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:15:"ROLE_NATURALIST";}', 0, NULL),
@@ -3086,14 +3086,14 @@ DROP TABLE IF EXISTS `observation`;
 CREATE TABLE IF NOT EXISTS `observation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
-  `comment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `comment` longtext COLLATE utf8_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `latlng` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `bird` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C576DBE0A76ED395` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Contenu de la table `observation`
@@ -3103,7 +3103,8 @@ INSERT INTO `observation` (`id`, `date`, `comment`, `image`, `latlng`, `bird`, `
 (9, '2016-08-22 13:22:25', '1ère observation', '32b498c417ea5bc3de4cf80b99fd5789.jpeg', 'LatLng(46.56591, 3.33186)', 'Aix galericulata', 5),
 (10, '2016-08-22 13:23:44', '2ème observation', 'e78c743bab29a4815a4c8624b27ed2bd.jpeg', 'LatLng(46.56571, 3.32959)', 'Polystica stelleri', 3),
 (11, '2016-08-22 13:24:42', '3ème observation', '2d43d4d2d0e74d6010f25f5138e2982f.jpeg', 'LatLng(46.57037, 3.32667)', 'Anas superciliosa pelewensis', 4),
-(12, '2016-08-22 13:25:26', '4ème observation', '995d3c22d6190c3fad70bc84c7e61880.jpeg', 'LatLng(46.56739, 3.34577)', 'Capella galinago', 5);
+(12, '2016-08-22 13:25:26', '4ème observation', '995d3c22d6190c3fad70bc84c7e61880.jpeg', 'LatLng(46.56739, 3.34577)', 'Capella galinago', 5),
+(13, '2016-08-22 13:41:11', '5ème observation', '078cf8b39f3191f0f5968275e152bb7b.jpeg', 'LatLng(46.56503, 3.33521)', 'Anser albifrons', 5);
 
 --
 -- Contraintes pour les tables exportées

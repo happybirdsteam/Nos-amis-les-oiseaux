@@ -1,0 +1,33 @@
+nao_app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Home:index }
+
+nao_app_adminpage:
+    path:     /admin
+    defaults: { _controller: AppBundle:Admin:index }
+
+nao_app_user_management:
+    path:     /admin/gestion-des-utilisateurs
+    defaults: { _controller: AppBundle:Admin:userManagement }
+
+nao_app_user_delete:
+    path:     /admin/gestion-des-utilisateurs/supprimer/{id}
+    defaults: { _controller: AppBundle:Admin:delete }
+    requirements:
+        id:   \d+
+
+nao_app_user_promote:
+    path:     /admin/gestion-des-utilisateurs/promouvoir/{id}
+    defaults: { _controller: AppBundle:Admin:promote }
+    requirements:
+        id:   \d+
+
+nao_app_user_demote:
+    path:     /admin/gestion-des-utilisateurs/retrograder/{id}
+    defaults: { _controller: AppBundle:Admin:demote }
+    requirements:
+        id:   \d+
+
+nao_app_ajax_bird:
+    path:     /ajaxbird
+    defaults: { _controller: AppBundle:Home:ajaxBird }
