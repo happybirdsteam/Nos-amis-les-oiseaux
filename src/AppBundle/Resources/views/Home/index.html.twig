@@ -6,15 +6,13 @@
 
 {% block body %}
     {{ parent() }}
-    <div class="home_logger">
         <h2>Partagez votre passion des oiseaux ! </h2>
 
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a class="bouton" href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
     {% else %}
-        <div class="boutons_accueil">
-        <a class="bouton" href="{{ path('fos_user_security_login') }}">Connexion</a>
-        <a class="bouton" href="{{ path('fos_user_registration_register') }}">Inscription</a>
+        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
+        <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
         </div>
         {% endif %}
 
@@ -30,6 +28,5 @@
         {% include 'AppBundle::Home/createObservation.html.twig' %}
     {% else %}
     {% endif %}
-    </div>
 {% endblock %}
 {% block javascripts %} {{ parent() }} {% endblock %}

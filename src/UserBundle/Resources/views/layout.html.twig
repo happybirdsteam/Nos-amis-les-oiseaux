@@ -1,61 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %} Happy birds par NAO {% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-            <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
-            <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-            <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700i&subset=latin-ext" rel="stylesheet">
-            <style>
-                body{ background: url({{asset('images/bg1.jpg')}});background-repeat: no-repeat; background-attachment: fixed;  background-position: center; background-size: cover;}
-            </style>
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    {% block body %}
-        <body>
-        <div id="home_header" class="navbar navbar-default navbar-fixed-top ">
-            <!-- Navigation-->
-            <div class="container-fluid">
-                <h1 id="home_title">Happy Birds par NAO</h1>
-                <img id="logo" class="hidden-xs" src="{{ asset('/images/hibou.png') }}" alt="logo" />
-                <!-- classe qui optimise l affichage mobile-->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        </div>
-
-        {% if app.request.hasPreviousSession %}
-            {% for type, messages in app.session.flashbag.all() %}
-                {% for message in messages %}
-                    <div class="flash-{{ type }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endif %}
-
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-        </div>
-    </body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %} Happy birds par NAO {% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css"/>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/>
     {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+{% block body %}
+    <body>
+        <h1>Happy Birds par NAO</h1>
+
+    {% if app.request.hasPreviousSession %}
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+    </body>
+{% endblock %}
 
 {% block javascripts %}
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+            integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 {% endblock %}
 </body>
 </html>
