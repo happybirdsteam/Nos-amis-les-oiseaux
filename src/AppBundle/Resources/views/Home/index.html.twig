@@ -6,27 +6,108 @@
 
 {% block body %}
     {{ parent() }}
-        <h2>Partagez votre passion des oiseaux ! </h2>
 
-        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-        <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-    {% else %}
-        <a href="{{ path('fos_user_security_login') }}">Connexion</a>
-        <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
+    <!-- CTA -->
+    <section id="cta" class="wrapper style3">
+        <div class="container">
+            <h2>Partagez votre passion des oiseaux ! </h2>
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
+            {% else %}
+            <a  href="{{ path('fos_user_security_login') }}">Connexion</a>
+            <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
         </div>
         {% endif %}
 
-    {% for flash_message in app.session.flashBag.get('info') %}
-        <div class="flash-notice alert alert-info">
-            {{ flash_message }}
-        </div>
-    {% endfor %}
+        {% for flash_message in app.session.flashBag.get('info') %}
+            <div class="flash-notice alert alert-info">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+        {% if is_granted("ROLE_OBSERVER") %}
+            {% include 'AppBundle::Home/createObservation.html.twig' %}
+        {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
+            {% include 'AppBundle::Home/createObservation.html.twig' %}
+        {% else %}
+        {% endif %}
+    </section>
 
-    {% if is_granted("ROLE_OBSERVER") %}
-        {% include 'AppBundle::Home/createObservation.html.twig' %}
-    {% elseif (is_granted("ROLE_NATURALIST") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
-        {% include 'AppBundle::Home/createObservation.html.twig' %}
-    {% else %}
-    {% endif %}
+
+<!-- Posts
+<section class="wrapper style1">
+    <div class="container">
+        <div class="row">
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="images/pic01.jpg" alt="" /></a>
+                    <div class="inner">
+                        <h3>TTThe First Thing</h3>
+                        <p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="images/pic02.jpg" alt="" /></a>
+                    <div class="inner">
+                        <h3>The Second Thing</h3>
+                        <p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="row">
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="images/pic03.jpg" alt="" /></a>
+                    <div class="inner">
+                        <h3>The Third Thing</h3>
+                        <p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+                    </div>
+                </div>
+            </section>
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="images/pic04.jpg" alt="" /></a>
+                    <div class="inner">
+                        <h3>The Fourth Thing</h3>
+                        <p>Duis neque nisi, dapibus sed mattis et quis, nibh. Sed et dapibus nisl amet mattis, sed a rutrum accumsan sed. Suspendisse eu.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+-->
+</div>
+<!-- Footer -->
+<div id="footer">
+    <div class="container">
+        <div class="row">
+
+        </div>
+    </div>
+
+    <!-- Icons -->
+    <ul class="icons">
+        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+    </ul>
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <ul class="menu">
+            <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
+</div>
+
+</div>
 {% endblock %}
-{% block javascripts %} {{ parent() }} {% endblock %}
+{% block javascripts %} {{ parent()}}
+
+
+{% endblock %}
