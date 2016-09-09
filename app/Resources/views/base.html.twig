@@ -1,8 +1,14 @@
 <!DOCTYPE HTML>
 <!--
+<<<<<<< HEAD
     Arcana by HTML5 UP
     html5up.net | @ajlkn
     Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+=======
+	Arcana by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
 -->
 <html>
 <head>
@@ -12,13 +18,22 @@
         {% block stylesheets %}
             <!--[if lte IE 8]><script src="/web/js/ie/html5shiv.js"></script><![endif]-->
             <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+<<<<<<< HEAD
             <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
             <!--[if lte IE 8]><link rel="stylesheet" href="/web/css/ie8.css" /><![endif]-->
             <!--[if lte IE 9]><link rel="stylesheet" href="/web/css/ie9.css" /><![endif]-->
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
+<<<<<<< HEAD
     {% block body %}
+=======
+    <body>
+        {% block body %}
+
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
         <body>
         <div id="page-wrapper">
 
@@ -26,13 +41,20 @@
             <div id="header">
 
                 <!-- Logo -->
+<<<<<<< HEAD
                 <img id="logo_header" src="{{ asset('images/hibou.png') }}" alt="Petit Hibou" />
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
                 <h1><a href="index.html" id="logo">Happy Birds <em>par NAO</em></a></h1>
 
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
+<<<<<<< HEAD
                         <li class="current"><a href="{{ path('nao_app_homepage') }}">Accueil</a></li>
+=======
+                        <li class="current"><a href="index.html">Accueil</a></li>
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
                         <li><a href="#">Consulter les observations</a></li>
                         <li><a href="#">Ajouter une observation</a></li>
                     </ul>
@@ -48,7 +70,13 @@
                 </header>
             </section>
 
+<<<<<<< HEAD
         <!-- Dont forget to add the </div> in the end if call parent() -->
+=======
+
+
+        </div>
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
         {% endblock %}
         {% block javascripts %}
             <!-- Scripts -->
@@ -60,6 +88,7 @@
             <!--[if lte IE 8]><script src=<script src="{{ asset('js/ie/respond.min.js') }}"></script>></script><![endif]-->
 
             <script src={{ asset('js/main.js') }}></script>
+<<<<<<< HEAD
 
             <script>
                 $('#nav ul li').on('click', function(e){
@@ -68,6 +97,8 @@
                     $(this).addClass('current');
                 });
             </script>
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
         {% endblock %}
     </body>
 </html>
