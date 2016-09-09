@@ -49,8 +49,11 @@
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> integration
     #logo_header {
         width:100px;
         height:141px;
@@ -102,8 +105,11 @@
 
 
 
+<<<<<<< HEAD
 =======
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
 >>>>>>> integration
 /* Box Model */
 
@@ -145,26 +151,21 @@
 <<<<<<< HEAD
 =======
 	.container a{
-<<<<<<< HEAD
+
 	    border: 1px solid white;
         padding: 0.5% 1% 0.5% 1%;
 		color: white;
 		font-size: 1.5em;
 		margin: 10px;
         text-decoration: none;
-=======
 		color: white;
 		font-size: 1.5em;
 		margin: 10px;
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
 	}
 
 	.container a:hover{
 		color: white;
-<<<<<<< HEAD
-=======
 		font-size: larger;
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
 	}
 
 >>>>>>> integration
@@ -222,6 +223,7 @@
 
 	@media screen and (max-width: 980px) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
         form {
@@ -229,6 +231,11 @@
         }
 =======
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
+        form {
+            width: 100%;
+        }
 >>>>>>> integration
 
 		.container.\31 25\25 {
@@ -258,11 +265,15 @@
 	@media screen and (max-width: 840px) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
 =======
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
+
 >>>>>>> integration
 		.container.\31 25\25 {
 			width: 100%;
@@ -1933,10 +1944,11 @@
 			border-bottom-color: transparent;
 =======
 			color: #ff6600;
-<<<<<<< HEAD
-=======
 			border-bottom-color: transparent;
+<<<<<<< HEAD
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
 >>>>>>> integration
 		}
 
@@ -2458,14 +2470,20 @@
 		text-align: center;
 		padding: 3em 0 0 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> integration
 		background-color: #00cc99;
 		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
 		background-position: top left,					top left,					top left;
 		background-size: 100% 6em,					100% 6em,					auto;
 		background-repeat: no-repeat,
         					no-repeat,					repeat;
+<<<<<<< HEAD
+=======
+>>>>>>> integration
 =======
 >>>>>>> integration
 		background-color: #fff;
@@ -2474,8 +2492,11 @@
 		background-size: 100% 6em,					100% 6em,					auto;
 		background-repeat: no-repeat,					no-repeat,					repeat;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
 >>>>>>> integration
 	}
 
@@ -2622,13 +2643,18 @@
 
 	#banner {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		background-image: url("../../images/banner.jpg");
 =======
 <<<<<<< HEAD
-		background-image: url("../images/banner.jpg");
 =======
+>>>>>>> integration
+		background-image: url("../images/banner.jpg");
 		background-image: url("../../images/banner.jpg");
+<<<<<<< HEAD
 >>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
+=======
 >>>>>>> integration
 		background-position: center center;
 		background-size: cover;
