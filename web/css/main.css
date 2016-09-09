@@ -48,6 +48,63 @@
 		-webkit-text-size-adjust: none;
 	}
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    #logo_header {
+        width:100px;
+        height:141px;
+        display:block;
+        float:left;
+    }
+
+    form {
+        width:50%;
+        text-align: center;
+        display:block;
+        margin: auto;
+        margin-top: 1.5%;
+        margin-bottom: 3%;
+        padding: 2%;
+        background-color: rgba(191, 191, 191, 0.3);
+        border-radius: 25px;
+    }
+
+
+
+    form > input {
+        margin-bottom: 4%;
+    }
+
+    form > div {
+        margin-bottom: 4%;
+    }
+
+    form > div > div {
+        margin-bottom: 4%;
+    }
+
+    #remember_me_label {
+        margin-top: -4%;
+        margin-bottom: 4%;
+    }
+
+    #form_add_observ input, #form_add_observ textarea{
+        color: rgb(71, 71, 71);
+    }
+
+    #mapid {
+        height: 360px;
+        margin-top: 3%;
+        margin-bottom: 2%;
+    }
+
+
+
+
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 /* Box Model */
 
 	*, *:before, *:after {
@@ -85,6 +142,32 @@
 		width: 1400px;
 	}
 
+<<<<<<< HEAD
+=======
+	.container a{
+<<<<<<< HEAD
+	    border: 1px solid white;
+        padding: 0.5% 1% 0.5% 1%;
+		color: white;
+		font-size: 1.5em;
+		margin: 10px;
+        text-decoration: none;
+=======
+		color: white;
+		font-size: 1.5em;
+		margin: 10px;
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+	}
+
+	.container a:hover{
+		color: white;
+<<<<<<< HEAD
+=======
+		font-size: larger;
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+	}
+
+>>>>>>> integration
 	@media screen and (max-width: 1680px) {
 
 		.container.\31 25\25 {
@@ -138,6 +221,15 @@
 	}
 
 	@media screen and (max-width: 980px) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        form {
+            width: 100%;
+        }
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 
 		.container.\31 25\25 {
 			width: 100%;
@@ -165,6 +257,13 @@
 
 	@media screen and (max-width: 840px) {
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 		.container.\31 25\25 {
 			width: 100%;
 			max-width: 118.75%;
@@ -1819,14 +1918,26 @@
 		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+<<<<<<< HEAD
 		color: #37c0fb;
+=======
+		color: #ff6600;
+>>>>>>> integration
 		text-decoration: none;
 		border-bottom: dotted 1px;
 	}
 
 		a:hover {
+<<<<<<< HEAD
 			color: #37c0fb;
 			border-bottom-color: transparent;
+=======
+			color: #ff6600;
+<<<<<<< HEAD
+=======
+			border-bottom-color: transparent;
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 		}
 
 	strong, b {
@@ -1964,7 +2075,11 @@
 		input[type="password"]:focus,
 		input[type="email"]:focus,
 		textarea:focus {
+<<<<<<< HEAD
 			border-color: #37c0fb;
+=======
+			border-color: #ff6600;
+>>>>>>> integration
 		}
 
 	input[type="text"],
@@ -2073,7 +2188,11 @@
 		.icon.major {
 			text-align: center;
 			cursor: default;
+<<<<<<< HEAD
 			background-color: #37c0fb;
+=======
+			background-color: #ff6600;
+>>>>>>> integration
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
@@ -2225,7 +2344,11 @@
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
+<<<<<<< HEAD
 		background-color: #37c0fb;
+=======
+		background-color: #ff6600;
+>>>>>>> integration
 		border-radius: 5px;
 		border: 0;
 		color: #fff;
@@ -2334,11 +2457,26 @@
 	#header {
 		text-align: center;
 		padding: 3em 0 0 0;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		background-color: #00cc99;
+		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
+		background-position: top left,					top left,					top left;
+		background-size: 100% 6em,					100% 6em,					auto;
+		background-repeat: no-repeat,
+        					no-repeat,					repeat;
+=======
+>>>>>>> integration
 		background-color: #fff;
 		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
 		background-position: top left,					top left,					top left;
 		background-size: 100% 6em,					100% 6em,					auto;
 		background-repeat: no-repeat,					no-repeat,					repeat;
+<<<<<<< HEAD
+=======
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 	}
 
 		#header h1 {
@@ -2367,7 +2505,11 @@
 			display: block;
 			width: 100%;
 			height: 0.75em;
+<<<<<<< HEAD
 			background-color: #37c0fb;
+=======
+			background-color: #ff6600;
+>>>>>>> integration
 			background-image: url("images/bg01.png");
 		}
 
@@ -2414,7 +2556,11 @@
 						bottom: -0.5em;
 						left: 50%;
 						margin-left: -0.375em;
+<<<<<<< HEAD
 						background-color: #37c0fb;
+=======
+						background-color: #ff6600;
+>>>>>>> integration
 						background-image: url("images/bg01.png");
 					}
 
@@ -2475,7 +2621,15 @@
 /* Banner */
 
 	#banner {
+<<<<<<< HEAD
 		background-image: url("../../images/banner.jpg");
+=======
+<<<<<<< HEAD
+		background-image: url("../images/banner.jpg");
+=======
+		background-image: url("../../images/banner.jpg");
+>>>>>>> 018711d17c1435db89a93020f169397026aa68da
+>>>>>>> integration
 		background-position: center center;
 		background-size: cover;
 		height: 28em;
@@ -2537,7 +2691,11 @@
 		}
 
 		.wrapper.style3 {
+<<<<<<< HEAD
 			background-color: #37c0fb;
+=======
+			background-color: #ff6600;
+>>>>>>> integration
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
@@ -2551,7 +2709,11 @@
 			}
 
 				.wrapper.style3 .button:hover {
+<<<<<<< HEAD
 					color: #37c0fb !important;
+=======
+					color: #ff6600 !important;
+>>>>>>> integration
 				}
 
 /* CTA */
@@ -2584,7 +2746,11 @@
 		}
 
 			#footer a:hover {
+<<<<<<< HEAD
 				color: #37c0fb;
+=======
+				color: #ff6600;
+>>>>>>> integration
 				border-bottom-color: transparent;
 			}
 
@@ -2855,7 +3021,11 @@
 				background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
 				height: 44px;
 				line-height: 44px;
+<<<<<<< HEAD
 				box-shadow: 0 4px 0 0 #37c0fb;
+=======
+				box-shadow: 0 4px 0 0 #ff6600;
+>>>>>>> integration
 			}
 
 				#titleBar .title {
