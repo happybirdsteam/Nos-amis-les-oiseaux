@@ -48,12 +48,6 @@
 		-webkit-text-size-adjust: none;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> integration
     #logo_header {
         width:100px;
         height:141px;
@@ -103,14 +97,6 @@
     }
 
 
-
-
-<<<<<<< HEAD
-=======
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
->>>>>>> integration
 /* Box Model */
 
 	*, *:before, *:after {
@@ -148,16 +134,14 @@
 		width: 1400px;
 	}
 
-<<<<<<< HEAD
-=======
 	.container a{
 
-	    border: 1px solid white;
-        padding: 0.5% 1% 0.5% 1%;
+	    	border: 1px solid white;
+        	padding: 0.5% 1% 0.5% 1%;
 		color: white;
 		font-size: 1.5em;
 		margin: 10px;
-        text-decoration: none;
+        	text-decoration: none;
 		color: white;
 		font-size: 1.5em;
 		margin: 10px;
@@ -165,10 +149,8 @@
 
 	.container a:hover{
 		color: white;
-		font-size: larger;
 	}
 
->>>>>>> integration
 	@media screen and (max-width: 1680px) {
 
 		.container.\31 25\25 {
@@ -222,21 +204,9 @@
 	}
 
 	@media screen and (max-width: 980px) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-        form {
-            width: 100%;
-        }
-=======
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
-        form {
-            width: 100%;
-        }
->>>>>>> integration
+	        form {
+        	    width: 100%;
+        	}
 
 		.container.\31 25\25 {
 			width: 100%;
@@ -264,17 +234,6 @@
 
 	@media screen and (max-width: 840px) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
-
->>>>>>> integration
 		.container.\31 25\25 {
 			width: 100%;
 			max-width: 118.75%;
@@ -1929,27 +1888,14 @@
 		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
-<<<<<<< HEAD
-		color: #37c0fb;
-=======
 		color: #ff6600;
->>>>>>> integration
 		text-decoration: none;
 		border-bottom: dotted 1px;
 	}
 
 		a:hover {
-<<<<<<< HEAD
-			color: #37c0fb;
-			border-bottom-color: transparent;
-=======
 			color: #ff6600;
 			border-bottom-color: transparent;
-<<<<<<< HEAD
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
->>>>>>> integration
 		}
 
 	strong, b {
@@ -2087,11 +2033,7 @@
 		input[type="password"]:focus,
 		input[type="email"]:focus,
 		textarea:focus {
-<<<<<<< HEAD
-			border-color: #37c0fb;
-=======
 			border-color: #ff6600;
->>>>>>> integration
 		}
 
 	input[type="text"],
@@ -2200,11 +2142,7 @@
 		.icon.major {
 			text-align: center;
 			cursor: default;
-<<<<<<< HEAD
-			background-color: #37c0fb;
-=======
 			background-color: #ff6600;
->>>>>>> integration
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
@@ -2356,11 +2294,7 @@
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
-<<<<<<< HEAD
-		background-color: #37c0fb;
-=======
 		background-color: #ff6600;
->>>>>>> integration
 		border-radius: 5px;
 		border: 0;
 		color: #fff;
@@ -2469,35 +2403,12 @@
 	#header {
 		text-align: center;
 		padding: 3em 0 0 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> integration
-		background-color: #00cc99;
-		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
-		background-position: top left,					top left,					top left;
-		background-size: 100% 6em,					100% 6em,					auto;
-		background-repeat: no-repeat,
-        					no-repeat,					repeat;
-<<<<<<< HEAD
-=======
->>>>>>> integration
-=======
->>>>>>> integration
 		background-color: #fff;
 		background-image: url("images/bg02.png"), url("images/bg02.png"), url("images/bg01.png");
 		background-position: top left,					top left,					top left;
 		background-size: 100% 6em,					100% 6em,					auto;
 		background-repeat: no-repeat,					no-repeat,					repeat;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
->>>>>>> integration
+
 	}
 
 		#header h1 {
@@ -2526,11 +2437,7 @@
 			display: block;
 			width: 100%;
 			height: 0.75em;
-<<<<<<< HEAD
-			background-color: #37c0fb;
-=======
 			background-color: #ff6600;
->>>>>>> integration
 			background-image: url("images/bg01.png");
 		}
 
@@ -2577,11 +2484,7 @@
 						bottom: -0.5em;
 						left: 50%;
 						margin-left: -0.375em;
-<<<<<<< HEAD
-						background-color: #37c0fb;
-=======
 						background-color: #ff6600;
->>>>>>> integration
 						background-image: url("images/bg01.png");
 					}
 
@@ -2642,20 +2545,8 @@
 /* Banner */
 
 	#banner {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		background-image: url("../../images/banner.jpg");
-=======
-<<<<<<< HEAD
-=======
->>>>>>> integration
 		background-image: url("../images/banner.jpg");
 		background-image: url("../../images/banner.jpg");
-<<<<<<< HEAD
->>>>>>> 018711d17c1435db89a93020f169397026aa68da
->>>>>>> integration
-=======
->>>>>>> integration
 		background-position: center center;
 		background-size: cover;
 		height: 28em;
@@ -2717,11 +2608,7 @@
 		}
 
 		.wrapper.style3 {
-<<<<<<< HEAD
-			background-color: #37c0fb;
-=======
 			background-color: #ff6600;
->>>>>>> integration
 			background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
 			background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
@@ -2735,11 +2622,7 @@
 			}
 
 				.wrapper.style3 .button:hover {
-<<<<<<< HEAD
-					color: #37c0fb !important;
-=======
 					color: #ff6600 !important;
->>>>>>> integration
 				}
 
 /* CTA */
@@ -2772,11 +2655,7 @@
 		}
 
 			#footer a:hover {
-<<<<<<< HEAD
-				color: #37c0fb;
-=======
 				color: #ff6600;
->>>>>>> integration
 				border-bottom-color: transparent;
 			}
 
@@ -3047,11 +2926,7 @@
 				background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
 				height: 44px;
 				line-height: 44px;
-<<<<<<< HEAD
-				box-shadow: 0 4px 0 0 #37c0fb;
-=======
 				box-shadow: 0 4px 0 0 #ff6600;
->>>>>>> integration
 			}
 
 				#titleBar .title {
