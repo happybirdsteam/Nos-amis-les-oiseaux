@@ -46,15 +46,12 @@
             map.on('click', onClickAddMarker);
         }
 
-        $(document).ready(function(){
-            if(navigator.geolocation)
-                navigator.geolocation.getCurrentPosition(initMap);
-        });
+        
 
     </script>
     <script>
         // AUTO-COMPLETE BIRD INPUT
-        $(function() {
+        (function($) {
             $('#observation_bird').autocomplete({
                 source : function(requete, reponse){
                     var motcle = $('#observation_bird').val();
@@ -74,10 +71,14 @@
                     });
                 }
             });
-        });
-
-        window.onload = function() {
+            
+             if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(initMap);
+            }
+                
             $('#observation_bird').val('');
-        };
+        })(jQuery);
+
+       
     </script>
 {% endblock %}
