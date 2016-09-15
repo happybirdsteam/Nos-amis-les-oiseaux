@@ -2,6 +2,10 @@ nao_app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Home:index }
 
+nao_app_client_observations_viewer :
+    path: /observations/
+    defaults: { _controller:AppBundle:Home:viewObservation }
+ 
 nao_app_adminpage:
     path:     /admin
     defaults: { _controller: AppBundle:Admin:index }
