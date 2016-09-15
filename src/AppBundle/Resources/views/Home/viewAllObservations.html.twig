@@ -2,9 +2,12 @@
 
 {% block body %}
 	{% block heading %} {{ parent() }} {% endblock %}
+	<div id="selection"><h2>selectionner l'espece à afficher</h2>
+	<p><input id="observation_bird" /><button class="addSpecises">Ajouter</button></p>
+	</div> 
+	<div class="debug"></div>
     <div id="mapid"></div>
    
-    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -12,7 +15,7 @@
     <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
-        // AUTO-COMPLETE BIRD INPUT
+
         (function($) {
         
         function initMap(position){
@@ -74,6 +77,12 @@
             }
                 
             $('#observation_bird').val('');
+            
+            $(".addSpecises").on("click", function(){
+            var speciesToAdd = $('#observation_bird').val();
+            $(".debug").append(speciesToAdd);
+            
+            });
         })(jQuery);
 
        
