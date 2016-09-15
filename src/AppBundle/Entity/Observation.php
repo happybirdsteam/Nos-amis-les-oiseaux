@@ -13,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Observation
 {
+
+
+	const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
     /**
      * @var int
      *
@@ -26,20 +31,36 @@ class Observation
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     *
+     * @Assert\Type(
+     *     type="stringr",
+     *     message="La date {{ value }} n'est pas de type : {{ type }}."
+     * )
      */
+     
     private $date;
+    
+    
 
     /**
      * @var string
      *
      * @ORM\Column(name="comment", type="text")
+     *
+     * @Assert\Type(
+     *     type="string",
+     *     message="La date {{ value }} n'est pas de type : {{ type }}."
+     * )
      */
     private $comment;
-
+    
+    
     /**
      * @var string
      *
      * @ORM\Column(name="bird", type="string", length=255)
+     *
+     * @Assert\Type("string")
      */
     private $bird;
 
@@ -52,8 +73,17 @@ class Observation
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\Type("string")
      */
     private $latlng;
+    
+    
+    /**
+    * @ORM\Column(name="statut", type="string", nullable=false, columnDefinition="ENUM('pending', 'accepted', 'rejected')", options={"default":"pending"})
+    *
+    * @Assert\Type("string")
+    */
+    private $statut;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
@@ -192,6 +222,33 @@ class Observation
     }
 
 
+	/**
+	*
+	* get status
+	*	@return string
+	*
+	*/
+	public function getStatut()
+	{
+		return $this->statut;
+	}
+
+	/**
+	* Set status
+	*
+	* @return Observation
+	*/
+	public function setStatut($statut)
+	{
+		 if (!in_array($statut, array(self::STATUS_PENDING, self::STATUS_ACCEPTED, self::STATUS_REJECTED))) {
+            throw new \InvalidArgumentException("Invalid status");
+        }
+		$this->statut = $statut;
+	}
+	
+	
+	
+
     /**
      * Set user
      *
@@ -215,4 +272,7 @@ class Observation
     {
         return $this->user;
     }
+    
+   
+    
 }

@@ -3091,6 +3091,7 @@ CREATE TABLE IF NOT EXISTS `observation` (
   `latlng` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `bird` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `statut` enum('pending','accepted','rejected') COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_C576DBE0A76ED395` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

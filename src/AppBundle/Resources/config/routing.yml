@@ -31,3 +31,15 @@ nao_app_user_demote:
 nao_app_ajax_bird:
     path:     /ajaxbird
     defaults: { _controller: AppBundle:Home:ajaxBird }
+    
+nao_app_observations_management:
+    path:    /admin/gestion-observations/
+    defaults: {_controller:AppBundle:Admin:confirmObservation }
+    
+nao_app_alter_observation_statut:
+    path:    /admin/gestion-observations/alterStatut
+    defaults: {_controller:AppBundle:Admin:alterStatut}
+nao_app_observations_viewer:
+    path:    /admin/voir-observations/
+    defaults: {_controller:AppBundle:Admin:viewObservations }
+    
