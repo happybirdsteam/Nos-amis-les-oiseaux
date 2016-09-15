@@ -80,4 +80,9 @@ class HomeController extends Controller
             return $response;
         }
     }
+    
+    public function viewObservationAction(){
+    
+    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', array() );
+    }
 }

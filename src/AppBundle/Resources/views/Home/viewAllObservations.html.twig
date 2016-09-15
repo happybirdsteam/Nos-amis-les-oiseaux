@@ -1,0 +1,81 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+	{% block heading %} {{ parent() }} {% endblock %}
+    <div id="mapid"></div>
+   
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        // AUTO-COMPLETE BIRD INPUT
+        (function($) {
+        
+        function initMap(position){
+            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+
+            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+            // create the tile layer with correct attribution
+            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+
+            var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+
+            var osm = L.tileLayer(tuileUrl, {
+                minZoom: 8,
+                maxZoom: 17,
+                attribution: attrib
+            });
+
+            var popup = L.popup();
+
+            function onClickAddMarker(e){
+                popup
+                        .setLatLng(e.latlng)
+                        .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
+                        .openOn(map);
+                marker
+                        .setLatLng(e.latlng)
+                        .update();
+                $('#observation_latlng').val(e.latlng);
+            }
+
+            osm.addTo(map);
+
+           //  map.on('click', onClickAddMarker);
+        }
+        
+            $('#observation_bird').autocomplete({
+                source : function(requete, reponse){
+                    var motcle = $('#observation_bird').val();
+                    var DATA = 'motcle=' + motcle;
+
+                    $.ajax({
+                        type:"POST",
+                        url : "{{ path('nao_app_ajax_bird') }}",
+                        dataType : 'json',
+                        data : DATA,
+
+                        success : function(donnee){
+                            reponse($.map(donnee, function(objet){
+                                return objet;
+                            }));
+                        }
+                    });
+                }
+            });
+            
+             if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(initMap);
+            }
+                
+            $('#observation_bird').val('');
+        })(jQuery);
+
+       
+    </script>
+{% endblock %}
