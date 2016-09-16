@@ -7,6 +7,9 @@
 	</div> 
 	<div class="debug"></div>
     <div id="mapid"></div>
+    {% for bird in birds %}
+    {{bird.id }}, {{bird.comment }}
+    {% endfor %}
    
 {% endblock %}
 
@@ -81,6 +84,17 @@
             $(".addSpecises").on("click", function(){
             var speciesToAdd = $('#observation_bird').val();
             $(".debug").append(speciesToAdd);
+            data = "bird=" + speciesToAdd.replace(/ /gi,"%20");
+            $.ajax({
+  				method: "POST",
+  				url: "{{ path('nao_app_get_observations_by_bird') }}",
+  				data: data,
+  				cache: false
+			})
+  			.done(function( msg ) {
+   				$(".debug").text( msg);
+   				console.warn( msg);
+  			});
             
             });
         })(jQuery);

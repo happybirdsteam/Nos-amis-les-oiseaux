@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends Controller
 {
@@ -76,13 +77,44 @@ class HomeController extends Controller
                 ->findBird($term);
 
             $response = new Response(json_encode($array));
-            $response -> headers -> set('Content-Type', 'application/json');
+            $response ->headers ->set('Content-Type', 'application/json');
             return $response;
         }
     }
     
     public function viewObservationAction(){
+    $theBird = "Polystica stelleri";
     
-    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', array() );
+    $DB_response = $this->getDoctrine()->getManager()
+    			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
+    			
+    var_dump($DB_response);
+    
+    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
+    	 					  array("birds" => $DB_response, "statut" =>'accepted') 
+    	 					);
+    }
+    
+    public function ajaxGetObservationsByBirdAction( Request $request){
+    	if($request->isXmlHttpRequest()){
+    	
+    		$theBird = $request->get('bird');
+    		
+    		if($theBird){
+    			$theBird = str_replace("%20", " ", $theBird);
+    			$DB_response = $this->getDoctrine()->getManager()
+    			->getRepository('AppBundle:Observation')->findBy(array("bird" => "$theBird"));
+    			$jsonContent = new JsonResponse();
+    			$jsonContent->setData( $DB_response);
+    			
+
+    			$response = new Response( $jsonContent );
+    			$response ->headers ->set('Content-Type', 'application/json');
+            	return $response;
+    		}
+    	
+    	}
+    
     }
 }
+
