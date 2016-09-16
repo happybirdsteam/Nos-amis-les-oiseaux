@@ -58,7 +58,7 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="bird", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\NaoAves", cascade={"persist"})
      *
      * @Assert\Type("string")
      */
@@ -200,7 +200,7 @@ class Observation
     /**
      * Set bird
      *
-     * @param string $bird
+     * @param \AppBundle\Entity\NaoAves $bird
      *
      * @return Observation
      */
@@ -214,7 +214,7 @@ class Observation
     /**
      * Get bird
      *
-     * @return string
+     * @return \AppBundle\Entity\NaoAves
      */
     public function getBird()
     {

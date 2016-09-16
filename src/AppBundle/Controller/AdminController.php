@@ -181,7 +181,7 @@ class AdminController extends Controller
                 	->findBy( array("statut" => $statut) ); 
 	}
 	//
-
+var_dump($contributionsList);
 	return $this->render(
 		'AppBundle:Admin:observationViewer.html.twig',
 		 array( 
