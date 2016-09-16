@@ -31,14 +31,16 @@
             var popup = L.popup();
 
             function onClickAddMarker(e){
+                var ll = e.latlng;
                 popup
-                        .setLatLng(e.latlng)
+                        .setLatLng(ll)
                         .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
                         .openOn(map);
                 marker
-                        .setLatLng(e.latlng)
+                        .setLatLng(ll)
                         .update();
-                $('#observation_latlng').val(e.latlng);
+                $('#observation_lat').val(ll.lat);
+                $('#observation_lng').val(ll.lng);
             }
 
             osm.addTo(map);

@@ -51,9 +51,14 @@ class Observation
     private $image;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
-    private $latlng;
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lng;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
@@ -143,31 +148,6 @@ class Observation
     }
 
     /**
-     * Set latlng
-     *
-     * @param string $latlng
-     *
-     * @return Observation
-     */
-    public function setLatlng($latlng)
-    {
-        $this->latlng = $latlng;
-
-        return $this;
-    }
-
-    /**
-     * Get latlng
-     *
-     * @return string
-     */
-    public function getLatlng()
-    {
-        return $this->latlng;
-    }
-
-
-    /**
      * Set bird
      *
      * @param string $bird
@@ -214,5 +194,53 @@ class Observation
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param float $lat
+     *
+     * @return Observation
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return float
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param float $lng
+     *
+     * @return Observation
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->lng;
     }
 }

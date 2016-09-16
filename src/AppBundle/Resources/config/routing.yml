@@ -2,6 +2,10 @@ nao_app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Home:index }
 
+nao_app_test:
+    path:     /test
+    defaults: { _controller: AppBundle:Home:test }
+
 nao_app_adminpage:
     path:     /admin
     defaults: { _controller: AppBundle:Admin:index }
@@ -31,3 +35,7 @@ nao_app_user_demote:
 nao_app_ajax_bird:
     path:     /ajaxbird
     defaults: { _controller: AppBundle:Home:ajaxBird }
+
+nao_app_getMarkers:
+    path:     /getMarkers/{latlng}
+    defaults: { _controller: AppBundle:Home:getMarkers }

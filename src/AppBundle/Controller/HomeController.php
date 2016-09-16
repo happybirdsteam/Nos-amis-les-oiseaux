@@ -6,6 +6,7 @@ use AppBundle\Entity\Observation;
 use AppBundle\Form\ObservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,7 +26,7 @@ class HomeController extends Controller
             $file = $observation->getImage();
 
             // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             // Move the file to the directory where brochures are stored
             $file->move(
@@ -67,17 +68,34 @@ class HomeController extends Controller
 
     public function ajaxBirdAction(Request $request)
     {
-        if($request->isXmlHttpRequest())
-        {
+        if ($request->isXmlHttpRequest()) {
             $term = $request->get('motcle');
-            $array= $this->getDoctrine()
+            $array = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:NaoAves')
                 ->findBird($term);
 
             $response = new Response(json_encode($array));
-            $response -> headers -> set('Content-Type', 'application/json');
+            $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
+    }
+
+    public function testAction()
+    {
+        return $this->render('AppBundle:Home:viewObservation.html.twig');
+    }
+
+    public function getMarkersAction($latlng)
+    {
+        $array = explode(',', $latlng);
+        $result = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Observation')
+            ->getMarkersBetween($array);
+
+        return new JsonResponse($result);
+
+
     }
 }

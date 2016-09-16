@@ -1,6 +1,6 @@
 <?php
 
-namespace NAO\AppBundle\Entity;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Observation
  *
  * @ORM\Table(name="observation")
- * @ORM\Entity(repositoryClass="NAO\AppBundle\Repository\ObservationRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ObservationRepository")
  */
 class Observation
 {
@@ -32,7 +32,7 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="string", length=255)
+     * @ORM\Column(name="comment", type="text")
      */
     private $comment;
 
@@ -46,17 +46,22 @@ class Observation
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\File(mimeTypes={ "image/*" })
+     * @Assert\Image(mimeTypes={ "image/*" })
      */
     private $image;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="float")
      */
-    private $latlng;
+    private $lat;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NAO\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\Column(type="float")
+     */
+    private $lng;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
      */
     private $user;
 
@@ -191,5 +196,28 @@ class Observation
         return $this->bird;
     }
 
-    
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Observation
+     */
+    public function setUser(\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }
