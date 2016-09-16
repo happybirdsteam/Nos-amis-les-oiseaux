@@ -36,7 +36,7 @@ contributions
 <tbody>
 {% for observation in observations %}
 <tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
-	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird }}</td>
+	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.latlng }}</td><td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
 	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
 	
