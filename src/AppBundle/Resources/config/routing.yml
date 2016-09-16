@@ -6,6 +6,14 @@ nao_app_test:
     path:     /test
     defaults: { _controller: AppBundle:Home:test }
 
+nao_app_client_observations_viewer :
+    path: /observations/
+    defaults: { _controller:AppBundle:Home:viewObservation }
+    
+nao_app_get_observations_by_bird:
+    path: /observations/birds
+    defaults: { _controller:AppBundle:Home:ajaxGetObservationsByBird }
+
 nao_app_adminpage:
     path:     /admin
     defaults: { _controller: AppBundle:Admin:index }
@@ -39,3 +47,15 @@ nao_app_ajax_bird:
 nao_app_getMarkers:
     path:     /getMarkers/{latlng}
     defaults: { _controller: AppBundle:Home:getMarkers }
+    
+nao_app_observations_management:
+    path:    /admin/gestion-observations/
+    defaults: {_controller:AppBundle:Admin:confirmObservation }
+    gi t
+nao_app_alter_observation_statut:
+    path:    /admin/gestion-observations/alterStatut
+    defaults: {_controller:AppBundle:Admin:alterStatut}
+nao_app_observations_viewer:
+    path:    /admin/voir-observations/
+    defaults: {_controller:AppBundle:Admin:viewObservations }
+

@@ -1,0 +1,161 @@
+{% extends "AppBundle::Admin/index.html.twig" %}
+
+{% block stylesheets %} {{ parent() }} 
+<link rel="stylesheet" href="{{ asset('/js/libs/datatables/css/jquery.dataTables.min.css') }}" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+<style>
+#map{ width:400px; height:400px;}
+.photos{width:80px; height:auto;}
+
+</style>
+{% endblock %}
+
+{% block title %} Liste des observations à valider {% endblock %}
+
+{% block container %}
+<div class="col-xs-12">
+
+<form class="tableObservation">
+contributions
+<table id="observations">
+<thead>
+	<tr>
+	<th>id</th><th>commentaires</th>
+	<th>date</th><th>type d'oiseau</th>
+	<th>map</th><th>role</th>
+	<th>nickname</th><th>image</th>
+	<th>action</th>
+	</tr>
+</thead>
+<tbody>
+{% for observation in observations %}
+<tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
+	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird }}</td>
+	<td class="gps"> {{ observation.latlng }}</td><td> {{ observation.user.roles|first }} </td> <td class="{{ 'userID' ~  observation.user.id}}"> {{ observation.user }} </td>
+	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder ~ '/'  ~ observation.image ) }}" />    {%endif %}</td> 
+	<td><select>
+			{% for key, traduction in option_value %}
+				<option value="{{ key }}">{{ traduction }}</option>
+			{% endfor %}
+	</select></td>
+</tr>
+ {% endfor %}
+ <tbody>
+</table>
+</form>
+ 
+</div>
+<hr />
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">x</span>
+    <div id="map"></div>
+  </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block javascripts %} {{ parent() }} 
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<script>
+       
+
+
+
+(function($){
+
+
+
+/*//// begin map ////**/
+
+//init map in globally scope
+var map = new L.Map('map');
+	function initMap(position, typeOfBird){
+	 
+	 reg = /(\-?\d+\.\d+)/g
+	 match = position.match(reg);
+	 //console.log(match);
+	
+	map.setView([match[0], match[1]], 13);
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	L.marker([match[0], match[1]]).addTo(map)
+    .bindPopup( typeOfBird )
+    .openPopup();
+    	
+};
+	
+	$(".gps").on("click", function(){
+	var pos = $(this).text();
+	var bird = $(this).parent().find(".bird").text();
+	console.log( $(this).parent().find(".bird") );
+		initMap(pos, bird );
+	});
+
+/**///////// end map /////////////**/
+
+
+	// must match with twig filter observation.date|date
+	$.fn.dataTable.moment('m/d/Y');
+	//init sortable table
+	$("#observations").DataTable({
+    language: {
+        processing:     "Traitement en cours...",
+        search:         "Rechercher&nbsp;:",
+        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        infoPostFix:    "",
+        loadingRecords: "Chargement en cours...",
+        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        emptyTable:     "Aucune donnée disponible dans le tableau",
+        paginate: {
+            first:      "Premier",
+            previous:   "Pr&eacute;c&eacute;dent",
+            next:       "Suivant",
+            last:       "Dernier"
+        },
+        aria: {
+            sortAscending:  ": activer pour trier la colonne par ordre croissant",
+            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+        }
+    }
+});
+	// get select change and send an ajax request
+	$("select").on("change", function(){
+		var IdToModify = $(this).parent().parent().find(".theID").text();
+		var newStatut = this.value;
+		var data = {"id" : IdToModify, "statut" : newStatut};
+		//console.log(IdToModify, newStatut);
+		$.ajax({
+            type: "POST",
+            url: "{{ path('nao_app_alter_observation_statut') }}",
+            data: data,
+            success: function(data, dataType)
+            {
+                console.log(data);
+            },
+
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
+                console.error('Error : ' + errorThrown);
+        	},
+        	cache: false
+        })
+	});
+
+})(jQuery);
+</script>
+{% endblock %}

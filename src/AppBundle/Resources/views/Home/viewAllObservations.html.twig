@@ -1,0 +1,104 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+	{% block heading %} {{ parent() }} {% endblock %}
+	<div id="selection"><h2>selectionner l'espece à afficher</h2>
+	<p><input id="observation_bird" /><button class="addSpecises">Ajouter</button></p>
+	</div> 
+	<div class="debug"></div>
+    <div id="mapid"></div>
+    {% for bird in birds %}
+    {{bird.id }}, {{bird.comment }}
+    {% endfor %}
+   
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+
+        (function($) {
+        
+        function initMap(position){
+            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+
+            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+            // create the tile layer with correct attribution
+            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+
+            var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+
+            var osm = L.tileLayer(tuileUrl, {
+                minZoom: 8,
+                maxZoom: 17,
+                attribution: attrib
+            });
+
+            var popup = L.popup();
+
+            function onClickAddMarker(e){
+                popup
+                        .setLatLng(e.latlng)
+                        .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
+                        .openOn(map);
+                marker
+                        .setLatLng(e.latlng)
+                        .update();
+                $('#observation_latlng').val(e.latlng);
+            }
+
+            osm.addTo(map);
+
+           //  map.on('click', onClickAddMarker);
+        }
+        
+            $('#observation_bird').autocomplete({
+                source : function(requete, reponse){
+                    var motcle = $('#observation_bird').val();
+                    var DATA = 'motcle=' + motcle;
+
+                    $.ajax({
+                        type:"POST",
+                        url : "{{ path('nao_app_ajax_bird') }}",
+                        dataType : 'json',
+                        data : DATA,
+
+                        success : function(donnee){
+                            reponse($.map(donnee, function(objet){
+                                return objet;
+                            }));
+                        }
+                    });
+                }
+            });
+            
+             if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(initMap);
+            }
+                
+            $('#observation_bird').val('');
+            
+            $(".addSpecises").on("click", function(){
+            var speciesToAdd = $('#observation_bird').val();
+            $(".debug").append(speciesToAdd);
+            data = "bird=" + speciesToAdd.replace(/ /gi,"%20");
+            $.ajax({
+  				method: "POST",
+  				url: "{{ path('nao_app_get_observations_by_bird') }}",
+  				data: data,
+  				cache: false
+			})
+  			.done(function( msg ) {
+   				$(".debug").text( msg);
+   				console.warn( msg);
+  			});
+            
+            });
+        })(jQuery);
+
+       
+    </script>
+{% endblock %}

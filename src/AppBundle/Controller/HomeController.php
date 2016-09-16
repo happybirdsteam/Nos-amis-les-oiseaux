@@ -95,7 +95,40 @@ class HomeController extends Controller
             ->getMarkersBetween($array);
 
         return new JsonResponse($result);
+    }
+    
+    public function viewObservationAction(){
+    $theBird = "Polystica stelleri";
+    
+    $DB_response = $this->getDoctrine()->getManager()
+    			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
+    			
+    var_dump($DB_response);
+    
+    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
+    	 					  array("birds" => $DB_response, "statut" =>'accepted') 
+    	 					);
+    }
+    
+    public function ajaxGetObservationsByBirdAction( Request $request){
+    	if($request->isXmlHttpRequest()){
+    	
+    		$theBird = $request->get('bird');
+    		
+    		if($theBird){
+    			$theBird = str_replace("%20", " ", $theBird);
+    			$DB_response = $this->getDoctrine()->getManager()
+    			->getRepository('AppBundle:Observation')->findBy(array("bird" => "$theBird"));
+    			$jsonContent = new JsonResponse();
+    			$jsonContent->setData( $DB_response);
+    			
 
-
+    			$response = new Response( $jsonContent );
+    			$response ->headers ->set('Content-Type', 'application/json');
+            	return $response;
+    		}
+    	
+    	}
     }
 }
+

@@ -11,7 +11,11 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
+        // AUTO-COMPLETE BIRD INPUT
+        (function($) {
+        
         function initMap(position){
             var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
 
@@ -47,16 +51,7 @@
 
             map.on('click', onClickAddMarker);
         }
-
-        $(document).ready(function(){
-            if(navigator.geolocation)
-                navigator.geolocation.getCurrentPosition(initMap);
-        });
-
-    </script>
-    <script>
-        // AUTO-COMPLETE BIRD INPUT
-        $(function() {
+        
             $('#observation_bird').autocomplete({
                 source : function(requete, reponse){
                     var motcle = $('#observation_bird').val();
@@ -76,10 +71,14 @@
                     });
                 }
             });
-        });
-
-        window.onload = function() {
+            
+             if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(initMap);
+            }
+                
             $('#observation_bird').val('');
-        };
+        })(jQuery);
+
+       
     </script>
 {% endblock %}
