@@ -60,7 +60,7 @@ class Observation
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\NaoAves", cascade={"persist"})
      *
-     * @Assert\Type("string")
+     * 
      */
     private $bird;
 

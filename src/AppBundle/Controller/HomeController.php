@@ -70,14 +70,19 @@ class HomeController extends Controller
     {
         if($request->isXmlHttpRequest())
         {
+        /*
             $term = $request->get('motcle');
             $array= $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:NaoAves')
                 ->findBird($term);
-
+	   */
+	   $array= $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:NaoAves')
+                ->getResult();
             $response = new Response(json_encode($array));
-            $response ->headers ->set('Content-Type', 'application/json');
+            $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
     }
