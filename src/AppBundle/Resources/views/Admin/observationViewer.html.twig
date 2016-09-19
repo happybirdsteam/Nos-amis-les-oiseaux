@@ -28,8 +28,9 @@ contributions
 	<tr>
 	<th>id</th><th>commentaires</th>
 	<th>date</th><th>type d'oiseau</th>
-	<th>map</th><th>role</th>
+	<th>Latitude</th><th>Longitude</th><th>role</th>
 	<th>nickname</th><th>image</th>
+	<th>voir sur la carte</th>
 	
 	</tr>
 </thead>
@@ -37,9 +38,10 @@ contributions
 {% for observation in observations %}
 <tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
 	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
-	<td class="gps"> {{ observation.latlng }}</td><td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
+	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
+	<td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
 	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
-	
+	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 </tr>
  {% endfor %}
  <tbody>
@@ -69,28 +71,26 @@ contributions
 
 //init map in globally scope
 var map = new L.Map('map');
-	function initMap(position, typeOfBird){
-	 
-	 reg = /(\-?\d+\.\d+)/g
-	 match = position.match(reg);
-	 //console.log(match);
+	function initMap(lat, lng, typeOfBird){
 	
-	map.setView([match[0], match[1]], 13);
+	map.setView([lat,lng], 13);
 	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 	}).addTo(map);
 
-	L.marker([match[0], match[1]]).addTo(map)
+	L.marker([lat, lng]).addTo(map)
     .bindPopup( typeOfBird )
     .openPopup();
     	
 };
 	
-	$(".gps").on("click", function(){
-	var pos = $(this).text();
-	var bird = $(this).parent().find(".bird").text();
-	console.log( $(this).parent().find(".bird") );
-		initMap(pos, bird );
+	$(".showMap").on("click", function(e){
+	e.preventDefault();
+	var lat = $(this).data('lat');
+	var lng = $(this).data('lng');
+	var bird = $(this).parent().parent().find(".bird").text();
+	initMap(lat,lng, bird );
+		
 	});
 
 /**///////// end map /////////////**/
