@@ -1,6 +1,10 @@
 nao_app_test:
     path:     /test
     defaults: { _controller: AppBundle:Home:test }
+    
+nao_app_getMarkers:
+    path:     /getMarkers/{latlng}
+    defaults: { _controller: AppBundle:Home:getMarkers }
 
 
 

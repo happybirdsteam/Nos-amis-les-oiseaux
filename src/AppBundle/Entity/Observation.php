@@ -33,7 +33,7 @@ class Observation
      * @ORM\Column(name="date", type="datetime")
      *
      * @Assert\Type(
-     *     type="stringr",
+     *     type="string",
      *     message="La date {{ value }} n'est pas de type : {{ type }}."
      * )
      */
