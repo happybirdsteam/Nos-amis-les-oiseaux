@@ -191,15 +191,7 @@ class Observation
         return $this;
     }
 
-    /**
-     * Get latlng
-     *
-     * @return string
-     */
-    public function getLatlng()
-    {
-        return $this->latlng;
-    }
+    
 
 
     /**
@@ -314,9 +306,22 @@ class Observation
      */
     public function getLng()
     {
-        return $this->user;
         return $this->lng;
     }
+    
+    
+    /**
+    * Get lat
+    * @return Observation
+    */
+    
+    public  function getLat()
+    {
+    	return $this->lat;
+    
+    
+
+	}
     
    
     
