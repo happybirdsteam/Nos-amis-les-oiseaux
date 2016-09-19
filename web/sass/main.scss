@@ -3,14 +3,17 @@
 @import 'libs/mixins';
 @import url("font-awesome.min.css");
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,600,600italic");
-
+@import "libs/skel";
 /*
 	Arcana by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-	@import "libs/skel";
+	
+	
+$orange : #ff6600;
+$bg : #ff6600;
 
 	@include skel-breakpoints((
 		wide: '(max-width: 1680px)',
@@ -1357,3 +1360,25 @@
 			}
 
 	}
+	
+	
+	/*** custom rules  **/
+	#logo_header {
+        width:100px;
+        height:141px;
+        display:block;
+        float:left;
+    }
+    
+    form{
+    width:50%;
+        text-align: center;
+        display:block;
+        margin: auto;
+        margin-top: 1.5%;
+        margin-bottom: 3%;
+        padding: 2%;
+        background-color: rgba(191, 191, 191, 0.3);
+        border-radius: 25px;
+    
+    }
