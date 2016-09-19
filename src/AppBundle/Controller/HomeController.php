@@ -87,6 +87,25 @@ class HomeController extends Controller
         }
     }
     
+    
+    public function testAction()
+   {
+        return $this->render('AppBundle:Home:viewObservation.html.twig');
+    }
+
+    public function getMarkersAction($latlng)
+    {
+        $array = explode(',', $latlng);
+        $result = $this->getDoctrine()
+           ->getManager()
+           ->getRepository('AppBundle:Observation')
+           ->getMarkersBetween($array);
+
+       return new JsonResponse($result);
+   }
+    
+    
+    
     public function viewObservationAction(){
     $theBird = "Polystica stelleri";
     
