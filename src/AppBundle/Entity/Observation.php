@@ -294,7 +294,6 @@ class Observation
      
      public function setLng($lng)
     {
-        $this->user = $user;
         $this->lng = $lng;
 
         return $this;
