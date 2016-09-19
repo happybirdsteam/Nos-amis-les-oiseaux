@@ -71,13 +71,18 @@ class Observation
      */
     private $image;
 
+	/**
+    * @ORM\Column(type="float")
+    */
+    private $lat;
+    
     /**
-     * @ORM\Column(type="string")
-     * @Assert\Type("string")
+     * @ORM\Column(type="float")
      */
-    private $latlng;
-    
-    
+     
+     private $lng;
+
+
     /**
     * @ORM\Column(name="statut", type="string", nullable=false, columnDefinition="ENUM('pending', 'accepted', 'rejected')", options={"default":"pending"})
     *
@@ -271,6 +276,46 @@ class Observation
     public function getUser()
     {
         return $this->user;
+    }
+    
+    /**
+     * Set lat
+     *
+     * @param float $lat
+     *
+     * @return Observation
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+    
+    /**
+     * Set lng
+     *
+     * @param float $lng
+     *
+     * @return Observation
+     */
+     
+     public function setLng($lng)
+    {
+        $this->user = $user;
+        $this->lng = $lng;
+
+        return $this;
+    }
+    
+    /**
+     * Get lng
+     * @return float
+     */
+    public function getLng()
+    {
+        return $this->user;
+        return $this->lng;
     }
     
    
