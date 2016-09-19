@@ -1,0 +1,78 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block body %}
+    <div id="mapid"></div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script>
+        function initMap(position) {
+            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+
+            //var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+            // create the tile layer with correct attribution
+            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+
+            var attrib = 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+
+            var osm = L.tileLayer(tuileUrl, {
+                minZoom: 8,
+                maxZoom: 17,
+                attribution: attrib
+            });
+
+            var popup = L.popup();
+
+            function dump(obj) {
+                var out = '';
+                for (var i in obj) {
+                    out += i + ": " + obj[i] + "\n";
+                }
+
+                console.log(out);
+            }
+
+            var groupLayer = L.layerGroup();
+
+            function testOnMove(){
+                // On instancie un objet layergroup
+
+
+                $.ajax({
+                    type : 'get',
+                    url  : 'http://localhost/nos-amis-les-oiseaux/web/app_dev.php/getMarkers/' + map.getBounds().toBBoxString(),
+                    beforeSend: function() {
+                        console.log(map.getBounds().toBBoxString());
+                        groupLayer.eachLayer(function(marker){
+                            map.removeLayer(marker);
+                        });
+                        groupLayer.clearLayers();
+                    },
+                    success : function (data) {
+                        for(var test in data){
+                            marker = L.marker([data[test].lat, data[test].lng]);
+                            groupLayer.addLayer(marker);
+                        }
+                        groupLayer.addTo(map);
+                    }
+                });
+            }
+
+            osm.addTo(map);
+
+            map.on('moveend', testOnMove);
+        }
+        /**/
+
+        $(document).ready(function () {
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(initMap);
+        });
+
+    </script>
+
+{% endblock %}
