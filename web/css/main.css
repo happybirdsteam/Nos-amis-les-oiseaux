@@ -739,5 +739,7 @@ input[type="submit"].small, input[type="reset"].small, input[type="button"].smal
 #logo_header { width: 100px; height: 141px; display: block; float: left; }
 
 form { width: 50%; text-align: center; display: block; margin: auto; margin-top: 1.5%; margin-bottom: 3%; padding: 2%; background-color: rgba(191, 191, 191, 0.3); border-radius: 25px; }
+form.tableObservation { width: 90%; }
+form.tableObservation img { width: 25px; height: auto; }
 
 #mapid { height: 360px; margin-top: 3%; margin-bottom: 2%; }
