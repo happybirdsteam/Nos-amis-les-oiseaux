@@ -111,6 +111,11 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
             }
                 
             $('#observation_bird').val('');
+            
+            $("#observation_save").on("click", function( e ) {
+            
+            	e.preventDefault();
+            });
         })(jQuery);
 
        
