@@ -6,8 +6,6 @@ nao_app_getMarkers:
     path:     /getMarkers/{latlng}
     defaults: { _controller: AppBundle:Home:getMarkers }
 
-
-
 nao_app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Home:index }
@@ -57,6 +55,7 @@ nao_app_observations_management:
 nao_app_alter_observation_statut:
     path:    /admin/gestion-observations/alterStatut
     defaults: {_controller:AppBundle:Admin:alterStatut}
+
 nao_app_observations_viewer:
     path:    /admin/voir-observations/
     defaults: {_controller:AppBundle:Admin:viewObservations }

@@ -27,10 +27,13 @@ class ObservationType extends AbstractType
             ->add("lng", TextType::class, array(
                 'label' => 'Lng'
             ))
-            ->add('comment', TextareaType::class)
+            ->add('comment', TextareaType::class, array(
+                'required' => false
+            ))
             ->add('bird', TextType::class)
             ->add('image', FileType::class, array(
-                'label' => 'Image'
+                'label' => 'Image',
+                'required' => false
             ))
             ->add('save', SubmitType::class)
         ;
