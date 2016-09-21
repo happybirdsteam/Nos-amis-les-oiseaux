@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ContainsBird extends Constraint
 {
-    public $message = "Le musée est complet à la date choisi.";
+    public $message = "L'oiseau n'existe pas!";
 
     public function validatedBy()
     {
