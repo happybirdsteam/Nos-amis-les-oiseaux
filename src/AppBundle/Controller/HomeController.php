@@ -112,11 +112,21 @@ class HomeController extends Controller
     $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
     			
-    var_dump($DB_response);
+   // var_dump($DB_response);
     
     	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
     	 					  array("birds" => $DB_response, "statut" =>'accepted') 
     	 					);
+    }
+    
+    public function viewMyObservationsAction( User $user ){
+    
+    	$query = $this->getDoctrine()
+    		->getManager()
+    		->getRepository('AppBundle:Observation')
+    		->findBy( array("user_id" => $user) );
+    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', array( "observations" => $query ) );
+    
     }
     
     public function ajaxGetObservationsByBirdAction( Request $request){

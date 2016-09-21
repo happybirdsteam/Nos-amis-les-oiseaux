@@ -16,6 +16,10 @@ nao_app_client_observations_viewer :
     path: /observations/
     defaults: { _controller:AppBundle:Home:viewObservation }
     
+nao_app_my_observations:
+    path: /observations/mesObservations/{id}
+    defaults: { _controller:AppBundle:Home:viewMyObservations }
+    
 nao_app_get_observations_by_bird:
     path: /observations/birds
     defaults: { _controller:AppBundle:Home:ajaxGetObservationsByBird }
