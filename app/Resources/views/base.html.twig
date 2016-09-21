@@ -24,7 +24,6 @@
                 <!-- Logo -->
                 <img id="logo_header" src="{{ asset('images/hibou.png') }}" alt="Petit Hibou" />
                 <h1><a href="index.html" id="logo">Happy Birds <em>par NAO</em></a></h1>
-
                 <!-- Nav -->
                 <nav id="nav">
                     <ul>
@@ -36,7 +35,7 @@
                         </li>
                         {% if app.user %}
                         <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %}>
-                        	<a href="#" >Consulter mes observations</a>
+                        	<a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
                         </li>
                         {% endif %}
                     </ul>

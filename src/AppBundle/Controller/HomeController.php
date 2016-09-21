@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Observation;
+use UserBundle\Entity\User;
 use AppBundle\Form\ObservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
@@ -12,6 +13,11 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class HomeController extends Controller
 {
+
+//DRY violation ( link to enum ) must inject the enum list directly minus pending
+ public $possibleStatus = ["pending" =>"en attente", "accepted" => "accepter", "rejected" => "rejeter"];
+ 
+ 
     public function indexAction(Request $request)
     {
         $observation = new Observation();
@@ -121,11 +127,22 @@ class HomeController extends Controller
     
     public function viewMyObservationsAction( User $user ){
     
+    	//DRY violation ( link to enum ) must inject the enum list directly minus pending
+    		 
+    			$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    			$server = $protocol . $_SERVER['SERVER_NAME'];
+				$img = $this->getParameter('web_img_directory');
+    
     	$query = $this->getDoctrine()
     		->getManager()
     		->getRepository('AppBundle:Observation')
-    		->findBy( array("user_id" => $user) );
-    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', array( "observations" => $query ) );
+    		->findBy( array("user" => $user) );
+    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', 
+    						array( "observations" => $query,
+    								'server' => $server, 
+            	  					'folder'=> $img,
+            	  					'option_value' => $this->possibleStatus
+            	  			) );
     
     }
     
