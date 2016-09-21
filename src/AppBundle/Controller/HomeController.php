@@ -43,9 +43,8 @@ class HomeController extends Controller
             // Check if bird is != null
             $getBird = $form->get('bird')->getData();
             $AvesBird = $em->getRepository('AppBundle:NaoAves')->findBy(array('lbNom' => $getBird));
-            if (null === $AvesBird) {
-                throw new Exception("Cet oiseau n'existe pas !");
-            }
+
+            $observation->setBird($AvesBird[0]);
 
             // Update the 'brochure' property to store the PDF file name
             // instead of its contents
@@ -76,17 +75,11 @@ class HomeController extends Controller
     {
         if($request->isXmlHttpRequest())
         {
-        /*
             $term = $request->get('motcle');
             $array= $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:NaoAves')
                 ->findBird($term);
-	   */
-	   $array= $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:NaoAves')
-                ->getResult();
             $response = new Response(json_encode($array));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
