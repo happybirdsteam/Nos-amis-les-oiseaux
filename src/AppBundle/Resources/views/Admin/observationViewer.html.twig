@@ -40,7 +40,7 @@ contributions
 	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
 	<td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
-	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
+	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" />    {%endif %}</td> 
 	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 </tr>
  {% endfor %}
