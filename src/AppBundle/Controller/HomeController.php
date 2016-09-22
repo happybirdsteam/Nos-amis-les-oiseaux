@@ -31,14 +31,19 @@ class HomeController extends Controller
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $observation->getImage();
 
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+			if( $file){
+            	// Generate a unique name for the file before saving it
+            	$fileName = md5(uniqid()).'.'.$file->guessExtension();
+				// Move the file to the directory where brochures are stored
+            	$file->move(
+                	$this->getParameter('image_directory'),
+                	$fileName
+            	);
+            	// Update the 'brochure' property to store the PDF file name
+            	// instead of its contents
+            	$observation->setImage($fileName);
+            }
 
-            // Move the file to the directory where brochures are stored
-            $file->move(
-                $this->getParameter('image_directory'),
-                $fileName
-            );
 
             // Check if bird is != null
             $getBird = $form->get('bird')->getData();
@@ -46,10 +51,7 @@ class HomeController extends Controller
 
             $observation->setBird($AvesBird[0]);
 
-            // Update the 'brochure' property to store the PDF file name
-            // instead of its contents
-            $observation->setImage($fileName);
-
+            
             // Add day of the observation
             $observation->setDate(new \DateTime('now'));
 
