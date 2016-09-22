@@ -37,10 +37,10 @@ contributions
 <tbody>
 {% for observation in observations %}
 <tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
-	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
+	<td>{{ observation.date|date("d/m/Y : h", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
 	<td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
-	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" />    {%endif %}</td> 
+	<td class="photos" data-img="observation.image">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" />    {%endif %}</td> 
 	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 </tr>
  {% endfor %}
@@ -97,7 +97,7 @@ var map = new L.Map('map');
 
 
 	// must match with twig filter observation.date|date
-	$.fn.dataTable.moment('m/d/Y');
+	$.fn.dataTable.moment('d/m/Y : h');
 	//init sortable table
 	$("#observations").DataTable({
     language: {
