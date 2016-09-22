@@ -10,9 +10,10 @@ contributions
 	<tr>
 	<th>id</th><th>commentaires</th>
 	<th>date</th><th>type d'oiseau</th>
-	<th>Latitude</th><th>Longitude</th><th>role</th>
-	<th>nickname</th><th>image</th>
+	<th>Latitude</th><th>Longitude</th>
+	<th>image</th>
 	<th>voir sur la carte</th>
+	<th>statut</th>
 	
 	</tr>
 </thead>
@@ -21,9 +22,9 @@ contributions
 <tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
 	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
-	<td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
 	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
 	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
+	<td>{{ observation.statut }}</td>
 </tr>
  {% endfor %}
  <tbody>
@@ -41,7 +42,7 @@ contributions
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 <script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
-<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 <script>
        
 
@@ -49,6 +50,10 @@ contributions
 
 (function($){
 
+var modal = function(){
+// show modal
+return ;
+}
 /*//// begin map ////**/
 
 //init map in globally scope
@@ -105,28 +110,7 @@ var map = new L.Map('map');
         }
     }
 });
-	// get select change and send an ajax request
-	$("select").on("change", function(){
-		var IdToModify = $(this).parent().parent().find(".theID").text();
-		var newStatut = this.value;
-		var data = {"id" : IdToModify, "statut" : newStatut};
-		//console.log(IdToModify, newStatut);
-		$.ajax({
-            type: "POST",
-            url: "{{ path('nao_app_alter_observation_statut') }}",
-            data: data,
-            success: function(data, dataType)
-            {
-                console.log(data);
-            },
 
-            error: function(XMLHttpRequest, textStatus, errorThrown)
-            {
-                console.error('Error : ' + errorThrown);
-        	},
-        	cache: false
-        })
-	});
 
 })(jQuery);
 </script>
