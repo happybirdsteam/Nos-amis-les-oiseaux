@@ -68,7 +68,7 @@ function valInCache(val,objt)
         (function($) {
         
         $observation_bird = $('#observation_bird');
-        $form_add_observ = ("#form_add_observ");
+        $form_add_observ = $("#form_add_observ");
         
         function initMap(position){
             var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
@@ -144,10 +144,11 @@ function valInCache(val,objt)
         $("#observation_save").on("click", function( e ) {
             
         	e.preventDefault();
+        	console.log("click");
             if( valInCache( $observation_bird.val(), cache ) && $form_add_observ.get()[0].checkValidity())
             {
             	$form_add_observ.submit();
-            //console.log( valInCache( $('#observation_bird').val(), cache ) );
+            	console.log( valInCache( $observation_bird.val(), cache ) );
             	} else {
             	// in modal check the error
             	console.warn("pas d'oiseau", cache, $observation_bird.val() );
