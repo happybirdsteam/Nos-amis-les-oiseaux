@@ -10,6 +10,7 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Eventviva\ImageResize;
 
 class HomeController extends Controller
 {
@@ -33,13 +34,20 @@ class HomeController extends Controller
 
 			if( $file){
             	// Generate a unique name for the file before saving it
-            	$fileName = md5(uniqid()).'.'.$file->guessExtension();
+            	$prefix = md5(uniqid());
+            	$imageThumb = new ImageResize( $file);
+				$imageThumb->resizeToWidth(150);
+				
+            	$fileName = $prefix .'.'.$file->guessExtension();
+            	$thumb_to_save = $this->getParameter('image_directory') . "/thumb_" . $fileName;
 				// Move the file to the directory where brochures are stored
             	$file->move(
                 	$this->getParameter('image_directory'),
                 	$fileName
             	);
-            	// Update the 'brochure' property to store the PDF file name
+            	
+            	$imageThumb->save( $thumb_to_save);
+            	// Update the 'image' property to store the jpeg file name
             	// instead of its contents
             	$observation->setImage($fileName);
             }
@@ -54,6 +62,7 @@ class HomeController extends Controller
             
             // Add day of the observation
             $observation->setDate(new \DateTime('now'));
+            $observation->setStatut("pending");
 
             // Add user
             $user = $this->getUser();
