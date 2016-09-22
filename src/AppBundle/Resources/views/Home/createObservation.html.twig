@@ -47,6 +47,23 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
 }( jQuery ));
     </script>
     <script>
+    //helper
+function valInCache(val,objt)
+{
+	for (var property in objt) {
+	
+    		for (var prop in objt[property]) {
+        		this_val = objt[property][prop];
+        		console.log(this_val);
+        		if(this_val === val)
+        		{
+            		return true;
+            		break;
+        		}
+			}
+	}
+    return false;
+}
         // AUTO-COMPLETE BIRD INPUT
         (function($) {
         
@@ -84,27 +101,43 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
             osm.addTo(map);
 
             map.on('click', onClickAddMarker);
-        }
+        };
+        
+        var cache = {};
         
             $('#observation_bird').autocomplete({
-                source : function(requete, reponse){
+            	minLength: 2,
+                source : function(request, response){
                     var motcle = $('#observation_bird').val();
-                    var DATA = 'motcle=' + motcle;
+                    var data = 'motcle=' + motcle;
+                    var term = request.term;
+        			if ( term in cache ) {
+          				response( cache[ term ] );
+          				return;
+        			}
 
                     $.ajax({
                         type:"POST",
                         url : "{{ path('nao_app_ajax_bird') }}",
                         dataType : 'json',
-                        data : DATA,
+                        data : data,
 
-                        success : function(donnee){
-                            reponse($.map(donnee, function(objet){
-                                return objet;
+                        success : function(data){
+                        	cache[ term ] = data;
+                            response($.map(data, function(object){
+                                return object;
                             }));
                         }
                     });
                 }
             });
+            
+            // temp
+            $('#observation_bird').on("change", function(){
+           
+            });
+            
+            // \end temp
             
              if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(initMap);
@@ -115,6 +148,16 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
             $("#observation_save").on("click", function( e ) {
             
             	e.preventDefault();
+            	if( valInCache( $('#observation_bird').val(), cache ) ){
+            	
+            		//$("#form_add_observ").submit();
+            		// add other controls here lat lng
+            		console.log( valInCache( $('#observation_bird').val(), cache ) );
+            	} else {
+            	// in modal
+            	console.warn("pas d'oiseau", cache, $('#observation_bird').val() );
+            	
+            	}
             });
         })(jQuery);
 
