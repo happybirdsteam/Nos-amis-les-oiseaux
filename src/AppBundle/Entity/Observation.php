@@ -46,12 +46,9 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable = true )
      *
-     * @Assert\Type(
-     *     type="string",
-     *     message="La date {{ value }} n'est pas de type : {{ type }}."
-     * )
+     * 
      */
     private $comment;
     
