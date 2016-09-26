@@ -10,10 +10,10 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
-	
-	
-$orange : #ff6600;
+
 $bg : #ff6600;
+$form_txt : rgb(71, 71, 71);
+$form_background_color : rgba(191, 191, 191, 0.3);
 
 	@include skel-breakpoints((
 		wide: '(max-width: 1680px)',
@@ -1261,7 +1261,7 @@ $bg : #ff6600;
 				}
 			}
             #observation_save{
-            background-color: #ff6600;
+            background-color: $bg;
             border: none;
             color: white;
             padding: 8px 17px;
@@ -1429,7 +1429,7 @@ $bg : #ff6600;
         margin-top: 1.5%;
         margin-bottom: 3%;
         padding: 2%;
-        background-color: rgba(191, 191, 191, 0.3);
+        background-color: $form_background_color;
         border-radius: 25px;
     
     }
@@ -1451,7 +1451,7 @@ $bg : #ff6600;
     }
 
     #form_add_observ input, #form_add_observ textarea{
-        color: rgb(71, 71, 71);
+        color: $form_txt;
     }
     #mapid{
         height: 360px;
@@ -1459,7 +1459,7 @@ $bg : #ff6600;
         margin-bottom: 2%;
     }
     #observation_save{
-        background-color: #ff6600;
+        background-color: $bg;
         border: none;
         color: white;
         padding: 15px 32px;
@@ -1471,7 +1471,7 @@ $bg : #ff6600;
 
     @media screen and ('max-width : 480px'){
         #observation_save{
-                background-color: #ff6600;
+                background-color: $bg; 
                 border: none;
                 color: white;
                 padding: 8px 17px;
