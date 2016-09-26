@@ -2293,6 +2293,11 @@ form {
   padding: 2%;
   background-color: rgba(191, 191, 191, 0.3);
   border-radius: 25px; }
+  form.tableObservation {
+    width: 90%; }
+    form.tableObservation img {
+      width: 25px;
+      height: auto; }
 
 form > input {
   margin-bottom: 4%; }

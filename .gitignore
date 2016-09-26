@@ -17,3 +17,7 @@
 /web/uploads/images/*
 /.idea/
 .DS_Store
+
+*.codekit
+
+*.codekit

@@ -3,15 +3,22 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Observation;
+use UserBundle\Entity\User;
 use AppBundle\Form\ObservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use AppBundle\Eventviva\ImageResize;
 
 class HomeController extends Controller
 {
+
+//DRY violation ( link to enum ) must inject the enum list directly minus pending
+ public $possibleStatus = ["pending" =>"en attente", "accepted" => "accepter", "rejected" => "rejeter"];
+ 
+ 
     public function indexAction(Request $request)
     {
         $observation = new Observation();
@@ -25,28 +32,37 @@ class HomeController extends Controller
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $observation->getImage();
 
-            // Generate a unique name for the file before saving it
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+			if( $file){
+            	// Generate a unique name for the file before saving it
+            	$prefix = md5(uniqid());
+            	$imageThumb = new ImageResize( $file);
+				$imageThumb->resizeToWidth(150);
+				
+            	$fileName = $prefix .'.'.$file->guessExtension();
+            	$thumb_to_save = $this->getParameter('image_directory') . "/thumb_" . $fileName;
+				// Move the file to the directory where brochures are stored
+            	$file->move(
+                	$this->getParameter('image_directory'),
+                	$fileName
+            	);
+            	
+            	$imageThumb->save( $thumb_to_save);
+            	// Update the 'image' property to store the jpeg file name
+            	// instead of its contents
+            	$observation->setImage($fileName);
+            }
 
-            // Move the file to the directory where brochures are stored
-            $file->move(
-                $this->getParameter('image_directory'),
-                $fileName
-            );
 
             // Check if bird is != null
             $getBird = $form->get('bird')->getData();
             $AvesBird = $em->getRepository('AppBundle:NaoAves')->findBy(array('lbNom' => $getBird));
-            if (null === $AvesBird) {
-                throw new Exception("Cet oiseau n'existe pas !");
-            }
 
-            // Update the 'brochure' property to store the PDF file name
-            // instead of its contents
-            $observation->setImage($fileName);
+            $observation->setBird($AvesBird[0]);
 
+            
             // Add day of the observation
             $observation->setDate(new \DateTime('now'));
+            $observation->setStatut("pending");
 
             // Add user
             $user = $this->getUser();
@@ -70,17 +86,11 @@ class HomeController extends Controller
     {
         if($request->isXmlHttpRequest())
         {
-        /*
             $term = $request->get('motcle');
             $array= $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:NaoAves')
                 ->findBird($term);
-	   */
-	   $array= $this->getDoctrine()
-                ->getManager()
-                ->getRepository('AppBundle:NaoAves')
-                ->getResult();
             $response = new Response(json_encode($array));
             $response->headers->set('Content-Type', 'application/json');
             return $response;
@@ -112,11 +122,32 @@ class HomeController extends Controller
     $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
     			
-    var_dump($DB_response);
+   // var_dump($DB_response);
     
     	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
     	 					  array("birds" => $DB_response, "statut" =>'accepted') 
     	 					);
+    }
+    
+    public function viewMyObservationsAction( User $user ){
+    
+    	//DRY violation ( link to enum ) must inject the enum list directly minus pending
+    		 
+    			$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    			$server = $protocol . $_SERVER['SERVER_NAME'];
+				$img = $this->getParameter('web_img_directory');
+    
+    	$query = $this->getDoctrine()
+    		->getManager()
+    		->getRepository('AppBundle:Observation')
+    		->findBy( array("user" => $user) );
+    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', 
+    						array( "observations" => $query,
+    								'server' => $server, 
+            	  					'folder'=> $img,
+            	  					'option_value' => $this->possibleStatus
+            	  			) );
+    
     }
     
     public function ajaxGetObservationsByBirdAction( Request $request){

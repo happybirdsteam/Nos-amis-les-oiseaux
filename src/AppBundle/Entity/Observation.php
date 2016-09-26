@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints\ContainsBird;
 
 /**
  * Observation
@@ -45,12 +46,9 @@ class Observation
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable = true )
      *
-     * @Assert\Type(
-     *     type="string",
-     *     message="La date {{ value }} n'est pas de type : {{ type }}."
-     * )
+     * 
      */
     private $comment;
     
@@ -59,13 +57,13 @@ class Observation
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\NaoAves", cascade={"persist"})
+     * @ContainsBird
      *
-     * 
      */
     private $bird;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @Assert\Image(mimeTypes={ "image/*" })
      */

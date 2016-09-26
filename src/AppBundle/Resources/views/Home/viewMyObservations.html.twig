@@ -1,82 +1,117 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block body %}
-    <div id="mapid"></div>
-    {{ form_start(form, {'attr':{'id':'form_add_observ'}})}}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    </div>
+	{% block heading %} {{ parent() }} {% endblock %}
+
+<form class="tableObservation">
+contributions
+<table id="observations">
+<thead>
+	<tr>
+	<th>id</th><th>commentaires</th>
+	<th>date</th><th>type d'oiseau</th>
+	<th>Latitude</th><th>Longitude</th>
+	<th>image</th>
+	<th>voir sur la carte</th>
+	<th>statut</th>
+	
+	</tr>
+</thead>
+<tbody>
+{% for observation in observations %}
+<tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
+	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
+	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
+	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
+	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
+	<td>{{ observation.statut }}</td>
+</tr>
+ {% endfor %}
+ <tbody>
+</table>
+</form>
+ 
+</div>
+<hr />
+<div id="map"></div>
+
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script>
-        // AUTO-COMPLETE BIRD INPUT
-        (function($) {
-        
-        function initMap(position){
-            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
 
-            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-
-            // create the tile layer with correct attribution
-            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
-
-            var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-
-            var osm = L.tileLayer(tuileUrl, {
-                minZoom: 8,
-                maxZoom: 17,
-                attribution: attrib
-            });
-
-            var popup = L.popup();
-
-            function onClickAddMarker(e){
-                popup
-                        .setLatLng(e.latlng)
-                        .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
-                        .openOn(map);
-                marker
-                        .setLatLng(e.latlng)
-                        .update();
-                $('#observation_latlng').val(e.latlng);
-            }
-
-            osm.addTo(map);
-
-            map.on('click', onClickAddMarker);
-        }
-        
-            $('#observation_bird').autocomplete({
-                source : function(requete, reponse){
-                    var motcle = $('#observation_bird').val();
-                    var DATA = 'motcle=' + motcle;
-
-                    $.ajax({
-                        type:"POST",
-                        url : "{{ path('nao_app_ajax_bird') }}",
-                        dataType : 'json',
-                        data : DATA,
-
-                        success : function(donnee){
-                            reponse($.map(donnee, function(objet){
-                                return objet;
-                            }));
-                        }
-                    });
-                }
-            });
-            
-             if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(initMap);
-            }
-                
-            $('#observation_bird').val('');
-        })(jQuery);
-
+{% block javascripts %} {{ parent() }} 
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
+<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<script>
        
-    </script>
+
+
+
+(function($){
+
+var modal = function(){
+// show modal
+return ;
+}
+/*//// begin map ////**/
+
+//init map in globally scope
+var map = new L.Map('map');
+	function initMap(lat, lng, typeOfBird){
+	
+	map.setView([lat,lng], 13);
+	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	L.marker([lat, lng]).addTo(map)
+    .bindPopup( typeOfBird )
+    .openPopup();
+    	
+};
+	
+	$(".showMap").on("click", function(e){
+	e.preventDefault();
+	var lat = $(this).data('lat');
+	var lng = $(this).data('lng');
+	var bird = $(this).parent().parent().find(".bird").text();
+	initMap(lat,lng, bird );
+		
+	});
+
+/**///////// end map /////////////**/
+
+
+	// must match with twig filter observation.date|date
+	$.fn.dataTable.moment('m/d/Y');
+	//init sortable table
+	$("#observations").DataTable({
+    language: {
+        processing:     "Traitement en cours...",
+        search:         "Rechercher&nbsp;:",
+        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        infoPostFix:    "",
+        loadingRecords: "Chargement en cours...",
+        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        emptyTable:     "Aucune donnée disponible dans le tableau",
+        paginate: {
+            first:      "Premier",
+            previous:   "Pr&eacute;c&eacute;dent",
+            next:       "Suivant",
+            last:       "Dernier"
+        },
+        aria: {
+            sortAscending:  ": activer pour trier la colonne par ordre croissant",
+            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+        }
+    }
+});
+
+
+})(jQuery);
+</script>
 {% endblock %}

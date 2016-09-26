@@ -1431,7 +1431,17 @@ $form_background_color : rgba(191, 191, 191, 0.3);
         padding: 2%;
         background-color: $form_background_color;
         border-radius: 25px;
-    
+        
+        &.tableObservation{
+        width:90%;
+        	& img{
+        	width:25px;
+        	height: auto;
+        	
+        	}
+        
+        }
+        
     }
     form > input {
         margin-bottom: 4%;
