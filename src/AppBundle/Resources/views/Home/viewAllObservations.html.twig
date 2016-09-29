@@ -6,7 +6,7 @@
 	<p><input id="observation_bird" /><button class="addSpecises">Ajouter</button></p>
 	</div> 
 	<div class="debug"></div>
-    <div id="mapid"></div>
+    <div id="map"></div>
     {% for bird in birds %}
     {{bird.id }}, {{bird.comment }}
     {% endfor %}
@@ -17,12 +17,65 @@
     {{ parent() }}
     <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script>
+        <script>
+    /** localize autocomplete **/
+    // live region extension, adding a `messages` option
+// NOTE: This is an experimental API. We are still investigating
+// a full solution for string manipulation and internationalization.
+(function( $, undefined ) {
+$.widget( "ui.autocomplete", $.ui.autocomplete, {
+	options: {
+		messages: {
+			noResults: "Pas de resultats.",
+			results: function( amount ) {
+				return amount + ( amount > 1 ? " resultats sont" : " resultat est" ) +
+					" disponible, utilisez les touches haut et bas pour naviguez.";
+			}
+		}
+	},
 
+	__response: function( content ) {
+		var message;
+		this._superApply( arguments );
+		if ( this.options.disabled || this.cancelSearch ) {
+			return;
+		}
+		if ( content && content.length ) {
+			message = this.options.messages.results( content.length );
+		} else {
+			message = this.options.messages.noResults;
+		}
+		this.liveRegion.text( message );
+	}
+});
+
+}( jQuery ));
+    </script>
+    <script>
+    
+    function valInCache(val,objt)
+{
+	for (var property in objt) {
+	
+    		for (var prop in objt[property]) {
+        		this_val = objt[property][prop];
+        		console.log(this_val);
+        		if(this_val === val)
+        		{
+            		return true;
+            		break;
+        		}
+			}
+	}
+    return false;
+}
+
+$("#map").css({height : "70vh"});
         (function($) {
+        $observation_bird = $('#observation_bird');
         
         function initMap(position){
-            var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
+            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 15);
 
             var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
 
@@ -38,42 +91,36 @@
             });
 
             var popup = L.popup();
-
-            function onClickAddMarker(e){
-                popup
-                        .setLatLng(e.latlng)
-                        .setContent("Vous avez placé un marqueur à la position "+ e.latlng.toString())
-                        .openOn(map);
-                marker
-                        .setLatLng(e.latlng)
-                        .update();
-                $('#observation_latlng').val(e.latlng);
-            }
-
-            osm.addTo(map);
-
-           //  map.on('click', onClickAddMarker);
-        }
+			osm.addTo(map);
+		}
         
-            $('#observation_bird').autocomplete({
-                source : function(requete, reponse){
-                    var motcle = $('#observation_bird').val();
-                    var DATA = 'motcle=' + motcle;
+        var cache = {};
+        $observation_bird.autocomplete({
+            	minLength: 2,
+                source : function(request, response){
+                    var motcle = $observation_bird.val();
+                    var data = 'motcle=' + motcle;
+                    var term = request.term;
+        			if ( term in cache ) {
+          				response( cache[ term ] );
+          				return;
+        			}
 
                     $.ajax({
                         type:"POST",
                         url : "{{ path('nao_app_ajax_bird') }}",
                         dataType : 'json',
-                        data : DATA,
+                        data : data,
 
-                        success : function(donnee){
-                            reponse($.map(donnee, function(objet){
-                                return objet;
+                        success : function(data){
+                        	cache[ term ] = data;
+                            response($.map(data, function(object){
+                                return object;
                             }));
                         }
                     });
                 }
-            });
+        });
             
              if(navigator.geolocation){
                 navigator.geolocation.getCurrentPosition(initMap);
@@ -91,9 +138,12 @@
   				data: data,
   				cache: false
 			})
-  			.done(function( msg ) {
-   				$(".debug").text( msg);
-   				console.warn( msg);
+  			.done(function( response ) {
+   				$(".debug").text("resultats :" + response);
+   				
+   				
+   				
+   				
   			});
             
             });
