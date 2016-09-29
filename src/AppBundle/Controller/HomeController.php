@@ -152,24 +152,22 @@ class HomeController extends Controller
     
     public function ajaxGetObservationsByBirdAction( Request $request){
     	if($request->isXmlHttpRequest()){
-    	
     		$theBird = $request->get('bird');
     		
-    		if($theBird){
-    			$theBird = str_replace("%20", " ", $theBird);
-    			$DB_response = $this->getDoctrine()->getManager()
-    			->getRepository('AppBundle:Observation')->findBy(array("bird" => "$theBird"));
-    			$jsonContent = new JsonResponse();
-    			$jsonContent->setData( $DB_response);
-    			
-
-    			$response = new Response( $jsonContent );
-    			$response ->headers ->set('Content-Type', 'application/json');
-            	return $response;
-    		}
-    	
+    			if($theBird){
+    				$theBird = str_replace("%20", " ", $theBird);
+    				//A reel name for test
+    				//$theBird = "Phoeniconaias minor";
+    				
+    				$DB_response = $this->getDoctrine()->getManager()
+    				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
+    				$array = [];
+    				$response = new JsonResponse( $DB_response );
+            		return $response;
+    			}
     	}
     
-    }
+	}
+	
 }
 
