@@ -31,4 +31,23 @@ public function getMarkersBetween($latLngArray)
             ->getResult();
 
     }
+    
+    
+	public function getObservationWithRelatedAves($nameBird, $statut) 
+	{
+    	$query = $this->getEntityManager()
+        ->createQuery(
+            'SELECT  o,partial a.{id,lbNom} as  FROM AppBundle:Observation o
+            JOIN o.bird a
+            WHERE a.lbNom = :name
+            AND o.statut = :statut '
+        )->setParameter('name', $nameBird)->setParameter('statut', $statut);
+
+    try {
+        return $query->getResult();
+    } catch (\Doctrine\ORM\NoResultException $e) {
+        return null;
+    }
+
+}
 }
