@@ -2,8 +2,6 @@
 
 {% block body %}
     {{ parent() }}
-    <body>
-        <h1>Happy Birds par NAO</h1>
 
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
@@ -19,7 +17,6 @@
         {% block fos_user_content %}
         {% endblock fos_user_content %}
     </div>
-    </body>
 {% endblock %}
 
 
