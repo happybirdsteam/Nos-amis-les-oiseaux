@@ -165,6 +165,10 @@ class HomeController extends Controller
     				$response = new JsonResponse( $DB_response );
             		return $response;
     			}
+    			
+    			else {
+    				return new JsonResponse(null);
+    			}
     	}
     
 	}

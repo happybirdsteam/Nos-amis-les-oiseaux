@@ -15,7 +15,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script>
     /** localize autocomplete **/
@@ -70,84 +70,97 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
     return false;
 }
 
-$("#map").css({height : "70vh"});
-        (function($) {
-        $observation_bird = $('#observation_bird');
+
+(function($) {
+
+    $("#map").css({height : "70vh"});
+    $observation_bird = $('#observation_bird');
         
-        function initMap(position){
-            var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 15);
-
-            var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-
-            // create the tile layer with correct attribution
-            var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
-
-            var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-
-            var osm = L.tileLayer(tuileUrl, {
-                minZoom: 8,
-                maxZoom: 17,
-                attribution: attrib
-            });
-
-            var popup = L.popup();
-			osm.addTo(map);
-		}
-        
-        var cache = {};
-        $observation_bird.autocomplete({
-            	minLength: 2,
-                source : function(request, response){
-                    var motcle = $observation_bird.val();
-                    var data = 'motcle=' + motcle;
-                    var term = request.term;
-        			if ( term in cache ) {
-          				response( cache[ term ] );
-          				return;
-        			}
-
-                    $.ajax({
-                        type:"POST",
-                        url : "{{ path('nao_app_ajax_bird') }}",
-                        dataType : 'json',
-                        data : data,
-
-                        success : function(data){
-                        	cache[ term ] = data;
-                            response($.map(data, function(object){
-                                return object;
-                            }));
-                        }
-                    });
-                }
+    function initMap(){
+        //center Clérmont France 45.7759415,3.0817609
+        var map = L.map('map').setView([45.7759415, 3.0817609], 6);
+		// create the tile layer with correct attribution
+        var tuileUrl = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+        var attrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+        var osm = L.tileLayer(tuileUrl, {
+        	minZoom: 3,
+        	maxZoom: 17,
+        	attribution: attrib
         });
+		var popup = L.popup();
+		osm.addTo(map);
+	}
+	
+	function populateMap(object = null, collection){
+		if ( object ) {
+		
+		
+		}
+	
+	}
+        
+    var cache = {};
+    $observation_bird.autocomplete({
+        minLength: 2,
+        source : function(request, response){
+        var motcle = $observation_bird.val();
+        var data = 'motcle=' + motcle;
+        var term = request.term;
+        if ( term in cache ) {
+          	response( cache[ term ] );
+          	return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url : "{{ path('nao_app_ajax_bird') }}",
+            dataType : 'json',
+            data : data,
+			success : function(data){
+                	cache[ term ] = data;
+                	response($.map(data, function(object){
+                		return object;
+                		}));
+            	   }
+        });
+                }
+    });
             
-             if(navigator.geolocation){
-                navigator.geolocation.getCurrentPosition(initMap);
-            }
-                
-            $('#observation_bird').val('');
-            
-            $(".addSpecises").on("click", function(){
-            var speciesToAdd = $('#observation_bird').val();
-            $(".debug").append(speciesToAdd);
-            data = "bird=" + speciesToAdd.replace(/ /gi,"%20");
-            $.ajax({
-  				method: "POST",
-  				url: "{{ path('nao_app_get_observations_by_bird') }}",
-  				data: data,
-  				cache: false
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(initMap);
+    }
+    $('#observation_bird').val('');
+    $(".addSpecises").on("click", function(){
+    
+    	var speciesToAdd = $('#observation_bird').val();
+        $(".debug").append(speciesToAdd);
+        data = "bird=" + speciesToAdd.replace(/ /gi,"%20");
+        $.ajax({
+  			method: "POST",
+  			url: "{{ path('nao_app_get_observations_by_bird') }}",
+  			data: data,
+  			cache: false
 			})
   			.done(function( response ) {
-   				$(".debug").text("resultats :" + response);
+  			
+  			/*
+  			[{"id":22,"date":{"date":"2016-09-22 17:37:01.000000","timezone_type":3,"timezone":"Europe/Paris"},
+  			"lat":48.6802834474,"lng":6.17945671052,"bird":{"id":782,"lbNom":"Phoeniconaias minor"}},
+  			
+  			{"id":23,"date":{"date":"2016-09-22 18:20:06.000000","timezone_type":3,"timezone":"Europe/Paris"},
+  			"lat":48.6780521896,"lng":6.17759466157,"bird":{"id":782,"lbNom":"Phoeniconaias minor"}}]
+  			
+  			$(".debug").text("resultats :" + JSON.stringify(response) );
+  			*/
+  			console.log(response.length);
    				
    				
    				
    				
   			});
             
-            });
-        })(jQuery);
+    	});
+})(jQuery);
 
        
     </script>
