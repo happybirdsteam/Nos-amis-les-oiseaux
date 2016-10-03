@@ -57,6 +57,7 @@ class Observation
      * @var string
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\NaoAves", cascade={"persist"})
+      * @ORM\JoinColumn(name="bird_id", referencedColumnName="id")
      * @ContainsBird
      *
      */

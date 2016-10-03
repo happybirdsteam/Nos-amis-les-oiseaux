@@ -48,6 +48,9 @@
         <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
         <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
         <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        {% if is_granted("ROLE_ADMIN") %}
+        <li><a href="{{ path('nao_app_user_management') }}" class="icon fa-user"><span class="label">Administration</span></a></li>
+        {% endif %}
     </ul>
 
     <!-- Copyright -->

@@ -65,7 +65,6 @@
             <script src={{ asset('js/main.js') }}></script>
             <script>
                 $('#nav ul li').on('click', function(e){
-                    e.preventDefault();
                     $('#nav ul li').removeClass('current');
                     $(this).addClass('current');
                 });
