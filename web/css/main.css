@@ -2404,6 +2404,14 @@ form > div > div {
   height: 360px;
   margin: 3% 5%; }
 
+.call {
+  width: 90%;
+  margin: 3rem auto;
+  padding: 1rem;
+  border-radius: 3%;
+  background-color: #eee;
+  text-align: center; }
+
 #observation_save {
   background-color: #ff6600;
   border: none;

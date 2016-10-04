@@ -1467,8 +1467,16 @@ $form_background_color : rgba(191, 191, 191, 0.3);
 		width:90%;
 		height: 360px;
 		margin:3% 5%;
-        
+
     }
+	.call{
+		width:90%;
+		margin: 3rem auto;
+		padding:1rem;
+		border-radius: 3%;
+		background-color: $gray;
+		text-align: center;
+	}
     #observation_save{
         background-color: $bg;
         border: none;

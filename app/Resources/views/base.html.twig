@@ -36,8 +36,11 @@
                         	<a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
                         </li>
                         {% endif %}
+                        {% if is_granted("ROLE_SUPER_ADMIN") or is_granted("ROLE_ADMIN") or is_granted("ROLE_NATURALIST") %}
+<                       <li><a href="{{  path('nao_app_adminpage') }}">Admin</a></li>
+                        {% endif %}
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li></li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                         {% endif %}
                     </ul>
                 </nav>
