@@ -63,13 +63,6 @@
             <!--[if lte IE 8]><script src=<script src="{{ asset('js/ie/respond.min.js') }}"></script>></script><![endif]-->
 
             <script src={{ asset('js/main.js') }}></script>
-            <script>
-                $('#nav ul li').on('click', function(e){
-                    $('#nav ul li').removeClass('current');
-                    $(this).addClass('current');
-                });
-            </script>
-            
         {% endblock %}
     </body>
 </html>
