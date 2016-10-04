@@ -23,7 +23,7 @@ contributions
 	<th>id</th><th>commentaires</th>
 	<th>date</th><th>type d'oiseau</th>
 	<th>lat</th><th>lng</th><th>role</th>
-	<th>nickname</th><th>image</th><th><button>voir sur la carte</th>
+	<th>nickname</th><th>image</th><th><voir sur la carte</th>
 	<th>action</th>
 	</tr>
 </thead>
@@ -33,7 +33,7 @@ contributions
 	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td><td> {{ observation.user.roles|first }} </td> <td class="{{ 'userID' ~  observation.user.id}}"> {{ observation.user }} </td>
 	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder ~ '/'  ~ observation.image ) }}" />    {%endif %}</td> 
-	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
+	<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 	<td><select>
 			{% for key, traduction in option_value %}
 				<option value="{{ key }}">{{ traduction }}</option>
