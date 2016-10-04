@@ -32,15 +32,15 @@
                         	<a href="{{ path('nao_app_client_observations_viewer') }}" >Consulter les observations</a>
                         </li>
                         {% if app.user %}
-                        <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %}>
+                            <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %}>
                         	<a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
-                        </li>
-                        {% endif %}
-                        {% if is_granted("ROLE_SUPER_ADMIN") or is_granted("ROLE_ADMIN") or is_granted("ROLE_NATURALIST") %}
-<                       <li><a href="{{  path('nao_app_adminpage') }}">Admin</a></li>
-                        {% endif %}
-                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                            </li>
+                            {% if is_granted("ROLE_SUPER_ADMIN") or is_granted("ROLE_ADMIN") or is_granted("ROLE_NATURALIST") %}
+<                               <li><a href="{{  path('nao_app_adminpage') }}" >Admin</a></li>
+                            {% endif %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 </nav>

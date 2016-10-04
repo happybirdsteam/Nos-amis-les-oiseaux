@@ -13,7 +13,7 @@
 
 $bg : #ff6600;
 $form_txt : rgb(71, 71, 71);
-$form_background_color : rgba(191, 191, 191, 0.3);
+$form_background_color : $gray;
 
 	@include skel-breakpoints((
 		wide: '(max-width: 1680px)',
@@ -1469,6 +1469,11 @@ $form_background_color : rgba(191, 191, 191, 0.3);
 		margin:3% 5%;
 
     }
+    #map{ position:relative;
+    z-index:1;
+    width:90%;
+      margin : 1rem auto;
+    height: 70vh;}
 	.call{
 		width:90%;
 		margin: 3rem auto;
@@ -1488,7 +1493,9 @@ $form_background_color : rgba(191, 191, 191, 0.3);
         font-size: 17px;
     }
     
-    
+    #observation_bird{
+
+    }
     /*** modal ***/
     /* The Modal (background) */
 .modal {
@@ -1560,7 +1567,24 @@ $form_background_color : rgba(191, 191, 191, 0.3);
         }
     }
 
-/* jquery autocomplete */
+/* jquery UI autocomplete */
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+.ui-autocomplete {
+  max-height: 100px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+}
 .ui-autocomplete-loading {
   background: white url("../images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+.ui-helper-hidden-accessible {
+  width:auto;
+  height:1.5rem;
+  margin-top:-1.5rem;
+  clip:auto;
+  font-style: italic;
 }
