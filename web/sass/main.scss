@@ -1600,3 +1600,18 @@ $form_background_color : $gray;
 table.dataTable {
   margin:0;
 }
+
+
+/*   flash info */
+.flash-notice, .alert, .alert-info{
+  @extend .modal;
+  display:block;
+
+  p{
+    @extend .modal-content;
+    font-size:2rem;
+    padding:3rem;
+    margin-top:40vh;
+    text-align: center;
+  }
+}

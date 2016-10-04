@@ -76,15 +76,11 @@ class HomeController extends Controller
                 $observation->setStatut("pending");
             }
 
-
-
-
-
             // Add user
             $user = $this->getUser();
             $observation->setUser($user);
 
-            // ... persist the $product variable or any other work
+            // ... persist the $observation 
             $em->persist($observation);
             $em->flush();
 
