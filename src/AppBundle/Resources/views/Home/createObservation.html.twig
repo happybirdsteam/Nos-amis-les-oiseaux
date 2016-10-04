@@ -1,12 +1,21 @@
 {% extends "AppBundle::layout.html.twig" %}
-
-{% block body %}
+{% block title %} {{ parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+    {% block body %}
+        {% block heading %} {{ parent() }} {% endblock %}
+    {% block container %}
+        <div class="call">
+        <h2>Soumettre une observation</h2>
+        <p>Soumettre une de vos observations, en remplissant le formulaire ci-dessous</p>
+            </div>
     <div id="mapid"></div>
     {{ form_start(form, {'attr':{'id':'form_add_observ'}})}}
     {{ form_widget(form) }}
     {{ form_end(form) }}
     </div>
+    {%  endblock %}
 {% endblock %}
+{% block footer %} {{ parent() }} {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
