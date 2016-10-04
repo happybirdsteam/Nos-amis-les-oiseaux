@@ -1460,6 +1460,8 @@ $form_background_color : $gray;
         margin-bottom: 4%;
     }
 
+
+
     #form_add_observ input, #form_add_observ textarea{
         color: $form_txt;
     }
@@ -1588,3 +1590,10 @@ $form_background_color : $gray;
   clip:auto;
   font-style: italic;
 }
+
+.addSpecies{
+  @extend .button
+}
+
+//DataSortable
+@import "https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css";
