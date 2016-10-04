@@ -34,7 +34,8 @@ class ObservationType extends AbstractType
             ->add('date',  DateTimeType::class,
                 array(
                     'label'=> 'date d\'observation',
-                    'date_widget' => "single_text", 'time_widget' => "single_text")
+                    'date_widget' => "single_text", 'time_widget' => "single_text",
+                    'data' => new \DateTime())
             )
             ->add('bird', TextType::class)
             ->add('image', FileType::class, array(
