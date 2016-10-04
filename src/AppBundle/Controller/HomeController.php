@@ -67,7 +67,17 @@ class HomeController extends Controller
             
             // Add day of the observation
             $observation->setDate(new \DateTime('now'));
-            $observation->setStatut("pending");
+
+            // add statut according to ROLE
+            if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST') || $this->isGranted('ROLE_SUPER_ADMIN')) {
+                $observation->setStatut("accepted");
+            } else {
+                $observation->setStatut("pending");
+            }
+
+
+
+
 
             // Add user
             $user = $this->getUser();
