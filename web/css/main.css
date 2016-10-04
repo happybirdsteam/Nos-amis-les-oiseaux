@@ -2443,7 +2443,7 @@ form > div > div {
 
 /*** modal ***/
 /* The Modal (background) */
-.modal {
+.modal, .flash-notice, .alert, .alert-info {
   display: none;
   /* Hidden by default */
   position: fixed;
@@ -2463,7 +2463,7 @@ form > div > div {
   /* Black w/ opacity */ }
 
 /* Modal Content/Box */
-.modal-content {
+.modal-content, .flash-notice p, .alert p, .alert-info p {
   background-color: #fefefe;
   margin: 5% auto;
   padding: 20px;
@@ -2535,3 +2535,12 @@ form > div > div {
 
 table.dataTable {
   margin: 0; }
+
+/*   flash info */
+.flash-notice, .alert, .alert-info {
+  display: block; }
+  .flash-notice p, .alert p, .alert-info p {
+    font-size: 2rem;
+    padding: 3rem;
+    margin-top: 40vh;
+    text-align: center; }

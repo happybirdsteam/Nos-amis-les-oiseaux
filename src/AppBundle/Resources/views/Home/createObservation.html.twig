@@ -4,6 +4,11 @@
     {% block body %}
         {% block heading %} {{ parent() }} {% endblock %}
     {% block container %}
+        {% for flash_message in app.session.flashBag.get('info') %}
+            <div class="flash-notice alert alert-info">
+              <p>{{ flash_message }}</p>
+            </div>
+        {% endfor %}
         <div class="call">
         <h2>Soumettre une observation</h2>
         <p>Soumettre une de vos observations, en remplissant le formulaire ci-dessous</p>
@@ -73,11 +78,16 @@ function valInCache(val,objt)
 	}
     return false;
 }
+
         // AUTO-COMPLETE BIRD INPUT
         (function($) {
         
         $observation_bird = $('#observation_bird');
         $form_add_observ = $("#form_add_observ");
+            //flash
+            $(".flash-notice, .flash-notice>p").on("click", function(){
+                $(".flash-notice").hide();
+            });
         
         function initMap(position){
             var map = L.map('mapid').setView([position.coords.latitude, position.coords.longitude], 15);
