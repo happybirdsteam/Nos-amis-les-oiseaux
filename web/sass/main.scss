@@ -1559,3 +1559,8 @@ $form_background_color : rgba(191, 191, 191, 0.3);
             width: 80%;
         }
     }
+
+/* jquery autocomplete */
+.ui-autocomplete-loading {
+  background: white url("../images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
