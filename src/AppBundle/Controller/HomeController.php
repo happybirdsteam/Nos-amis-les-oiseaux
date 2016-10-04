@@ -21,6 +21,11 @@ class HomeController extends Controller
  
     public function indexAction(Request $request)
     {
+        if( !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') ) {
+            return $this->render('AppBundle:Home:index.html.twig');
+        }
+
+
         $observation = new Observation();
         $em = $this->getDoctrine()->getManager();
 
@@ -76,8 +81,9 @@ class HomeController extends Controller
 
             return $this->redirectToRoute('nao_app_homepage');
         }
+        
 
-        return $this->render('AppBundle:Home:index.html.twig', array(
+        return $this->render('AppBundle:Home:createObservation.html.twig', array(
             'form' => $form->createView()
         ));
     }

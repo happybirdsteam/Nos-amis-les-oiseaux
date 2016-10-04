@@ -10,8 +10,11 @@
     {% for bird in birds %}
     {{bird.id }}, {{bird.comment }}
     {% endfor %}
-   
+
+
+
 {% endblock %}
+{% block footer %}{{ parent() }}{% endblock  %}
 
 {% block javascripts %}
     {{ parent() }}
