@@ -1594,7 +1594,9 @@ $form_background_color : $gray;
 .addSpecies{
   @extend .button
 }
-
 //DataSortable
 @import "https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css";
 @import "//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css";
+table.dataTable {
+  margin:0;
+}

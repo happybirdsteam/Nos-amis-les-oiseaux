@@ -2532,3 +2532,6 @@ form > div > div {
   margin-top: -1.5rem;
   clip: auto;
   font-style: italic; }
+
+table.dataTable {
+  margin: 0; }

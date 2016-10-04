@@ -8,29 +8,29 @@
 
 <form class="tableObservation">
 contributions
-<table id="observations" class="display nowrap dataTable dtr-inline responsive" role="grid">
-<thead>
-	<tr>
-	<th>id</th><th>commentaires</th>
-	<th>date</th><th>type d'oiseau</th>
-	<th>Latitude</th><th>Longitude</th>
-	<th>image</th>
-	<th>voir sur la carte</th>
-	<th>statut</th>
-	
-	</tr>
-</thead>
-<tbody>
-{% for observation in observations %}
-<tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
-	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
-	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
-	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td> 
-	<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
-	<td>{{ observation.statut }}</td>
-</tr>
- {% endfor %}
- <tbody>
+<table id="observations" class="display nowrap dataTable responsive" role="grid">
+	<thead>
+		<tr>
+			<th>id</th><th>commentaires</th>
+			<th>date</th><th>type d'oiseau</th>
+			<th>Latitude</th><th>Longitude</th>
+			<th>image</th>
+			<th>voir sur la carte</th>
+			<th>statut</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for observation in observations %}
+		<tr>
+			<td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
+			<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
+			<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
+			<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td>
+			<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
+			<td>{{ observation.statut }}</td>
+		</tr>
+ 	{% endfor %}
+ 	<tbody>
 </table>
 </form>
  
@@ -145,7 +145,6 @@ function initMap(lat, lng, typeOfBird){
 	$.fn.dataTable.moment('m/d/Y');
 	//init sortable table
 	$("#observations").DataTable({
-		responsive: true,
 		"scrollX": true,
 		language: {
         	processing:    "Traitement en cours...",
