@@ -108,7 +108,7 @@ class AdminController extends Controller
     
     public function confirmObservationAction(){
     
-    	if( $this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST')){
+    	if( $this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST') || $this->isGranted('ROLE_SUPER_ADMIN')){
     		
     		
     		

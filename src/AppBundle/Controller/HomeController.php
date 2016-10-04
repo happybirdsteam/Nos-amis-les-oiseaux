@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /* @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $observation->getImage();
 
 			if( $file){
@@ -66,7 +66,8 @@ class HomeController extends Controller
 
             
             // Add day of the observation
-            $observation->setDate(new \DateTime('now'));
+            //$dateformatted = date_create_from_format('d/m/Y H:i:s', );
+            $observation->setDate( $observation->getDate() );
 
             // add statut according to ROLE
             if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST') || $this->isGranted('ROLE_SUPER_ADMIN')) {
