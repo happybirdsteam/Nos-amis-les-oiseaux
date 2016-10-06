@@ -173,9 +173,11 @@
 
 	}
 
-	/// Wraps @content in a @media block using a given breakpoint.
-	/// @param {string} $breakpoint Breakpoint.
-	/// @param {map} $queries Additional queries.
+	/* Wraps @content in a @media block using a given breakpoint.
+	// @param {string} $breakpoint Breakpoint.
+	// @param {map} $queries Additional queries.
+	*/
+	
 	@mixin breakpoint($breakpoint: null, $queries: null) {
 
 		$query: 'screen';
@@ -219,10 +221,10 @@
 			}
 
 		// Modifiers.
-			.container.\31 25\25		{ width: 100%; max-width: $width * 1.25; min-width: $width; }
-			.container.\37 5\25			{ width: $width * 0.75; }
-			.container.\35 0\25			{ width: $width * 0.5; }
-			.container.\32 5\25			{ width: $width * 0.25; }
+			.container[class ~= "125%"]		{ width: 100%; max-width: $width * 1.25; min-width: $width; }
+			.container[class ~= "75%"]			{ width: $width * 0.75; }
+			.container[class ~= "50%"]			{ width: $width * 0.5; }
+			.container[class ~= "25%"]		{ width: $width * 0.25; }
 
 		// Main class.
 			.container {
