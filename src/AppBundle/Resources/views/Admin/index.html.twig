@@ -23,6 +23,7 @@
                     	<li {%if app.request.attributes.get('_route') == 'nao_app_observations_management' %} class="current" {% endif %}><a href="{{ path('nao_app_observations_management') }}">Valider observations</a></li>
                     	<li {%if app.request.attributes.get('_route') == 'nao_app_observations_viewer' %} class="current" {% endif %}><a href="{{ path('nao_app_observations_viewer') }}">Voir les observations</a></li>
                         <li {%if app.request.attributes.get('_route') == 'nao_app_homepage' %} class="current" {% endif %}><a href="{{ path('nao_app_homepage') }}">Retour au site</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                     </ul>
                 </nav>
             </div>
