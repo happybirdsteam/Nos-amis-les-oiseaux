@@ -9,7 +9,7 @@
 
     {% for flash_message in app.session.flashBag.get('info') %}
         <div class="flash-notice">
-            {{ flash_message }}
+           <p>{{ flash_message }}</p>
         </div>
     {% endfor %}
 
@@ -53,4 +53,17 @@
             <li>Aucun observateur n'a été trouvé.</li>
         {% endfor %}
     </ul>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (function($){
+            //flash
+            $(".flash-notice, .flash-notice>p").on("click", function(){
+                $(".flash-notice").hide();
+            });
+        })(jQuery)
+    </script>
+
+
 {% endblock %}
