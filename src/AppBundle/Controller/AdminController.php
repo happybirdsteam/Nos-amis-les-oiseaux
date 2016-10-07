@@ -19,7 +19,12 @@ class AdminController extends Controller
  
     public function indexAction()
     {
-        return $this->render('AppBundle:Admin:index.html.twig');
+        $countPendingContributions = $contributionsList = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Observation')
+            ->countObservationsByStatut( 'pending');
+
+        return $this->render('AppBundle:Admin:index.html.twig', array('counter' => $countPendingContributions));
     }
 
     public function userManagementAction()
