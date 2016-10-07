@@ -43,11 +43,22 @@ public function getMarkersBetween($latLngArray)
             AND o.statut = :statut '
         )->setParameter('name', $nameBird)->setParameter('statut', $statut);
 
-    try {
-        return $query->getArrayResult();
-    } catch (\Doctrine\ORM\NoResultException $e) {
-        return null;
+         try {
+            return $query->getArrayResult();
+         } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
     }
 
-}
+    public function countObservationsByStatut( $statut ){
+
+        $qb = $this->createQueryBuilder('c')
+            ->select( 'count( c.id )' )
+            ->where( 'c.statut = :statut')
+            ->setParameter('statut', $statut);
+        return $qb->getQuery()
+            ->getSingleScalarResult();
+
+
+    }
 }
