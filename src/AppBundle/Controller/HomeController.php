@@ -17,8 +17,8 @@ class HomeController extends Controller
 
 //DRY violation ( link to enum ) must inject the enum list directly minus pending
  public $possibleStatus = ["pending" =>"en attente", "accepted" => "accepter", "rejected" => "rejeter"];
- 
- 
+
+
     public function indexAction(Request $request)
     {
         $observation = new Observation();
@@ -37,7 +37,7 @@ class HomeController extends Controller
             	$prefix = md5(uniqid());
             	$imageThumb = new ImageResize( $file);
 				$imageThumb->resizeToWidth(150);
-				
+
             	$fileName = $prefix .'.'.$file->guessExtension();
             	$thumb_to_save = $this->getParameter('image_directory') . "/thumb_" . $fileName;
 				// Move the file to the directory where brochures are stored
@@ -45,7 +45,7 @@ class HomeController extends Controller
                 	$this->getParameter('image_directory'),
                 	$fileName
             	);
-            	
+
             	$imageThumb->save( $thumb_to_save);
             	// Update the 'image' property to store the jpeg file name
             	// instead of its contents
@@ -59,7 +59,7 @@ class HomeController extends Controller
 
             $observation->setBird($AvesBird[0]);
 
-            
+
             // Add day of the observation
             $observation->setDate(new \DateTime('now'));
             $observation->setStatut("pending");
@@ -96,8 +96,8 @@ class HomeController extends Controller
             return $response;
         }
     }
-    
-    
+
+
     public function testAction()
    {
         return $this->render('AppBundle:Home:viewObservation.html.twig');
@@ -113,52 +113,52 @@ class HomeController extends Controller
 
        return new JsonResponse($result);
    }
-    
-    
-    
+
+
+
     public function viewObservationAction(){
     $theBird = "Polystica stelleri";
-    
+
     $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
-    			
+
    // var_dump($DB_response);
-    
-    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
-    	 					  array("birds" => $DB_response, "statut" =>'accepted') 
+
+    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig',
+    	 					  array("birds" => $DB_response, "statut" =>'accepted')
     	 					);
     }
-    
+
     public function viewMyObservationsAction( User $user ){
-    
+
     	//DRY violation ( link to enum ) must inject the enum list directly minus pending
-    		 
+
     			$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
     			$server = $protocol . $_SERVER['SERVER_NAME'];
 				$img = $this->getParameter('web_img_directory');
-    
+
     	$query = $this->getDoctrine()
     		->getManager()
     		->getRepository('AppBundle:Observation')
     		->findBy( array("user" => $user) );
-    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', 
+    	return $this->render('AppBundle:Home:viewMyObservations.html.twig',
     						array( "observations" => $query,
-    								'server' => $server, 
+    								'server' => $server,
             	  					'folder'=> $img,
             	  					'option_value' => $this->possibleStatus
             	  			) );
-    
+
     }
-    
+
     public function ajaxGetObservationsByBirdAction( Request $request){
     	if($request->isXmlHttpRequest()){
     		$theBird = $request->get('bird');
-    		
+
     			if($theBird){
     				$theBird = str_replace("%20", " ", $theBird);
     				//A reel name for test
     				//$theBird = "Phoeniconaias minor";
-    				
+
     				$DB_response = $this->getDoctrine()->getManager()
     				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
     				$array = [];
@@ -166,8 +166,8 @@ class HomeController extends Controller
             		return $response;
     			}
     	}
-    
+
 	}
-	
+
 }
 
