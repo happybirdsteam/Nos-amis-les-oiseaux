@@ -1,17 +1,26 @@
 {% extends "AppBundle::layout.html.twig" %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {{ parent() }}
 
+{% endblock %}
 {% block body %}
 	{% block heading %} {{ parent() }} {% endblock %}
-	<div id="selection"><h2>selectionner l'espece à afficher</h2>
-	<p><input id="observation_bird" /><button class="addSpecises">Ajouter</button></p>
+	<div id="selection" class="call">
+        <h2>sélectionner l'espèce à afficher</h2>
+        <input id="observation_bird" size="53"/><button class="addSpecies">Ajouter</button>
+
 	</div> 
 	<div class="debug"></div>
     <div id="map"></div>
     {% for bird in birds %}
     {{bird.id }}, {{bird.comment }}
     {% endfor %}
-   
+
+
+
 {% endblock %}
+{% block footer %}{{ parent() }}{% endblock  %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -26,9 +35,9 @@
 $.widget( "ui.autocomplete", $.ui.autocomplete, {
 	options: {
 		messages: {
-			noResults: "Pas de resultats.",
+			noResults: "Pas de résultats.",
 			results: function( amount ) {
-				return amount + ( amount > 1 ? " resultats sont" : " resultat est" ) +
+				return amount + ( amount > 1 ? " résultats sont" : " résultat est" ) +
 					" disponible, utilisez les touches haut et bas pour naviguez.";
 			}
 		}
@@ -69,8 +78,6 @@ $.widget( "ui.autocomplete", $.ui.autocomplete, {
 	}
     return false;
 }
-
-$("#map").css({height : "70vh"});
         (function($) {
         $observation_bird = $('#observation_bird');
         

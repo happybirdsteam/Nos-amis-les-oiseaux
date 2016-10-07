@@ -778,21 +778,181 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
-	"\/sass\/main.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
+	"\/uploads\/images\/0aa7ad5292891ff45ad15e315f83e1d6.jpeg": {
+		"fileType": 16384,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/sass\/main.scss",
-		"outputAbbreviatedPath": "\/css\/main.css",
+		"initialSize": 39481,
+		"inputAbbreviatedPath": "\/uploads\/images\/0aa7ad5292891ff45ad15e315f83e1d6.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/0aa7ad5292891ff45ad15e315f83e1d6.jpeg",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
-		"shouldRunAutoprefixer": 0,
-		"shouldRunBless": 0,
-		"useLibsass": 0
+		"processed": 0
+		},
+	"\/uploads\/images\/310deea62eaccaf2bcff8e01168f070d.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2043,
+		"inputAbbreviatedPath": "\/uploads\/images\/310deea62eaccaf2bcff8e01168f070d.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/310deea62eaccaf2bcff8e01168f070d.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/3239741f5de4d9f518e5220c805b6493.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 223285,
+		"inputAbbreviatedPath": "\/uploads\/images\/3239741f5de4d9f518e5220c805b6493.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/3239741f5de4d9f518e5220c805b6493.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/3eae8c80a62ed85bfc178735d98a821a.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 223285,
+		"inputAbbreviatedPath": "\/uploads\/images\/3eae8c80a62ed85bfc178735d98a821a.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/3eae8c80a62ed85bfc178735d98a821a.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/485bab9cd2995eb8b7d2cd58b4b8e02a.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 223285,
+		"inputAbbreviatedPath": "\/uploads\/images\/485bab9cd2995eb8b7d2cd58b4b8e02a.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/485bab9cd2995eb8b7d2cd58b4b8e02a.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/79199ad311a775f11de64d61a7e839f9.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2043,
+		"inputAbbreviatedPath": "\/uploads\/images\/79199ad311a775f11de64d61a7e839f9.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/79199ad311a775f11de64d61a7e839f9.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/80b8483f59fca51066176730ee581dc6.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2043,
+		"inputAbbreviatedPath": "\/uploads\/images\/80b8483f59fca51066176730ee581dc6.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/80b8483f59fca51066176730ee581dc6.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/969aef5381d5eebe71905487915ee7d6.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 12455,
+		"inputAbbreviatedPath": "\/uploads\/images\/969aef5381d5eebe71905487915ee7d6.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/969aef5381d5eebe71905487915ee7d6.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/aa98fae4d3ebbe061be32dab7511e856.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 12455,
+		"inputAbbreviatedPath": "\/uploads\/images\/aa98fae4d3ebbe061be32dab7511e856.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/aa98fae4d3ebbe061be32dab7511e856.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/c55ed6fb005717736c4363688c8c15d1.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 231935,
+		"inputAbbreviatedPath": "\/uploads\/images\/c55ed6fb005717736c4363688c8c15d1.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/c55ed6fb005717736c4363688c8c15d1.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/d039491132d4f723bfc7f5ec18b83023.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2043,
+		"inputAbbreviatedPath": "\/uploads\/images\/d039491132d4f723bfc7f5ec18b83023.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/d039491132d4f723bfc7f5ec18b83023.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/e9a9a5b40e69564cd4cbf8069fcce750.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 2043,
+		"inputAbbreviatedPath": "\/uploads\/images\/e9a9a5b40e69564cd4cbf8069fcce750.png",
+		"outputAbbreviatedPath": "\/uploads\/images\/e9a9a5b40e69564cd4cbf8069fcce750.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/f7c31e6c80c9c4e19d4f49293b1a48d9.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 223285,
+		"inputAbbreviatedPath": "\/uploads\/images\/f7c31e6c80c9c4e19d4f49293b1a48d9.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/f7c31e6c80c9c4e19d4f49293b1a48d9.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/thumb_0aa7ad5292891ff45ad15e315f83e1d6.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5418,
+		"inputAbbreviatedPath": "\/uploads\/images\/thumb_0aa7ad5292891ff45ad15e315f83e1d6.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/thumb_0aa7ad5292891ff45ad15e315f83e1d6.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/thumb_3eae8c80a62ed85bfc178735d98a821a.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 6064,
+		"inputAbbreviatedPath": "\/uploads\/images\/thumb_3eae8c80a62ed85bfc178735d98a821a.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/thumb_3eae8c80a62ed85bfc178735d98a821a.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/uploads\/images\/thumb_c55ed6fb005717736c4363688c8c15d1.jpeg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 5031,
+		"inputAbbreviatedPath": "\/uploads\/images\/thumb_c55ed6fb005717736c4363688c8c15d1.jpeg",
+		"outputAbbreviatedPath": "\/uploads\/images\/thumb_c55ed6fb005717736c4363688c8c15d1.jpeg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		}
 	},
 "hooks": [

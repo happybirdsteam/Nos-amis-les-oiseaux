@@ -3,24 +3,22 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{% block title %}Happy Birds par NAO{% endblock %}</title>
-        {% block stylesheets %}
-            <!--[if lte IE 8]><script src="/web/js/ie/html5shiv.js"></script><![endif]-->
-            <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
-             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-            <!--[if lte IE 8]><link rel="stylesheet" href="/web/css/ie8.css" /><![endif]-->
-            <!--[if lte IE 9]><link rel="stylesheet" href="/web/css/ie9.css" /><![endif]-->
-        	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        {% endblock %}
-    </head>
-    <body>
-    {% block body %}
-        <div id="page-wrapper">
-
-            {% block heading %}
+    <title>{% block title %}Happy Birds par NAO{% endblock %}</title>
+    {% block stylesheets %}
+        <!--[if lte IE 8]><script src="/web/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="/web/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="/web/css/ie9.css" /><![endif]-->
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    <div id="page-wrapper">
+        {% block heading %}
             <!-- Header -->
             <div id="header">
-
                 <!-- Logo -->
                 <img id="logo_header" src="{{ asset('images/hibou.png') }}" alt="Petit Hibou" />
                 <h1><a href="index.html" id="logo">Happy Birds <em>par NAO</em></a></h1>
@@ -28,59 +26,76 @@
                 <nav id="nav">
                     <ul>
                         <li {%if app.request.attributes.get('_route') == 'nao_app_homepage' %} class="current" {% endif %}>
-                        	<a href="{{ path('nao_app_homepage') }}">Accueil</a>
+                            <a href="{{ path('nao_app_homepage') }}">Accueil</a>
                         </li>
                         <li {%if app.request.attributes.get('_route') == 'nao_app_client_observations_viewer' %} class="current" {% endif %}>
-                        	<a href="{{ path('nao_app_client_observations_viewer') }}" >Consulter les observations</a>
+                            <a href="{{ path('nao_app_client_observations_viewer') }}" >Consulter les observations</a>
                         </li>
                         {% if app.user %}
-                        <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %}>
-                        	<a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
-                        </li>
+                            <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %}>
+                                <a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
+                            </li>
+                            {% if is_granted("ROLE_SUPER_ADMIN") or is_granted("ROLE_ADMIN") or is_granted("ROLE_NATURALIST") %}
+                                <li><a href="{{  path('nao_app_adminpage') }}" >Admin</a></li>
+                            {% endif %}
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                            {% endif %}
                         {% endif %}
                     </ul>
                 </nav>
             </div>
-            {% endblock %}
-
+        {% endblock %}
+        {%  block banner %}
             <!-- Banner -->
             <section id="banner">
                 <header>
                     <h2>Happy Birds: <em>Une application pour partager votre passion des oiseaux</em></h2>
                     <!--<a href="#" class="button">Choisir une action...</a>-->
                 </header>
-            </section>
+            </section><!-- Dont forget to add the </div> in the end if call parent() -->
+        {%  endblock %}
+        {% block container %}{%  endblock %}
+    </div>
+{% endblock %}
+{% block footer %}
+    <!-- Footer -->
+    <div id="footer">
+        <div class="container">
+            <div class="row">
 
-        <!-- Dont forget to add the </div> in the end if call parent() -->
-        {% endblock %}
-        {% block javascripts %}
-            <!-- Scripts -->
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/jquery.dropotron.min.js') }}"></script>
-            <script src="{{ asset('js/skel.min.js') }}"></script>
-            <script src="{{ asset('js/util.js') }}"></script>
-
-            <!--[if lte IE 8]><script src=<script src="{{ asset('js/ie/respond.min.js') }}"></script>></script><![endif]-->
-
-            <script src={{ asset('js/main.js') }}></script>
-            <script>
-                $('#nav ul li').on('click', function(e){
-                    $('#nav ul li').removeClass('current');
-                    $(this).addClass('current');
-                });
-            </script>
+            </div>
         </div>
-    {% endblock %}
-    </body>
+
+        <!-- Icons -->
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            {% if is_granted("ROLE_ADMIN") %}
+                <li><a href="{{ path('nao_app_user_management') }}" class="icon fa-user"><span class="label">Administration</span></a></li>
+            {% endif %}
+        </ul>
+
+        <!-- Copyright -->
+        <div class="copyright">
+            <ul class="menu">
+                <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </div>
+
+    </div>
+{% endblock  %}
+{% block javascripts %}
+    <!-- Scripts -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.dropotron.min.js') }}"></script>
+    <script src="{{ asset('js/skel.min.js') }}"></script>
+    <script src="{{ asset('js/util.js') }}"></script>
+
+    <!--[if lte IE 8]><script src=<script src="{{ asset('js/ie/respond.min.js') }}"></script>></script><![endif]-->
+
+    <script src={{ asset('js/main.js') }}></script>
+{% endblock %}
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

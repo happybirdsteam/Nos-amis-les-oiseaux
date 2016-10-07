@@ -21,6 +21,11 @@ class HomeController extends Controller
  
     public function indexAction(Request $request)
     {
+        if( !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') ) {
+            return $this->render('AppBundle:Home:index.html.twig');
+        }
+
+
         $observation = new Observation();
         $em = $this->getDoctrine()->getManager();
 
@@ -29,7 +34,7 @@ class HomeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /* @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $observation->getImage();
 
 			if( $file){
@@ -61,14 +66,21 @@ class HomeController extends Controller
 
             
             // Add day of the observation
-            $observation->setDate(new \DateTime('now'));
-            $observation->setStatut("pending");
+            //$dateformatted = date_create_from_format('d/m/Y H:i:s', );
+            $observation->setDate( $observation->getDate() );
+
+            // add statut according to ROLE
+            if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST') || $this->isGranted('ROLE_SUPER_ADMIN')) {
+                $observation->setStatut("accepted");
+            } else {
+                $observation->setStatut("pending");
+            }
 
             // Add user
             $user = $this->getUser();
             $observation->setUser($user);
 
-            // ... persist the $product variable or any other work
+            // ... persist the $observation 
             $em->persist($observation);
             $em->flush();
 
@@ -76,8 +88,9 @@ class HomeController extends Controller
 
             return $this->redirectToRoute('nao_app_homepage');
         }
+        
 
-        return $this->render('AppBundle:Home:index.html.twig', array(
+        return $this->render('AppBundle:Home:createObservation.html.twig', array(
             'form' => $form->createView()
         ));
     }

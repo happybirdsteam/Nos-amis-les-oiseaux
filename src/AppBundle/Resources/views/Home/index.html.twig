@@ -11,57 +11,25 @@
         <div class="container">
             <h2>Partagez votre passion des oiseaux ! </h2>
 
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-            <a href="{{ path('fos_user_security_logout') }}">Déconnexion</a>
-            {% else %}
+
+
             <a href="{{ path('fos_user_security_login') }}">Connexion</a>
             <a href="{{ path('fos_user_registration_register') }}">Inscription</a>
         </div>
-        {% endif %}
+
 
         {% for flash_message in app.session.flashBag.get('info') %}
             <div class="flash-notice alert alert-info">
                 {{ flash_message }}
             </div>
         {% endfor %}
-
-        {% if is_granted("ROLE_OBSERVER") %}
-            {% include 'AppBundle::Home/createObservation.html.twig' %}
-       		{% elseif (is_granted(" ") or is_granted("ROLE_ADMIN") or is_granted("ROLE_SUPER_ADMIN")) %}
-            {% include 'AppBundle::Home/createObservation.html.twig' %}
-        {% else %}
-        {% endif %}
 </div>
 </section>
 
 </div>
-<!-- Footer -->
-<div id="footer">
-    <div class="container">
-        <div class="row">
 
-        </div>
-    </div>
-
-    <!-- Icons -->
-    <ul class="icons">
-        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-        <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-        {% if is_granted("ROLE_ADMIN") %}
-        <li><a href="{{ path('nao_app_user_management') }}" class="icon fa-user"><span class="label">Administration</span></a></li>
-        {% endif %}
-    </ul>
-
-    <!-- Copyright -->
-    <div class="copyright">
-        <ul class="menu">
-            <li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </div>
-
-</div>
 
 </div>
 {% endblock %}
+{% block footer %} {{  parent() }} {% endblock  %}
 {% block javascripts %} {{ parent() }} {% endblock %}

@@ -37,6 +37,26 @@ class HomeControllerTest extends WebTestCase
         $this->assertEquals('/observations/mesObservations/3', $client->getRequest()->getPathInfo());
     }*/
 
+    /*public function testAdminLink()
+    {
+        $client = $this->logIn();
+        $crawler = $client->request('GET', '/');
+        $link = $crawler->selectLink('Admin')->link();
+        $client->click($link);
+
+        $this->assertEquals('/admin', $client->getRequest()->getPathInfo());
+    }*/
+
+    /*public function testDisconnexionLink()
+    {
+        $client = $this->logIn();
+        $crawler = $client->request('GET', '/');
+        $link = $crawler->selectLink('Déconnexion')->link();
+        $client->click($link);
+
+        $this->assertEquals('/logout', $client->getRequest()->getPathInfo());
+    }*/
+
     private function logIn()
     {
         $client = static::createClient();

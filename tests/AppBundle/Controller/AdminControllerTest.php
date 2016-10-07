@@ -44,6 +44,14 @@ class AdminControllerTest extends WebTestCase
         $this->assertEquals('/admin/gestion-des-utilisateurs', $client->getRequest()->getPathInfo());
     }
 
+    public function testUserManagementPage()
+    {
+        $client = $this->logIn();
+        $client->request('GET', '/admin/gestion-des-utilisateurs');
+
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+    }
+
     public function testValidateObservationsLink()
     {
         $client = $this->logIn();
@@ -54,6 +62,14 @@ class AdminControllerTest extends WebTestCase
         $this->assertEquals('/admin/gestion-observations/', $client->getRequest()->getPathInfo());
     }
 
+    /*public function testValidateObservationsPage()
+    {
+        $client = $this->logIn();
+        $client->request('GET', '/admin/gestion-observations/');
+
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+    }*/
+
     public function testSeeObservationsLink()
     {
         $client = $this->logIn();
@@ -63,6 +79,14 @@ class AdminControllerTest extends WebTestCase
 
         $this->assertEquals('/admin/voir-observations/', $client->getRequest()->getPathInfo());
     }
+
+    /*public function testSeeObservationsPage()
+    {
+        $client = $this->logIn();
+        $client->request('GET', '/admin/voir-observations/');
+
+        $this->assertTrue(200 === $client->getResponse()->getStatusCode());
+    }*/
 
     public function testReturnToHomeLink()
     {
