@@ -5,7 +5,7 @@
 {% block stylesheets %} {{ parent() }} {% endblock %}
 
 {% block body %}
-<div id="page-wrapper">
+<ul id="page-wrapper">
 
             {% block heading %}
             <!-- Header -->
@@ -31,8 +31,12 @@
 
 
     {% block container %}
-      <div > <p>il y a <em>{{ counter }} </em>observation(s) en  attente.</p>
-      </div>
+      <ul>
+          <li><p>Il y a <em>{{ countPending }} </em>observation(s) en  attente.</p></li>
+          <li><p>Il y a <em>{{ countAccepted }} </em>observation(s) acceptées.</p></li>
+          <li><p>Il y a <em>{{ countRejected }} </em>observation(s) rejetées.</p></li>
+      </ul>
+        <p>Il y a {{ inscriptions|length }} inscrits </p>
     {% endblock %}
 {% endblock %}
     {% block footer %}{{ parent() }}{% endblock  %}
