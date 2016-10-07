@@ -31,12 +31,17 @@
 
 
     {% block container %}
+    <div class="call">
       <ul>
-          <li><p>Il y a <em>{{ countPending }} </em>observation(s) en  attente.</p></li>
-          <li><p>Il y a <em>{{ countAccepted }} </em>observation(s) acceptées.</p></li>
-          <li><p>Il y a <em>{{ countRejected }} </em>observation(s) rejetées.</p></li>
+          <li class="bgYellow"><p>Il y a <em >{{ countPending }} </em>observation(s) en  attente.</p></li>
+          <li class="bgGreen"><p>Il y a <em>{{ countAccepted }} </em>observation(s) acceptées.</p></li>
+          <li class="bgRed"><p>Il y a <em >{{ countRejected }} </em>observation(s) rejetées.</p></li>
       </ul>
-        <p>Il y a {{ inscriptions|length }} inscrits </p>
+    </div>
+        <div>
+            <p>Il y a {{ inscriptions|length }} inscrits </p>
+        </div>
+
     {% endblock %}
 {% endblock %}
     {% block footer %}{{ parent() }}{% endblock  %}
