@@ -69,12 +69,13 @@ contributions
 
 
 (function($){
+
+// thumb to large
     $("#popupImg").hide();
     $("#popupImg").on("click", function(){
         $(this).toggle();
 
-    })
-// thumb to large
+    });
   $(".thumb").on("click", function (e) {
       var source = e.target.src;
       source = source.replace('thumb_','');

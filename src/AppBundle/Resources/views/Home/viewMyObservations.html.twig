@@ -52,7 +52,9 @@ contributions
 </div>
 </div>
 <!-- /endModal -->
-
+	<div id="popupImg" class="popup alert">
+		<p><img /></p>
+	</div>
 
 {% endblock %}
 {% block footer %}{{ parent() }}{% endblock  %}
@@ -71,6 +73,22 @@ contributions
 
 
 (function($){
+
+	// thumb to large
+	$("#popupImg").hide();
+	$("#popupImg").on("click", function(){
+		$(this).toggle();
+
+	});
+	$(".thumb").on("click", function (e) {
+		var source = e.target.src;
+		source = source.replace('thumb_','');
+		$("#popupImg").show()
+				.find('p img')
+				.attr('src', source);
+
+
+	}) ;
 
 var modalMap = $("#modalMap");
 modalMap.css({height : '70vh'});
