@@ -11,8 +11,8 @@
 </ul>
 
 <ul>
-    <li>réinitialiser mot de passe</li>
-    <li>changer d'adresse email</li>
+   <li><a href="{{ path('nao_app_user_edit_profile', {'id' :  app.user.id} ) }}">éditer profil</a></li>
+
 </ul>
 
     {% endblock %}
