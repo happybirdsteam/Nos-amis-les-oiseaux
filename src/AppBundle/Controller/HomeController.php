@@ -129,7 +129,7 @@ class HomeController extends Controller
     
     
     
-    public function viewObservationAction( $theBird ){
+    public function viewObservationAction( $theBird= null ){
 
     
     $DB_response = $this->getDoctrine()->getManager()
