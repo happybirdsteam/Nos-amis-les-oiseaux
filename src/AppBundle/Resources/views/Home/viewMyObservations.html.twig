@@ -47,7 +47,7 @@ contributions
   	<div id="modalMap"></div>
   </div>
   <div class="modal-footer">
-    <h3></h3>
+    <button class="button clean">Enlever tous les marqueurs.</button>
   </div>
 </div>
 </div>
@@ -90,14 +90,12 @@ contributions
 
 	}) ;
 
-var modalMap = $("#modalMap");
-modalMap.css({height : '70vh'});
+	var modalMap = $("#modalMap");
+	modalMap.css({height : '70vh'});
 
-	
-
-//draggable
-var modal = $('#myModal');
-modal.draggable(  ); //launch one to initialize
+	//draggable
+	var modal = $('#myModal');
+	modal.draggable(  ); //launch one to initialize
 	$(".modal-header").hover( function(){ 
 		modal.draggable( "option", "disabled", false);
 	}, 
@@ -105,46 +103,47 @@ modal.draggable(  ); //launch one to initialize
 		modal.draggable( "option", "disabled", true );
 	});
 
-var launchModal = function(title){
-
-	var modal = $('#myModal');
-	var span = $(".close");
-	span.on("click", function() {
-    	modal.css({display : "none" });
-	});
+	var launchModal = function(title){
+		var modal = $('#myModal');
+		var span = $(".close");
+		span.on("click", function() {
+    		modal.css({display : "none" });
+		});
 	
 	
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-    	if (event.target == modal) {
-        	modal.css({display : "none" });
-    	}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+    		if (event.target == modal) {
+        		modal.css({display : "none" });
+    		}
+		}
+		//set title
+		$(".modal-header h2").text( title );
+		modal.css({display : "block" })
+		return ;
 	}
-	//set title
-	$(".modal-header h2").text( title );
-	modal.css({display : "block" })
+
+	/*//// begin map ////**/
+	//init map in globally scope
+	var map = new L.Map('modalMap');
+	var markers = new L.FeatureGroup();
+	function removeAllMarkers(){
+		map.removeLayer(markers);
+	};
+
+	function initMap(lat, lng, typeOfBird){
 	
-	return ;
-}
-/*//// begin map ////**/
+		map.setView([lat,lng], 13);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
-//init map in globally scope
-var map = new L.Map('modalMap');
-
-
-
-function initMap(lat, lng, typeOfBird){
-	
-	map.setView([lat,lng], 13);
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
-
-	L.marker([lat, lng]).addTo(map)
-    .bindPopup( typeOfBird )
-    .openPopup();
-    	
-};
+		var marker = L.marker([lat, lng]);
+    	marker.bindPopup( typeOfBird )
+    			.openPopup();
+		markers.addLayer(marker);
+		map.addLayer(markers);
+	};
 	
 	$(".showMap").on("click", function(e){
 	e.preventDefault();
@@ -184,9 +183,13 @@ function initMap(lat, lng, typeOfBird){
         	aria: {
             	sortAscending:  ": activer pour trier la colonne par ordre croissant",
             	sortDescending: ": activer pour trier la colonne par ordre décroissant"
-        }
-    }
-});
+        		}
+    	}
+	});
+
+	$(".clean").on("click", function(){
+		removeAllMarkers();
+	});
 
 
 })(jQuery);
