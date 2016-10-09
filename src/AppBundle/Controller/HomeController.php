@@ -174,13 +174,22 @@ class HomeController extends Controller
     				
     				$DB_response = $this->getDoctrine()->getManager()
     				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
-    				$array = [];
     				$response = new JsonResponse( $DB_response );
             		return $response;
     			}
     	}
     
 	}
+
+    public  function getProfilAction( $id ){
+
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy( ['id'=>$id]);
+        var_dump($user);
+        return $this->render( 'AppBundle:Home:profil.html.twig',
+            ['user' => $user ] );
+
+    }
 	
 }
 

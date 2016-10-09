@@ -1,0 +1,23 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block title %} {{ parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block body %}
+    {% block heading %} {{ parent() }} {% endblock %}
+    {% block container %}
+<ul>
+    <li>username :  {{ user.username }} </li>
+    <li>adresse email : {{ user.email }}</li>
+    <li>derniere connexion : {{ user.lastLogin|localizeddate('none', 'none', 'fr_FR', null, "cccc, d MMMM Y 'à' HH 'h 'mm 'minutes'") }}</li>
+</ul>
+
+<ul>
+    <li>réinitialiser mot de passe</li>
+    <li>changer d'adresse email</li>
+</ul>
+
+    {% endblock %}
+{% endblock %}
+{% block footer %} {{ parent() }} {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

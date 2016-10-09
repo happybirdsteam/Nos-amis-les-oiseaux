@@ -35,6 +35,9 @@
                             <li {%if app.request.attributes.get('_route') == 'nao_app_my_observations' %} class="current" {% endif %} >
                         	<a href="{{ path('nao_app_my_observations', {'id' :  app.user.id} )  }}" >Consulter mes observations</a>
                             </li>
+                            <li {%if app.request.attributes.get('_route') == 'nao_app_user_profile' %} class="current" {% endif %} >
+                                <a href="{{ path('nao_app_user_profile', {'id' :  app.user.id} )  }}" >Profil</a>
+                            </li>
                             {% if is_granted("ROLE_SUPER_ADMIN") or is_granted("ROLE_ADMIN") or is_granted("ROLE_NATURALIST") %}
                                <li><a href="{{  path('nao_app_adminpage') }}" >Admin</a></li>
                             {% endif %}
