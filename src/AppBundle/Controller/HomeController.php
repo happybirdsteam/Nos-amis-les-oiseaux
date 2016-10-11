@@ -17,10 +17,15 @@ class HomeController extends Controller
 
 //DRY violation ( link to enum ) must inject the enum list directly minus pending
  public $possibleStatus = ["pending" =>"en attente", "accepted" => "accepter", "rejected" => "rejeter"];
-
-
+ 
+ 
     public function indexAction(Request $request)
     {
+        if( !$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') ) {
+            return $this->render('AppBundle:Home:index.html.twig');
+        }
+
+
         $observation = new Observation();
         $em = $this->getDoctrine()->getManager();
 
@@ -29,7 +34,7 @@ class HomeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /* @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $observation->getImage();
 
 			if( $file){
@@ -37,7 +42,7 @@ class HomeController extends Controller
             	$prefix = md5(uniqid());
             	$imageThumb = new ImageResize( $file);
 				$imageThumb->resizeToWidth(150);
-
+				
             	$fileName = $prefix .'.'.$file->guessExtension();
             	$thumb_to_save = $this->getParameter('image_directory') . "/thumb_" . $fileName;
 				// Move the file to the directory where brochures are stored
@@ -45,7 +50,7 @@ class HomeController extends Controller
                 	$this->getParameter('image_directory'),
                 	$fileName
             	);
-
+            	
             	$imageThumb->save( $thumb_to_save);
             	// Update the 'image' property to store the jpeg file name
             	// instead of its contents
@@ -59,16 +64,23 @@ class HomeController extends Controller
 
             $observation->setBird($AvesBird[0]);
 
-
+            
             // Add day of the observation
-            $observation->setDate(new \DateTime('now'));
-            $observation->setStatut("pending");
+            //$dateformatted = date_create_from_format('d/m/Y H:i:s', );
+            $observation->setDate( $observation->getDate() );
+
+            // add statut according to ROLE
+            if ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_NATURALIST') || $this->isGranted('ROLE_SUPER_ADMIN')) {
+                $observation->setStatut("accepted");
+            } else {
+                $observation->setStatut("pending");
+            }
 
             // Add user
             $user = $this->getUser();
             $observation->setUser($user);
 
-            // ... persist the $product variable or any other work
+            // ... persist the $observation 
             $em->persist($observation);
             $em->flush();
 
@@ -76,8 +88,9 @@ class HomeController extends Controller
 
             return $this->redirectToRoute('nao_app_homepage');
         }
+        
 
-        return $this->render('AppBundle:Home:index.html.twig', array(
+        return $this->render('AppBundle:Home:createObservation.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -96,8 +109,8 @@ class HomeController extends Controller
             return $response;
         }
     }
-
-
+    
+    
     public function testAction()
    {
         return $this->render('AppBundle:Home:viewObservation.html.twig');
@@ -113,61 +126,103 @@ class HomeController extends Controller
 
        return new JsonResponse($result);
    }
+    
+    
+    
+    public function viewObservationAction( $theBird= null ){
 
-
-
-    public function viewObservationAction(){
-    $theBird = "Polystica stelleri";
-
+    
     $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
 
-   // var_dump($DB_response);
-
-    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig',
-    	 					  array("birds" => $DB_response, "statut" =>'accepted')
+    
+    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
+    	 					  array("birds" => $DB_response, "statut" =>'accepted') 
     	 					);
     }
-
+    
     public function viewMyObservationsAction( User $user ){
-
+    
     	//DRY violation ( link to enum ) must inject the enum list directly minus pending
-
+    		 
     			$protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
     			$server = $protocol . $_SERVER['SERVER_NAME'];
 				$img = $this->getParameter('web_img_directory');
-
+    
     	$query = $this->getDoctrine()
     		->getManager()
     		->getRepository('AppBundle:Observation')
     		->findBy( array("user" => $user) );
-    	return $this->render('AppBundle:Home:viewMyObservations.html.twig',
+    	return $this->render('AppBundle:Home:viewMyObservations.html.twig', 
     						array( "observations" => $query,
-    								'server' => $server,
+    								'server' => $server, 
             	  					'folder'=> $img,
             	  					'option_value' => $this->possibleStatus
             	  			) );
-
+    
     }
-
+    
     public function ajaxGetObservationsByBirdAction( Request $request){
     	if($request->isXmlHttpRequest()){
     		$theBird = $request->get('bird');
-
+    		
     			if($theBird){
     				$theBird = str_replace("%20", " ", $theBird);
     				//A reel name for test
     				//$theBird = "Phoeniconaias minor";
-
+    				
     				$DB_response = $this->getDoctrine()->getManager()
     				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
-    				$array = [];
     				$response = new JsonResponse( $DB_response );
             		return $response;
     			}
     	}
-
+    
 	}
 
+    public  function getProfilAction( $id ){
+
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy( ['id'=>$id]);
+        return $this->render( 'AppBundle:Home:profil.html.twig',
+            ['user' => $user ] );
+
+    }
+
+
+    public function editUserAction($id, Request $request = null)
+    {
+        $user =$this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:User')->find($id);
+
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.profile.form.factory');
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+
+            $session = $this->getRequest()->getSession();
+            $session->getFlashBag()->add('message', 'Successfully updated');
+            $url = $this->generateUrl('matrix_edi_viewUser');
+            $response = new RedirectResponse($url);
+
+        }
+
+        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
+	
 }
 
