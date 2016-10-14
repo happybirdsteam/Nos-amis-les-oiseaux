@@ -36,22 +36,7 @@ contributions
  
 </div>
 <hr />
-<!-- Modal content -->
-<div id="myModal" class="modal" >
-<div class="modal-content">
-  <div class="modal-header">
-    <span class="close">×</span>
-    <h2>Modal Header</h2>
-  </div>
-  <div class="modal-body">
-  	<div id="modalMap"></div>
-  </div>
-  <div class="modal-footer">
-    <button class="button clean">Enlever tous les marqueurs.</button>
-  </div>
-</div>
-</div>
-<!-- /endModal -->
+{%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
 	<div id="popupImg" class="popup alert">
 		<p><img /></p>
 	</div>

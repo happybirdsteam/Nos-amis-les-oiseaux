@@ -48,15 +48,7 @@ contributions
 </div>
 <hr />
 <!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">x</span>
-    <div id="map"></div>
-  </div>
-
-</div>
+    {%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
     <div id="popupImg" class="popup alert">
         <p><img /></p>
     </div>
