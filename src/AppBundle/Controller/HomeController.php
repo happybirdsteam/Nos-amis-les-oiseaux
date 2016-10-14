@@ -216,7 +216,7 @@ class HomeController extends Controller
             $session = $this->getRequest()->getSession();
             $session->getFlashBag()->add('message', 'Successfully updated');
             $url = $this->generateUrl('matrix_edi_viewUser');
-            $response = new RedirectResponse($url);
+            return new RedirectResponse($url);
 
         }
 
