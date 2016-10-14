@@ -29,60 +29,8 @@
     {{ parent() }}
      <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    {% include('AppBunde::_Autocomplete.js.html.twig') %}
     <script>
-    /** localize autocomplete **/
-    // live region extension, adding a `messages` option
-// NOTE: This is an experimental API. We are still investigating
-// a full solution for string manipulation and internationalization.
-(function( $, undefined ) {
-$.widget( "ui.autocomplete", $.ui.autocomplete, {
-	options: {
-		messages: {
-			noResults: "Pas de resultats.",
-			results: function( amount ) {
-				return amount + ( amount > 1 ? " resultats sont" : " resultat est" ) +
-					" disponible, utilisez les touches haut et bas pour naviguez.";
-			}
-		}
-	},
-
-	__response: function( content ) {
-		var message;
-		this._superApply( arguments );
-		if ( this.options.disabled || this.cancelSearch ) {
-			return;
-		}
-		if ( content && content.length ) {
-			message = this.options.messages.results( content.length );
-		} else {
-			message = this.options.messages.noResults;
-		}
-		this.liveRegion.text( message );
-	}
-});
-
-}( jQuery ));
-    </script>
-    <script>
-    //helper
-function valInCache(val,objt)
-{
-	for (var property in objt) {
-	
-    		for (var prop in objt[property]) {
-        		this_val = objt[property][prop];
-        		console.log(this_val);
-        		if(this_val === val)
-        		{
-            		return true;
-            		break;
-        		}
-			}
-	}
-    return false;
-}
-
-        // AUTO-COMPLETE BIRD INPUT
         (function($) {
         
         $observation_bird = $('#observation_bird');

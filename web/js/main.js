@@ -3,7 +3,22 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+function valInCache(val,objt)
+{
+	for (var property in objt) {
 
+		for (var prop in objt[property]) {
+			this_val = objt[property][prop];
+			console.log(this_val);
+			if(this_val === val)
+			{
+				return true;
+				break;
+			}
+		}
+	}
+	return false;
+};
 (function($) {
 
 	skel.breakpoints({
@@ -14,6 +29,8 @@
 		mobile: '(max-width: 736px)',
 		mobilep: '(max-width: 480px)'
 	});
+
+
 
 	$(function() {
 
@@ -82,5 +99,7 @@
 						.css('transition', 'none');
 
 	});
+
+	
 
 })(jQuery);

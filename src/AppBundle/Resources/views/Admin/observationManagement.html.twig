@@ -56,11 +56,12 @@ contributions
 
 
 {% block javascripts %} {{ parent() }} 
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
-<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-<script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
+	<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	<script>
        
 
 
@@ -86,7 +87,7 @@ contributions
 /*//// begin map ////**/
 
 //init map in globally scope
-var map = new L.Map('map');
+var map = new L.Map('modalMap');
 	function initMap(lat, lng, typeOfBird){
 	
 	map.setView([lat,lng], 13);
@@ -99,13 +100,49 @@ var map = new L.Map('map');
     .openPopup();
     	
 };
-	
+
+	var modalMap = $("#modalMap");
+	modalMap.css({height : '70vh'});
+	//draggable
+	var modal = $('#myModal');
+	modal.draggable(  ); //launch one to initialize
+	$(".modal-header").hover( function(){
+				modal.draggable( "option", "disabled", false);
+			},
+			function(){
+				modal.draggable( "option", "disabled", true );
+			});
+
+	var launchModal = function(title){
+		var modal = $('#myModal');
+		var span = $(".close");
+		span.on("click", function() {
+			modal.css({display : "none" });
+		});
+
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.css({display : "none" });
+			}
+		}
+		//set title
+		$(".modal-header h2").text( title );
+		modal.css({display : "block" })
+		return ;
+	}
+
+
 	$(".showMap").on("click", function(e){
-	e.preventDefault();
-	var lat = $(this).data('lat');
-	var lng = $(this).data('lng');
-	var bird = $(this).parent().parent().find(".bird").text();
-	initMap(lat,lng, bird );
+
+		e.preventDefault();
+
+		var lat = $(this).data('lat');
+		var lng = $(this).data('lng');
+		var bird = $(this).parent().parent().find(".bird").text();
+		launchModal(bird);
+		initMap(lat,lng, bird );
 		
 	});
 
@@ -115,31 +152,7 @@ var map = new L.Map('map');
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('m/d/Y');
 	//init sortable table
-	$("#observations").DataTable({
-    language: {
-        processing:     "Traitement en cours...",
-        search:         "Rechercher&nbsp;:",
-        lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-        info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-        infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-        infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-        infoPostFix:    "",
-        loadingRecords: "Chargement en cours...",
-        zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-        emptyTable:     "Aucune donnée disponible dans le tableau",
-        paginate: {
-            first:      "Premier",
-            previous:   "Pr&eacute;c&eacute;dent",
-            next:       "Suivant",
-            last:       "Dernier"
-        },
-        aria: {
-            sortAscending:  ": activer pour trier la colonne par ordre croissant",
-            sortDescending: ": activer pour trier la colonne par ordre décroissant"
-        }
-    }
-});
-	// get select change and send an ajax request
+    // get select change and send an ajax request
 	$("select").on("change", function(){
 		var IdToModify = $(this).parent().parent().find(".theID").text();
 		var newStatut = this.value;
