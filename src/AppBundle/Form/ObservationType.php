@@ -23,12 +23,13 @@ class ObservationType extends AbstractType
     {
         $builder
             ->add("lat", TextType::class, array(
-                'label' => 'Lat'
+                'label' => 'Latitude'
             ))
             ->add("lng", TextType::class, array(
-                'label' => 'Lng'
+                'label' => 'Longitude'
             ))
             ->add('comment', TextareaType::class, array(
+                'label' => 'commentaire',
                 'required' => false
             ))
             ->add('date',  DateTimeType::class,
@@ -37,7 +38,10 @@ class ObservationType extends AbstractType
                     'date_widget' => "single_text", 'time_widget' => "single_text",
                     'data' => new \DateTime())
             )
-            ->add('bird', TextType::class)
+            ->add('bird', TextType::class, array(
+                'label' => 'nom de l\'oiseau'
+
+            ))
             ->add('image', FileType::class, array(
                 'label' => 'Image',
                 'required' => false

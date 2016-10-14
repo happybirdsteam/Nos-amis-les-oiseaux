@@ -32,7 +32,7 @@ contributions
 <tr><td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
 	<td>{{ observation.date|date("m/d/Y", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td><td> {{ observation.user.roles|first }} </td> <td class="{{ 'userID' ~  observation.user.id}}"> {{ observation.user }} </td>
-	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder ~ '/'  ~ observation.image ) }}" />    {%endif %}</td> 
+	<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" class="thumb" />    {%endif %}</td>
 	<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 	<td><select>
 			{% for key, traduction in option_value %}
@@ -57,8 +57,9 @@ contributions
   </div>
 
 </div>
-
-
+    <div id="popupImg" class="popup alert">
+        <p><img /></p>
+    </div>
 {% endblock %}
 
 
@@ -74,7 +75,21 @@ contributions
 
 (function($){
 
+// thumb to large
+    $("#popupImg").hide();
+    $("#popupImg").on("click", function(){
+        $(this).toggle();
 
+    });
+    $(".thumb").on("click", function (e) {
+        var source = e.target.src;
+        source = source.replace('thumb_','');
+        $("#popupImg").show()
+                .find('p img')
+                .attr('src', source);
+
+
+    }) ;
 
 /*//// begin map ////**/
 

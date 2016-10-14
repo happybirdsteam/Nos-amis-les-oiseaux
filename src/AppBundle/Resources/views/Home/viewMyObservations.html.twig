@@ -25,7 +25,7 @@ contributions
 			<td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
 			<td>{{ observation.date|date("m/d/Y  H:i", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
 			<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
-			<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ observation.image ) }}" />    {%endif %}</td>
+			<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" class="thumb"/>    {%endif %}</td>
 			<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 			<td>{{ observation.statut }}</td>
 		</tr>
@@ -47,12 +47,14 @@ contributions
   	<div id="modalMap"></div>
   </div>
   <div class="modal-footer">
-    <h3></h3>
+    <button class="button clean">Enlever tous les marqueurs.</button>
   </div>
 </div>
 </div>
 <!-- /endModal -->
-
+	<div id="popupImg" class="popup alert">
+		<p><img /></p>
+	</div>
 
 {% endblock %}
 {% block footer %}{{ parent() }}{% endblock  %}
@@ -72,14 +74,28 @@ contributions
 
 (function($){
 
-var modalMap = $("#modalMap");
-modalMap.css({height : '70vh'});
+	// thumb to large
+	$("#popupImg").hide();
+	$("#popupImg").on("click", function(){
+		$(this).toggle();
 
-	
+	});
+	$(".thumb").on("click", function (e) {
+		var source = e.target.src;
+		source = source.replace('thumb_','');
+		$("#popupImg").show()
+				.find('p img')
+				.attr('src', source);
 
-//draggable
-var modal = $('#myModal');
-modal.draggable(  ); //launch one to initialize
+
+	}) ;
+
+	var modalMap = $("#modalMap");
+	modalMap.css({height : '70vh'});
+
+	//draggable
+	var modal = $('#myModal');
+	modal.draggable(  ); //launch one to initialize
 	$(".modal-header").hover( function(){ 
 		modal.draggable( "option", "disabled", false);
 	}, 
@@ -87,46 +103,47 @@ modal.draggable(  ); //launch one to initialize
 		modal.draggable( "option", "disabled", true );
 	});
 
-var launchModal = function(title){
-
-	var modal = $('#myModal');
-	var span = $(".close");
-	span.on("click", function() {
-    	modal.css({display : "none" });
-	});
+	var launchModal = function(title){
+		var modal = $('#myModal');
+		var span = $(".close");
+		span.on("click", function() {
+    		modal.css({display : "none" });
+		});
 	
 	
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-    	if (event.target == modal) {
-        	modal.css({display : "none" });
-    	}
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+    		if (event.target == modal) {
+        		modal.css({display : "none" });
+    		}
+		}
+		//set title
+		$(".modal-header h2").text( title );
+		modal.css({display : "block" })
+		return ;
 	}
-	//set title
-	$(".modal-header h2").text( title );
-	modal.css({display : "block" })
+
+	/*//// begin map ////**/
+	//init map in globally scope
+	var map = new L.Map('modalMap');
+	var markers = new L.FeatureGroup();
+	function removeAllMarkers(){
+		map.removeLayer(markers);
+	};
+
+	function initMap(lat, lng, typeOfBird){
 	
-	return ;
-}
-/*//// begin map ////**/
+		map.setView([lat,lng], 13);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    	attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
-//init map in globally scope
-var map = new L.Map('modalMap');
-
-
-
-function initMap(lat, lng, typeOfBird){
-	
-	map.setView([lat,lng], 13);
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
-
-	L.marker([lat, lng]).addTo(map)
-    .bindPopup( typeOfBird )
-    .openPopup();
-    	
-};
+		var marker = L.marker([lat, lng]);
+    	marker.bindPopup( typeOfBird )
+    			.openPopup();
+		markers.addLayer(marker);
+		map.addLayer(markers);
+	};
 	
 	$(".showMap").on("click", function(e){
 	e.preventDefault();
@@ -166,9 +183,13 @@ function initMap(lat, lng, typeOfBird){
         	aria: {
             	sortAscending:  ": activer pour trier la colonne par ordre croissant",
             	sortDescending: ": activer pour trier la colonne par ordre décroissant"
-        }
-    }
-});
+        		}
+    	}
+	});
+
+	$(".clean").on("click", function(){
+		removeAllMarkers();
+	});
 
 
 })(jQuery);

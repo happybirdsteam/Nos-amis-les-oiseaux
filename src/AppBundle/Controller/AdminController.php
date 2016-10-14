@@ -19,7 +19,22 @@ class AdminController extends Controller
  
     public function indexAction()
     {
-        return $this->render('AppBundle:Admin:index.html.twig');
+        $count = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Observation');
+
+        $countPendingObservations =   $count->countObservationsByStatut( 'pending');
+        $countAcceptedObservations = $count->countObservationsByStatut( 'accepted');
+        $countRejectedObservations = $count->countObservationsByStatut( 'rejected');
+        $inscriptions =$this->get('fos_user.user_manager')->findUsers();
+
+        return $this->render('AppBundle:Admin:index.html.twig',
+            array('countPending' => $countPendingObservations,
+                'countAccepted' => $countAcceptedObservations,
+                'countRejected' => $countRejectedObservations,
+                'inscriptions'      => $inscriptions
+
+        ));
     }
 
     public function userManagementAction()

@@ -14,8 +14,11 @@
         <p>Soumettre une de vos observations, en remplissant le formulaire ci-dessous</p>
             </div>
     <div id="mapid"></div>
+        {% form_theme form _self %}
     {{ form_start(form, {'attr':{'id':'form_add_observ'}})}}
+
     {{ form_widget(form) }}
+
     {{ form_end(form) }}
     </div>
     {%  endblock %}
@@ -163,7 +166,6 @@ function valInCache(val,objt)
         $("#observation_save").on("click", function( e ) {
             
         	e.preventDefault();
-        	console.log("click");
             if( valInCache( $observation_bird.val(), cache ) && $form_add_observ.get()[0].checkValidity())
             {
             	$form_add_observ.submit();

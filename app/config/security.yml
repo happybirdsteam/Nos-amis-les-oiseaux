@@ -34,4 +34,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, role: [ROLE_OBSERVER, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/observations/mesObservations, role: [ROLE_OBSERVER, ROLE_NATURALIST, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/profil, role: [ROLE_OBSERVER, ROLE_NATURALIST, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/admin, role: [ROLE_NATURALIST, ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/admin/gestion-des-utilisateurs, role: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }

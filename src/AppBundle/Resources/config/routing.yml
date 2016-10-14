@@ -63,4 +63,17 @@ nao_app_alter_observation_statut:
 nao_app_observations_viewer:
     path:    /admin/voir-observations/
     defaults: {_controller:AppBundle:Admin:viewObservations }
+
+nao_app_user_profile:
+    path:    /profil/{id}
+    defaults: {  _controller:AppBundle:Home:getProfil }
+    requirements:
+        id:    \d+
+
+nao_app_user_edit_profile:
+    path:     /profil/{id}/edit
+    defaults: { _controller: AppBundle:Home:editUser }
+    requirements:
+            id:    \d+
+
     

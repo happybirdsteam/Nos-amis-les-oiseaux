@@ -5,7 +5,7 @@
 {% block stylesheets %} {{ parent() }} {% endblock %}
 
 {% block body %}
-<div id="page-wrapper">
+<ul id="page-wrapper">
 
             {% block heading %}
             <!-- Header -->
@@ -23,6 +23,7 @@
                     	<li {%if app.request.attributes.get('_route') == 'nao_app_observations_management' %} class="current" {% endif %}><a href="{{ path('nao_app_observations_management') }}">Valider observations</a></li>
                     	<li {%if app.request.attributes.get('_route') == 'nao_app_observations_viewer' %} class="current" {% endif %}><a href="{{ path('nao_app_observations_viewer') }}">Voir les observations</a></li>
                         <li {%if app.request.attributes.get('_route') == 'nao_app_homepage' %} class="current" {% endif %}><a href="{{ path('nao_app_homepage') }}">Retour au site</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                     </ul>
                 </nav>
             </div>
@@ -30,6 +31,17 @@
 
 
     {% block container %}
+    <div class="call">
+      <ul>
+          <li class="bgYellow"><p>Il y a <em >{{ countPending }} </em>observation(s) en  attente.</p></li>
+          <li class="bgGreen"><p>Il y a <em>{{ countAccepted }} </em>observation(s) acceptées.</p></li>
+          <li class="bgRed"><p>Il y a <em >{{ countRejected }} </em>observation(s) rejetées.</p></li>
+      </ul>
+    </div>
+        <div>
+            <p>Il y a {{ inscriptions|length }} inscrits </p>
+        </div>
+
     {% endblock %}
 {% endblock %}
     {% block footer %}{{ parent() }}{% endblock  %}

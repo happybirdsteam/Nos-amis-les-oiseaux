@@ -129,13 +129,12 @@ class HomeController extends Controller
     
     
     
-    public function viewObservationAction(){
-    $theBird = "Polystica stelleri";
+    public function viewObservationAction( $theBird= null ){
+
     
     $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
-    			
-   // var_dump($DB_response);
+
     
     	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
     	 					  array("birds" => $DB_response, "statut" =>'accepted') 
@@ -174,13 +173,56 @@ class HomeController extends Controller
     				
     				$DB_response = $this->getDoctrine()->getManager()
     				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
-    				$array = [];
     				$response = new JsonResponse( $DB_response );
             		return $response;
     			}
     	}
     
 	}
+
+    public  function getProfilAction( $id ){
+
+        $userManager = $this->get('fos_user.user_manager');
+        $user = $userManager->findUserBy( ['id'=>$id]);
+        return $this->render( 'AppBundle:Home:profil.html.twig',
+            ['user' => $user ] );
+
+    }
+
+
+    public function editUserAction($id, Request $request = null)
+    {
+        $user =$this->getDoctrine()
+            ->getManager()
+            ->getRepository('UserBundle:User')->find($id);
+
+        if (!is_object($user)) {
+            throw new AccessDeniedException('This user does not have access to this section.');
+        }
+
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+        $formFactory = $this->get('fos_user.profile.form.factory');
+
+        $form = $formFactory->createForm();
+        $form->setData($user);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+            $userManager = $this->get('fos_user.user_manager');
+            $userManager->updateUser($user);
+
+            $session = $this->getRequest()->getSession();
+            $session->getFlashBag()->add('message', 'Successfully updated');
+            $url = $this->generateUrl('matrix_edi_viewUser');
+            $response = new RedirectResponse($url);
+
+        }
+
+        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 	
 }
 
