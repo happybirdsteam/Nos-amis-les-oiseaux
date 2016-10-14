@@ -1,0 +1,19 @@
+
+<div id="myModal" class="modal" >
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">×</span>
+            <h2>&nbsp;</h2>
+        </div>
+        <div class="modal-body">
+            {% if showMap == true %}
+            <div id="modalMap"></div>
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+            {% if showMap == true %}
+                <button class="button clean">Enlever tous les marqueurs.</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
