@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="{{ asset('/js/libs/datatables/css/jquery.dataTables.min.css') }}" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 <style>
-#map{ width:400px; height:400px;}
 .photos{width:80px; height:auto;}
 
 </style>
@@ -87,57 +86,39 @@ contributions
 /*//// begin map ////**/
 
 //init map in globally scope
-var map = new L.Map('modalMap');
+
+	var map = new L.Map('modalMap');
+	var markers = new L.FeatureGroup();
+	function removeAllMarkers(){
+		map.removeLayer(markers);
+	};
+
 	function initMap(lat, lng, typeOfBird){
-	
-	map.setView([lat,lng], 13);
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
 
-	L.marker([lat, lng]).addTo(map)
-    .bindPopup( typeOfBird )
-    .openPopup();
-    	
-};
+		map.setView([lat,lng], 13);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
 
-	var modalMap = $("#modalMap");
-	modalMap.css({height : '70vh'});
-	//draggable
-	var modal = $('#myModal');
-	modal.draggable(  ); //launch one to initialize
-	$(".modal-header").hover( function(){
-				modal.draggable( "option", "disabled", false);
-			},
-			function(){
-				modal.draggable( "option", "disabled", true );
-			});
+		var marker = L.marker([lat, lng]);
+		marker.bindPopup( typeOfBird )
+				.openPopup();
+		markers.addLayer(marker);
+		map.addLayer(markers);
+	};
 
-	var launchModal = function(title){
-		var modal = $('#myModal');
-		var span = $(".close");
-		span.on("click", function() {
-			modal.css({display : "none" });
-		});
+	$(".clean").on("click", function(){
+		removeAllMarkers();
+	});
 
 
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-				modal.css({display : "none" });
-			}
-		}
-		//set title
-		$(".modal-header h2").text( title );
-		modal.css({display : "block" })
-		return ;
-	}
+
+	{% include('AppBundle::_modal.js.html.twig') %}
 
 
 	$(".showMap").on("click", function(e){
 
 		e.preventDefault();
-
 		var lat = $(this).data('lat');
 		var lng = $(this).data('lng');
 		var bird = $(this).parent().parent().find(".bird").text();
@@ -151,6 +132,7 @@ var map = new L.Map('modalMap');
 
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('m/d/Y');
+	{% include('AppBundle::_dataTable.js.html.twig') %}
 	//init sortable table
     // get select change and send an ajax request
 	$("select").on("change", function(){

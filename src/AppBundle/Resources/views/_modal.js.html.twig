@@ -1,0 +1,31 @@
+var modalMap = $("#modalMap");
+modalMap.css({height : '70vh'});
+//draggable
+var modal = $('#myModal');
+modal.draggable(  ); //launch one to initialize
+$(".modal-header").hover( function(){
+modal.draggable( "option", "disabled", false);
+},
+function(){
+modal.draggable( "option", "disabled", true );
+});
+
+var launchModal = function(title){
+var modal = $('#myModal');
+var span = $(".close");
+span.on("click", function() {
+modal.css({display : "none" });
+});
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.css({display : "none" });
+}
+}
+//set title
+$(".modal-header h2").text( title );
+modal.css({display : "block" })
+return ;
+}

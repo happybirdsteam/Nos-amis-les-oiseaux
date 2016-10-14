@@ -1,10 +1,9 @@
 {% extends "AppBundle::Admin/index.html.twig" %}
 
-{% block stylesheets %} {{ parent() }} 
-<link rel="stylesheet" href="{{ asset('/js/libs/datatables/css/jquery.dataTables.min.css') }}" />
+{% block stylesheets %} {{ parent() }}
+	<link rel="stylesheet" href="{{ asset('/js/libs/datatables/css/jquery.dataTables.min.css') }}" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
 <style>
-#map{ width:400px; height:400px;}
 .photos{width:80px; height:auto;}
 }
 </style>
@@ -41,7 +40,7 @@ contributions
 	<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
 	<td> {{ observation.user.roles|first }} </td> <td class="userID"><a href="?userID={{observation.user.id}}"> {{ observation.user }} </a></td>
 	<td class="photos" >{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" class="thumb"/>    {%endif %}</td>
-	<td><button class="showMap" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
+	<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 </tr>
  {% endfor %}
  <tbody>
@@ -49,8 +48,7 @@ contributions
 </form>
  
 </div>
-<hr />
-<div id="map"></div>
+	{%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
     <div id="popupImg" class="popup alert">
         <p><img /></p>
     </div>
@@ -59,10 +57,11 @@ contributions
 
 
 {% block javascripts %} {{ parent() }} 
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
-<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
+	<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+	<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 <script>
        
 
@@ -86,29 +85,41 @@ contributions
 
   }) ;
 
-
+	{%  include('AppBundle::_modal.js.html.twig') %}
 /*//// begin map ////**/
 
-//init map in globally scope
-var map = new L.Map('map');
-	function initMap(lat, lng, typeOfBird){
-	
-	map.setView([lat,lng], 13);
-	L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-	}).addTo(map);
 
-	L.marker([lat, lng]).addTo(map)
-    .bindPopup( typeOfBird )
-    .openPopup();
-    	
-};
+//init map in globally scope
+	var map = new L.Map('modalMap');
+	var markers = new L.FeatureGroup();
+	function removeAllMarkers(){
+		map.removeLayer(markers);
+	};
+
+	function initMap(lat, lng, typeOfBird){
+
+		map.setView([lat,lng], 13);
+		L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+		}).addTo(map);
+
+		var marker = L.marker([lat, lng]);
+		marker.bindPopup( typeOfBird )
+				.openPopup();
+		markers.addLayer(marker);
+		map.addLayer(markers);
+	};
+
+	$(".clean").on("click", function(){
+		removeAllMarkers();
+	});
 	
 	$(".showMap").on("click", function(e){
 	e.preventDefault();
 	var lat = $(this).data('lat');
 	var lng = $(this).data('lng');
 	var bird = $(this).parent().parent().find(".bird").text();
+		launchModal(bird);
 	initMap(lat,lng, bird );
 		
 	});
