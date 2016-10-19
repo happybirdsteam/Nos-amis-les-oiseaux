@@ -6,10 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Security\UserProvider;
-use UserBundle\Entity\User;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Observations;
 use AppBundle\Eventviva;
-
 
 class AdminController extends Controller
 {

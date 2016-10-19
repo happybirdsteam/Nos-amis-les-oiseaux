@@ -3,8 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Observation;
-use UserBundle\Entity\User;
-use AppBundle\Form\ObservationType;
+use AppBundle\Entity\User;
+use AppBundle\Form\Type\ObservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -111,11 +111,6 @@ class HomeController extends Controller
         }
     }
     
-    
-    public function testAction()
-   {
-        return $this->render('AppBundle:Home:viewObservation.html.twig');
-    }
 
     public function getMarkersAction($latlng)
     {
@@ -195,7 +190,7 @@ class HomeController extends Controller
     {
         $user =$this->getDoctrine()
             ->getManager()
-            ->getRepository('UserBundle:User')->find($id);
+            ->getRepository('AppBundle:User')->find($id);
 
         if (!is_object($user)) {
             throw new AccessDeniedException('This user does not have access to this section.');

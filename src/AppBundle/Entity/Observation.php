@@ -90,7 +90,7 @@ class Observation
     private $statut;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", cascade={"persist"})
      */
     private $user;
 
@@ -248,11 +248,11 @@ class Observation
     /**
      * Set user
      *
-     * @param \UserBundle\Entity\User $user
+     * @param \AppBundle\Entity\User $user
      *
      * @return Observation
      */
-    public function setUser(\UserBundle\Entity\User $user = null)
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -262,7 +262,7 @@ class Observation
     /**
      * Get user
      *
-     * @return \UserBundle\Entity\User
+     * @return \AppBundle\Entity\User
      */
     public function getUser()
     {

@@ -1,7 +1,3 @@
 nao_app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /
-
-nao_user:
-    resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /

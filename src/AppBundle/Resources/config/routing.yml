@@ -1,3 +1,10 @@
+nao_user_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Home:index }
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 nao_app_test:
     path:     /test
     defaults: { _controller: AppBundle:Home:test }
@@ -75,5 +82,7 @@ nao_app_user_edit_profile:
     defaults: { _controller: AppBundle:Home:editUser }
     requirements:
             id:    \d+
+
+
 
     
