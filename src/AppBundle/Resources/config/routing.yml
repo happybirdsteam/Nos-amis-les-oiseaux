@@ -83,6 +83,10 @@ nao_app_user_edit_profile:
     requirements:
             id:    \d+
 
+nao_app_login:
+    path:    /logon
+    defaults: { _controller: AppBundle:Home:loginUser }
+
 
 
     

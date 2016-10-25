@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Observation;
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\ObservationType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -215,10 +217,11 @@ class HomeController extends Controller
 
         }
 
-        return $this->render('FOSUserBundle:Profile:edit.html.twig', array(
+        return $this->render('AppBundle:Home:profil.edit.html.twig', array(
             'form' => $form->createView()
         ));
     }
-	
+
+    
 }
 

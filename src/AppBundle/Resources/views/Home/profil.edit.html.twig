@@ -1,0 +1,20 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block title %} {{ parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block body %}
+    {% block heading %} {{ parent() }} {% endblock %}
+    {% block container %}
+
+        {% block fos_user_content %}
+             {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+        {% endblock fos_user_content %}
+
+        {% for flash_message in app.session.flashBag.get('info') %}
+        <div class="flash-notice alert alert-info">
+            {{ flash_message }}
+        </div>
+        {% endfor %}
+    {% endblock %}
+    {% endblock %}
+{% block footer %} {{  parent() }} {% endblock  %}
+{% block javascripts %} {{ parent() }} {% endblock %}

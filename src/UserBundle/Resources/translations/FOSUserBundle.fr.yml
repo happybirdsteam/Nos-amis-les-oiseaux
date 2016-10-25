@@ -1,4 +1,0 @@
-registration:
-    email:
-        subject: 'Bienvenue %username% !'
-        message: "Bonjour %username% !\n\nPour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%\n\nCordialement,\nL'équipe Nos amis les oiseaux.\n"
