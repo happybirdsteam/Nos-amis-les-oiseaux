@@ -69,7 +69,6 @@ class HomeController extends Controller
 
             
             // Add day of the observation
-            //$dateformatted = date_create_from_format('d/m/Y H:i:s', );
             $observation->setDate( $observation->getDate() );
 
             // add statut according to ROLE
