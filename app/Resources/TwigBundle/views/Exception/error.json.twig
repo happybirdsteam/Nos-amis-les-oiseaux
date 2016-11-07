@@ -1,11 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>la page que vous avez demandée n'existe pas. </h1>
+<div id="selection" class="call">
+<div>
+<img style="height: 400px" src="{{ asset('images/hibou.svg') }}" alt="hibou">
+</div>
 
-    <p>ou à peut être été déplacée.</p>
+<div>
+<h1>La page que vous avez demandée n'existe pas. </h1>
 
-    <p>
-        <a href="{{ path('nao_user_homepage') }}">return to the homepage</a>.
-    </p>
+<p>ou à peut être été déplacée.</p>
+
+<p>
+<a href="{{ path('nao_user_homepage') }}">Retourner à l'accueil.</a>.
+</p>
+</div>
+
+</div>
 {% endblock %}
