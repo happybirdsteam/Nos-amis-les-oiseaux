@@ -170,12 +170,10 @@ class HomeController extends Controller
     				
     				$DB_response = $this->getDoctrine()->getManager()
     				->getRepository('AppBundle:Observation')->getObservationWithRelatedAves($theBird, "accepted");
-    				$response = new JsonResponse( $DB_response );
-            		return $response;
-    			}
+                    return new JsonResponse( $DB_response );
+                }
     	}
-    
-	}
+    }
 
     public  function getProfilAction( $id ){
 

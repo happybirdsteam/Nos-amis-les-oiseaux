@@ -1,19 +1,23 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% block stylesheets %} {{ parent() }}
+	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-2.2.3/dt-1.10.12/af-2.1.2/b-1.2.2/b-html5-1.2.2/cr-1.3.2/r-2.1.0/sc-1.4.2/se-1.2.0/datatables.min.css"/>
 	<style>form {background: none;}</style>
 
 {% endblock %}
 {% block body %}
 	{% block heading %} {{ parent() }} {% endblock %}
-
-<form class="tableObservation">
+    <form class="tableObservation">
 contributions
-<table id="observations" class="display nowrap dataTable responsive" role="grid">
+<table id="observations" class="display nowrap dataTable" role="grid">
 	<thead>
 		<tr>
-			<th>id</th><th>commentaires</th>
-			<th>date</th><th>type d'oiseau</th>
-			<th>Latitude</th><th>Longitude</th>
+			<th>id</th>
+			<th>type d'oiseau</th>
+			<th>commentaires</th>
+			<th>date</th>
+			<th>Latitude</th>
+			<th>Longitude</th>
 			<th>image</th>
 			<th>voir sur la carte</th>
 			<th>statut</th>
@@ -22,10 +26,13 @@ contributions
 	<tbody>
 	{% for observation in observations %}
 		<tr>
-			<td class="theID">{{ observation.id }}</td><td> {{ observation.comment }}</td>
-			<td>{{ observation.date|date("m/d/Y  H:i", false) }}</td><td class="bird">{{ observation.bird.lbNom }}</td>
-			<td class="gps"> {{ observation.lat }}</td><td class="gps"> {{ observation.lng }}</td>
-			<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" class="thumb"/>    {%endif %}</td>
+			<td class="theID">{{ observation.id }}</td>
+			<td class="bird">{{ observation.bird.lbNom }}</td>
+			<td> {{ observation.comment }}</td>
+			<td>{{ observation.date|date("m/d/Y  H:i", false) }}</td>
+			<td class="gps"> {{ observation.lat }}</td>
+			<td class="gps"> {{ observation.lng }}</td>
+			<td class="photos">{% if (observation.image) %} <img src="{{ server ~ asset( folder  ~ '/' ~ 'thumb_'  ~ observation.image ) }}" class="thumb" />    {%endif %}</td>
 			<td><button class="showMap button" data-lat="{{ observation.lat }}" data-lng="{{ observation.lng }}">voir sur la carte</button></td>
 			<td>{{ observation.statut }}</td>
 		</tr>
@@ -33,60 +40,43 @@ contributions
  	<tbody>
 </table>
 </form>
- 
-</div>
-
-{%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
-	<div id="popupImg" class="popup alert">
-		<p><img /></p>
+    <div id="popupImg" class="popup alert">
+		<p><img src="#"/></p>
 	</div>
+    {%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
+
 
 {% endblock %}
 {% block footer %}{{ parent() }}{% endblock  %}
 
 
 {% block javascripts %} {{ parent() }} 
+	<!--<script src="{{ absolute_url(asset('js/libs/jquery-ui-1.12.1.custom/jquery-ui.min.js')) }}"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="//unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-	<script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-	<script src="{{ asset('/js/libs/datatables/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{ absolute_url(asset('js/libs/datatables/js/jquery.dataTables.min.js')) }}"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.12/r-2.1.0/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
 	<script src="//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js"></script>
+
+
 	<script>
 (function($){
 
 	// thumb to large
-	$("#popupImg").hide();
-	$("#popupImg").on("click", function(){
+	var $popUpImg = $("#popupImg");
+    $popUpImg.on("click", function(){
 		$(this).toggle();
-
 	});
-	$(".thumb").on("click", function (e) {
+    $(".thumb").on("click", function (e) {
 		var source = e.target.src;
 		source = source.replace('thumb_','');
-		$("#popupImg").show()
+		$popUpImg.show()
 				.find('p img')
 				.attr('src', source);
-
-
 	}) ;
+    {% include 'AppBundle::_modal.js.twig' %}
 
-	{% include('_modaljs.html.twig') %}
-	
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-    		if (event.target == modal) {
-        		modal.css({display : "none" });
-    		}
-		}
-		//set title
-		$(".modal-header h2").text( title );
-		modal.css({display : "block" })
-		return ;
-	}
-
-
-	{%  include('_dataTable.js.html.twig') %}
 	/*//// begin map ////**/
 	//init map in globally scope
 	var map = new L.Map('modalMap');
@@ -121,7 +111,7 @@ contributions
 
 /**///////// end map /////////////**/
 
-
+    {% include 'AppBundle::_dataTable.js.html.twig' %}
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('m/d/Y  H:i');
 	$(".clean").on("click", function(){

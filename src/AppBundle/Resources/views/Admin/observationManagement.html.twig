@@ -46,8 +46,7 @@ contributions
  
 </div>
 <hr />
-<!-- The Modal -->
-    {%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
+	{%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
     <div id="popupImg" class="popup alert">
         <p><img /></p>
     </div>
@@ -110,11 +109,6 @@ contributions
 	$(".clean").on("click", function(){
 		removeAllMarkers();
 	});
-
-
-
-	{% include('AppBundle::_modal.js.html.twig') %}
-
 
 	$(".showMap").on("click", function(e){
 

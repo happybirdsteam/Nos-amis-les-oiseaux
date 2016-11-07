@@ -85,7 +85,6 @@ contributions
 
   }) ;
 
-	{%  include('AppBundle::_modal.js.html.twig') %}
 /*//// begin map ////**/
 
 
@@ -129,6 +128,7 @@ contributions
 
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('d/m/Y :H:i');
+	{% include('AppBundle::_dataTable.js.html.twig') %}
     // get select change and send an ajax request
 	$("select").on("change", function(){
 		var IdToModify = $(this).parent().parent().find(".theID").text();

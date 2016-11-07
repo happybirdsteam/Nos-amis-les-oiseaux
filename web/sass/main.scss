@@ -1597,7 +1597,7 @@ $form_background_color : $gray;
 @import "https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css";
 @import "//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css";
 table.dataTable {
-  margin:0;
+  margin:0 !important;
 }
 
 
@@ -1629,4 +1629,8 @@ table.dataTable {
   width:100%;
   max-width:100vw;
 }
-#popupImg p {margin-top: 5vh;}
+#popupImg{
+	display: none;
+	p {margin-top: 5vh;}
+
+}

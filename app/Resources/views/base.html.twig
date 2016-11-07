@@ -54,7 +54,6 @@
             <section id="banner">
                 <header>
                     <h2>Happy Birds: <em>Une application pour partager votre passion des oiseaux.</em></h2>
-                    <!--<a href="#" class="button">Choisir une action...</a>-->
                 </header>
             </section><!-- Dont forget to add the </div> in the end if call parent() -->
             {%  endblock %}
@@ -91,13 +90,12 @@
             {% endblock  %}
         {% block javascripts %}
             <!-- Scripts -->
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <!-- <script src="{{ asset('js/jquery.min.js') }}"></script> -->
+            <script src="//code.jquery.com/jquery-1.11.3.js" ></script>
             <script src="{{ asset('js/jquery.dropotron.min.js') }}"></script>
             <script src="{{ asset('js/skel.min.js') }}"></script>
             <script src="{{ asset('js/util.js') }}"></script>
-
             <!--[if lte IE 8]><script src=<script src="{{ asset('js/ie/respond.min.js') }}"></script>></script><![endif]-->
-
             <script src={{ asset('js/main.js') }}></script>
         {% endblock %}
     </body>

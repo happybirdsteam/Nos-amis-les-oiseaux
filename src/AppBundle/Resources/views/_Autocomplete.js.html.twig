@@ -1,3 +1,6 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block javascripts %}
+    {{ parent() }}
 <script>
     /** localize autocomplete **/
     // live region extension, adding a `messages` option
@@ -7,7 +10,7 @@
         $.widget( "ui.autocomplete", $.ui.autocomplete, {
             options: {
                 messages: {
-                    noResults: "Pas de resultats.",
+                    noResults: "Pas de résultats.",
                     results: function( amount ) {
                         return amount + ( amount > 1 ? " résultats sont" : " résultat est" ) +
                                 " disponible, utilisez les touches haut et bas pour naviguer.";
@@ -32,3 +35,4 @@
 
     }( jQuery ));
 </script>
+{% endblock %}

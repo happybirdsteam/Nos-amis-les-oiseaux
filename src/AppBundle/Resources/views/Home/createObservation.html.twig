@@ -27,10 +27,38 @@
 
 {% block javascripts %}
     {{ parent() }}
-     <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    {% include('AppBundle::_Autocomplete.js.html.twig') %}
+     <script src="//unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+    <script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script>
+        (function( $, undefined ) {
+            $.widget( "ui.autocomplete", $.ui.autocomplete, {
+                options: {
+                    messages: {
+                        noResults: "Pas de résultats.",
+                        results: function( amount ) {
+                            return amount + ( amount > 1 ? " résultats sont" : " résultat est" ) +
+                                    " disponible, utilisez les touches haut et bas pour naviguer.";
+                        }
+                    }
+                },
+
+                __response: function( content ) {
+                    var message;
+                    this._superApply( arguments );
+                    if ( this.options.disabled || this.cancelSearch ) {
+                        return;
+                    }
+                    if ( content && content.length ) {
+                        message = this.options.messages.results( content.length );
+                    } else {
+                        message = this.options.messages.noResults;
+                    }
+                    this.liveRegion.text( message );
+                }
+            });
+
+        }( jQuery ));
+
         (function($) {
         
         $observation_bird = $('#observation_bird');
