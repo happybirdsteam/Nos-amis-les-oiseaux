@@ -1518,10 +1518,11 @@ $form_background_color : $gray;
     margin: 5% auto; 
     padding: 20px;
     border: 1px solid #888;
-    width: 90%; 
+    width: 90%;
     animation-name: animatetop;
     animation-duration: 0.4s;
 }
+#modalMap{height: 70vh;}
 
 /* The Close Button */
 .close {
@@ -1546,7 +1547,6 @@ $form_background_color : $gray;
     from {top: -200px; opacity: 0}
     to {top: 0; opacity: 1}
 }
-
 
     
     /** /modal  ***/
@@ -1634,3 +1634,4 @@ table.dataTable {
 	p {margin-top: 5vh;}
 
 }
+.fos_user_user_show{width:60%;margin-top:2rem;margin-left:auto;margin-right: auto;}

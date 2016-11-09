@@ -43,6 +43,9 @@ contributions
     <div id="popupImg" class="popup alert">
 		<p><img src="#"/></p>
 	</div>
+	<br />
+	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     {%  include('AppBundle::_modal.html.twig') with { showMap : true } %}
 
 
@@ -74,7 +77,7 @@ contributions
 				.find('p img')
 				.attr('src', source);
 	}) ;
-    {% include 'AppBundle::_modal.js.twig' %}
+
 
 	/*//// begin map ////**/
 	//init map in globally scope
@@ -97,20 +100,26 @@ contributions
 		markers.addLayer(marker);
 		map.addLayer(markers);
 	};
-	
+
 	$(".showMap").on("click", function(e){
 	e.preventDefault();
 	var lat = $(this).data('lat');
 	var lng = $(this).data('lng');
-	var bird = $(this).parent().parent().find(".bird").text();
-	launchModal(bird);
-	initMap(lat,lng, bird );
+		if(lat !== 'undefined' && lng !== 'undefined') {
+			var bird = $(this).parent().parent().find(".bird").text();
+			launchModal(bird);
+			initMap(lat,lng, bird );
+
+		}
+
 		
 	});
+
 
 /**///////// end map /////////////**/
 
     {% include 'AppBundle::_dataTable.js.html.twig' %}
+	{% include 'AppBundle::_modal.js.twig' %}
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('m/d/Y  H:i');
 	$(".clean").on("click", function(){

@@ -1,19 +1,24 @@
 var modalMap = $("#modalMap");
 var modal = $("#myModal");
+var content = $('.modal-content');
 var title ="Oiseaux";
 
-modalMap.css({height : '70vh'});
+
 //draggable
-modal.draggable( ); //launch one to initialize
+
+content.draggable( ); //launch one to initialize
 $(".modal-header").hover( function(){
-            modal.draggable( "option", "disabled", false);
+            content.draggable( "option", "disabled", false);
         },
         function(){
-            modal.draggable( "option", "disabled", true );
+            content.draggable( "option", "disabled", true );
         });
 
 var launchModal = function(title){
     console.log("modal");
+    //set title
+    $(".modal-header h2").text( title );
+    modal.css({display : "block" });
     var $close = $(".close");
     $close.on("click", function() {
         modal.css({display : "none" });
@@ -33,7 +38,5 @@ window.onclick = function(event) {
         modal.css({display : "none" }
         );
     }
-    //set title
-    $(".modal-header h2").text( title );
-    modal.css({display : "block" });
-}
+
+};

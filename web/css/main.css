@@ -45,6 +45,8 @@ body {
 
 /* Box Model */
 *, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 /* Containers */
@@ -174,10 +176,14 @@ body {
 /* Grid */
 .row {
   border-bottom: solid 1px transparent;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .row > * {
   float: left;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 .row:after, .row:before {
@@ -1377,9 +1383,13 @@ body {
 body {
   background: white url("images/bg01.png"); }
   body.is-loading * {
+    -moz-transition: none !important;
     -webkit-transition: none !important;
+    -ms-transition: none !important;
     transition: none !important;
+    -moz-animation: none !important;
     -webkit-animation: none !important;
+    -ms-animation: none !important;
     animation: none !important; }
 
 body, input, select, textarea {
@@ -1390,7 +1400,9 @@ body, input, select, textarea {
   line-height: 1.65em; }
 
 a {
+  -moz-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
   -webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
   transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
   color: #ff6600;
   text-decoration: none;
@@ -1487,7 +1499,9 @@ textarea {
   -webkit-appearance: none;
   -ms-appearance: none;
   appearance: none;
+  -moz-transition: border-color 0.2s ease-in-out;
   -webkit-transition: border-color 0.2s ease-in-out;
+  -ms-transition: border-color 0.2s ease-in-out;
   transition: border-color 0.2s ease-in-out;
   background: #fff;
   border: solid 1px #e0e0e0;
@@ -1581,7 +1595,9 @@ label {
     text-align: center;
     cursor: default;
     background-color: #ff6600;
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     color: #000;
     border-radius: 100%;
@@ -1658,7 +1674,9 @@ table {
       text-align: left; }
     table.default thead {
       background-color: #555555;
+      background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
       background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
+      background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
       background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
       color: #fff; }
 
@@ -1672,9 +1690,13 @@ input[type="button"],
   -webkit-appearance: none;
   -ms-appearance: none;
   appearance: none;
+  -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
   background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
   background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
   background-color: #ff6600;
   border-radius: 5px;
@@ -1779,7 +1801,9 @@ input[type="button"],
 #nav {
   cursor: default;
   background-color: #333;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
   background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
   background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
   padding: 0; }
   #nav:after {
@@ -1808,6 +1832,7 @@ input[type="button"],
       #nav > ul > li.current {
         font-weight: 600; }
         #nav > ul > li.current:before {
+          -moz-transform: rotateZ(45deg);
           -webkit-transform: rotateZ(45deg);
           -ms-transform: rotateZ(45deg);
           transform: rotateZ(45deg);
@@ -1833,7 +1858,9 @@ input[type="button"],
 /* Dropotron */
 .dropotron {
   background-color: #333;
+  background-image: -moz-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("images/bg01.png");
   background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("images/bg01.png");
+  background-image: -ms-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("images/bg01.png");
   background-image: linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("images/bg01.png");
   border-radius: 5px;
   color: #fff;
@@ -1901,7 +1928,9 @@ input[type="button"],
     background-repeat: no-repeat,						no-repeat,						repeat; }
   .wrapper.style3 {
     background-color: #ff6600;
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.15)), url("images/bg01.png");
     color: #000; }
     .wrapper.style3 .button, .wrapper.style3 .addSpecies {
@@ -2085,19 +2114,25 @@ input[type="button"],
 
   /* Off-Canvas Navigation */
   #page-wrapper {
+    -moz-backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
     backface-visibility: hidden;
+    -moz-transition: -moz-transform 0.5s ease;
     -webkit-transition: -webkit-transform 0.5s ease;
+    -ms-transition: -ms-transform 0.5s ease;
     transition: transform 0.5s ease;
     padding-bottom: 1px;
     padding-top: 44px; }
 
   #titleBar {
+    -moz-backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
     backface-visibility: hidden;
+    -moz-transition: -moz-transform 0.5s ease;
     -webkit-transition: -webkit-transform 0.5s ease;
+    -ms-transition: -ms-transform 0.5s ease;
     transition: transform 0.5s ease;
     display: block;
     height: 44px;
@@ -2107,7 +2142,9 @@ input[type="button"],
     width: 100%;
     z-index: 10001;
     background-color: #333;
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
+    background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("images/bg01.png");
     height: 44px;
     line-height: 44px;
@@ -2152,15 +2189,21 @@ input[type="button"],
   #navPanel {
     background-color: #1f1f1f;
     box-shadow: inset -1px 0 3px 0 rgba(0, 0, 0, 0.5);
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0) 75%, rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: -webkit-linear-gradient(left, rgba(0,0,0,0) 75%, rgba(0,0,0,0.15)), url("images/bg01.png");
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0) 75%, rgba(0,0,0,0.15)), url("images/bg01.png");
     background-image: linear-gradient(left, rgba(0,0,0,0) 75%, rgba(0,0,0,0.15)), url("images/bg01.png");
+    -moz-backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -ms-backface-visibility: hidden;
     backface-visibility: hidden;
+    -moz-transform: translateX(-275px);
     -webkit-transform: translateX(-275px);
     -ms-transform: translateX(-275px);
     transform: translateX(-275px);
+    -moz-transition: -moz-transform 0.5s ease;
     -webkit-transition: -webkit-transform 0.5s ease;
+    -ms-transition: -ms-transform 0.5s ease;
     transition: transform 0.5s ease;
     display: block;
     height: 100%;
@@ -2200,14 +2243,17 @@ input[type="button"],
         width: 5em; }
 
   body.navPanel-visible #page-wrapper {
+    -moz-transform: translateX(275px);
     -webkit-transform: translateX(275px);
     -ms-transform: translateX(275px);
     transform: translateX(275px); }
   body.navPanel-visible #titleBar {
+    -moz-transform: translateX(275px);
     -webkit-transform: translateX(275px);
     -ms-transform: translateX(275px);
     transform: translateX(275px); }
   body.navPanel-visible #navPanel {
+    -moz-transform: translateX(0);
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
     transform: translateX(0); } }
@@ -2427,10 +2473,11 @@ form > div > div {
   padding: 20px;
   border: 1px solid #888;
   width: 90%;
-  -webkit-animation-name: animatetop;
-          animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-          animation-duration: 0.4s; }
+  animation-name: animatetop;
+  animation-duration: 0.4s; }
+
+#modalMap {
+  height: 70vh; }
 
 /* The Close Button */
 .close {
@@ -2524,4 +2571,8 @@ table.dataTable {
   #popupImg p {
     margin-top: 5vh; }
 
-/*# sourceMappingURL=main.css.map */
+.fos_user_user_show {
+  width: 60%;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto; }
