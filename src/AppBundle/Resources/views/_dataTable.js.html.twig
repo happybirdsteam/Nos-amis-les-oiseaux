@@ -2,6 +2,10 @@
 $("#observations").DataTable({
 "scrollX": true,
 "pageLength": 50,
+"colReorder": true,
+"columnDefs": [
+{ "width": "20vw", "targets": 1 }
+],
 language: {
 processing:    "Traitement en cours...",
 search:        "Rechercher&nbsp;:",

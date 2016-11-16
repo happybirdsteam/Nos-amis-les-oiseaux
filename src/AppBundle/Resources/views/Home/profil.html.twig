@@ -4,16 +4,17 @@
 {% block body %}
     {% block heading %} {{ parent() }} {% endblock %}
     {% block container %}
-<ul>
-    <li>username :  {{ user.username }} </li>
-    <li>adresse email : {{ user.email }}</li>
-    <li>derniere connexion : {{ user.lastLogin|localizeddate('none', 'none', 'fr_FR', null, "cccc, d MMMM Y 'à' HH 'h 'mm 'minutes'") }}</li>
-</ul>
+        <div class="call">
+            <ul>
+                <li>username :  {{ user.username }} </li>
+                <li>adresse email : {{ user.email }}</li>
+                <li>derniere connexion : {{ user.lastLogin|localizeddate('none', 'none', 'fr_FR', null, "cccc, d MMMM Y 'à' HH 'h 'mm 'minutes'") }}</li>
+            </ul>
 
-<ul>
-   <li><a href="{{ path('nao_app_user_edit_profile', {'id' :  app.user.id} ) }}">éditer profil</a></li>
-
-</ul>
+            <ul>
+                <li><a href="{{ path('nao_app_user_edit_profile', {'id' :  app.user.id} ) }}">éditer profil</a></li>
+            </ul>
+        </div>
 
     {% endblock %}
 {% endblock %}

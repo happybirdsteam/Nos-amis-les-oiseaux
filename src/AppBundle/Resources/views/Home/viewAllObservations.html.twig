@@ -1,7 +1,9 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% block stylesheets %}
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     {{ parent() }}
+
 
 {% endblock %}
 {% block body %}
@@ -11,7 +13,7 @@
         <input id="observation_bird" size="53"/><button class="addSpecies">Ajouter</button>
 
 	</div> 
-	<div class="debug"></div>
+	<div class="showingSpecies"></div>
     <div id="map"></div>
     {% for bird in birds %}
     {{bird.id }}, {{bird.comment }}
@@ -70,41 +72,30 @@
 
         $observation_bird = $('#observation_bird');
 
-
             //init map in globally scope
             var map = new L.Map('map');
-            var markers = new L.FeatureGroup();
-            function removeAllMarkers(){
-                map.removeLayer(markers);
+            var refLayer = [];
+            var getRefToLayerControl = false;
+            map.setView([48.86, 3.333], 6.3);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            if(getRefToLayerControl === false) {
+                getRefToLayerControl =  L.control.layers( null, null ).addTo( map );
             };
 
-            function initMap(lat, lng, typeOfBird){
-
-                map.setView([lat,lng], 7);
-                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                var marker = L.marker([lat, lng]);
-                marker.bindPopup( typeOfBird )
-                        .openPopup();
-                markers.addLayer(marker);
-                map.addLayer(markers);
+            var fillMap = function(items){
+                var layersGroups = L.layerGroup();
+                refLayer[ items[0].bird.lbNom ] =  layersGroups;
+                var l = items.length;
+                for (var i=0; i<l; i++){
+                    var marker = L.marker( [ items[i].lat , items[i].lng ] ).bindPopup( items[0].bird.lbNom );
+                    layersGroups.addLayer( marker );
+                };
+               layersGroups.bindPopup( items[0].bird.lbNom ).addTo(map);
+                getRefToLayerControl.addOverlay( refLayer[ items[0].bird.lbNom ] , items[0].bird.lbNom   );
             };
-
-            $(".clean").on("click", function(){
-                removeAllMarkers();
-            });
-
-
-         var fillMap = function(items){
-             var l = items.length;
-             for (var i=0; i<l; i++){
-
-                 initMap(items[i].lat, items[i].lng, items[i].bird.lbNom);
-             }
-
-         }
 
         var cache = {};
         $observation_bird.autocomplete({
@@ -134,13 +125,20 @@
                 }
         });
 
-                
-            $observation_bird.val('');
+
             
             $(".addSpecies").on("click", function(){
-            var speciesToAdd = $observation_bird.val();
-            $(".debug").append(speciesToAdd);
-            data = "bird=" + speciesToAdd.replace(/ /gi,"%20");
+
+            var speciesToAdd = "<span class='addedSpecies button' id='" +$observation_bird.val() + "' >" + $observation_bird.val() + "<span class='remove'>&nbsp;&nbsp;X</span</span>";
+            $(".showingSpecies").append(speciesToAdd);
+                $(".remove").on('click', function () {
+                    refLayer[ $(this).parent().attr("id") ].clearLayers();
+                    getRefToLayerControl.removeLayer( refLayer[ $(this).parent().attr("id") ] )  ;
+                    $(this).parent().remove();
+
+
+                });
+            data = "bird=" + $observation_bird.val().replace(/ /gi,"%20");
             $.ajax({
   				method: "POST",
   				url: "{{ path('nao_app_get_observations_by_bird') }}",
@@ -149,11 +147,15 @@
 			})
   			.done(function( response ) {
                 fillMap(response);
-   				console.log("résultats :" + JSON.stringify(response));
+   				//console.log("résultats :" + JSON.stringify(response));
+                $observation_bird.val('');
             })
                     .error(function(){console.log("error")});
             
             });
+
+
+
         })(jQuery)
     </script>
 {% endblock %}

@@ -5,6 +5,7 @@
 {% block title %} Liste des utilisateurs {% endblock %}
 
 {% block container %}
+    <div class="call text-left">
     <h3>Liste des utilisateurs</h3>
 
     {% for flash_message in app.session.flashBag.get('info') %}
@@ -53,6 +54,7 @@
             <li>Aucun observateur n'a été trouvé.</li>
         {% endfor %}
     </ul>
+    </div>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

@@ -12,12 +12,12 @@
 
 
 {% block container %}
-<div class="col-xs-12">
+<div class="call">
 {% for key,trad in possibleStatus %}
-<a href="?statut={{key}}">{{ trad }}</a>
+<a href="?statut={{key}}" class="button">{{ trad }}</a>
 {% endfor %}
 </div>
-<div class="col-xs-12">
+<div>
 
 <form class="tableObservation">
 contributions
@@ -123,7 +123,7 @@ contributions
 	});
 
 /**///////// end map /////////////**/
-
+	{% include 'AppBundle::_modal.js.twig' %}
 
 	// must match with twig filter observation.date|date
 	$.fn.dataTable.moment('d/m/Y :H:i');

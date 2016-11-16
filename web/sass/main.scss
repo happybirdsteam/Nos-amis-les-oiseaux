@@ -1593,12 +1593,14 @@ $form_background_color : $gray;
 .addSpecies{
   @extend .button
 }
+.showingSpecies{width:90%; margin:1rem auto;}
 //DataSortable
 @import "https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css";
 @import "//cdn.datatables.net/responsive/1.0.0/css/dataTables.responsive.css";
 table.dataTable {
   margin:0 !important;
 }
+form.leaflet-control-layers-list{width: 10rem;;background-color:white;}
 
 
 /*   flash info */
@@ -1615,6 +1617,7 @@ table.dataTable {
     text-align: center;
   }
 }
+.text-left{text-align: left;}
 
 .bgGreen{
   background-color:rgba(0, 255, 0, .3);

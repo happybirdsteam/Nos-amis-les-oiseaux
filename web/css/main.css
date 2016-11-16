@@ -2540,8 +2540,16 @@ form > div > div {
   clip: auto;
   font-style: italic; }
 
+.showingSpecies {
+  width: 90%;
+  margin: 1rem auto; }
+
 table.dataTable {
   margin: 0 !important; }
+
+form.leaflet-control-layers-list {
+  width: 10rem;
+  background-color: white; }
 
 /*   flash info */
 .flash-notice, .alert, .alert-info {
@@ -2552,6 +2560,9 @@ table.dataTable {
     margin-top: 40vh;
     border-radius: 5%;
     text-align: center; }
+
+.text-left {
+  text-align: left; }
 
 .bgGreen {
   background-color: rgba(0, 255, 0, 0.3); }
