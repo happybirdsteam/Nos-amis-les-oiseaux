@@ -1,6 +1,8 @@
 {% extends "AppBundle::layout.html.twig" %}
 {% block title %} {{ parent() }} {% endblock %}
-{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block stylesheets %} {{ parent() }}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
     {% block body %}
         {% block heading %} {{ parent() }} {% endblock %}
     {% block container %}
