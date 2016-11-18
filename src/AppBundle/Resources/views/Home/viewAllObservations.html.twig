@@ -9,7 +9,7 @@
 {% block body %}
 	{% block heading %} {{ parent() }} {% endblock %}
 	<div id="selection" class="call">
-        <h2>sélectionner l'espèce à afficher</h2>
+        <h2>Sélectionner l'espèce à afficher</h2>
         <input id="observation_bird" size="53"/><button class="addSpecies">Ajouter</button>
 
 	</div> 
@@ -129,7 +129,7 @@
             
             $(".addSpecies").on("click", function(){
 
-            var speciesToAdd = "<span class='addedSpecies button' id='" +$observation_bird.val() + "' >" + $observation_bird.val() + "<span class='remove'>&nbsp;&nbsp;X</span</span>";
+            var speciesToAdd = "<span class='addedSpecies button' id='" +$observation_bird.val() + "' >" + $observation_bird.val() + "<span class='remove'>&nbsp;&nbsp;X</span></span>";
             $(".showingSpecies").append(speciesToAdd);
                 $(".remove").on('click', function () {
                     refLayer[ $(this).parent().attr("id") ].clearLayers();

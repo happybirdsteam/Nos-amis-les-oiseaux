@@ -6,13 +6,13 @@
     {% block container %}
         <div class="call">
             <ul>
-                <li>username :  {{ user.username }} </li>
-                <li>adresse email : {{ user.email }}</li>
-                <li>derniere connexion : {{ user.lastLogin|localizeddate('none', 'none', 'fr_FR', null, "cccc, d MMMM Y 'à' HH 'h 'mm 'minutes'") }}</li>
+                <li>Nom d'utilisateur :  {{ user.username }} </li>
+                <li>Adresse email : {{ user.email }}</li>
+                <li>Derniere connexion : {{ user.lastLogin|localizeddate('none', 'none', 'fr_FR', null, "cccc, d MMMM Y 'à' HH 'h 'mm 'minutes'") }}</li>
             </ul>
 
             <ul>
-                <li><a href="{{ path('nao_app_user_edit_profile', {'id' :  app.user.id} ) }}">éditer profil</a></li>
+                <li><a class="button" href="{{ path('nao_app_user_edit_profile', {'id' :  app.user.id} ) }}">Éditer profil</a></li>
             </ul>
         </div>
 

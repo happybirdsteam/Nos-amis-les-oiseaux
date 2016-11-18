@@ -19,7 +19,7 @@ class HomeController extends Controller
 {
 
 //DRY violation ( link to enum ) must inject the enum list directly minus pending
- public $possibleStatus = ["pending" =>"en attente", "accepted" => "accepter", "rejected" => "rejeter"];
+ public $possibleStatus = ["pending" => "En attente", "accepted" => "Accepter", "rejected" => "Rejeter"];
  
  
     public function indexAction(Request $request)

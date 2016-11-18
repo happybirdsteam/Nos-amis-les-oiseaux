@@ -1406,7 +1406,7 @@ a {
   transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
   color: #ff6600;
   text-decoration: none;
-  border-bottom: dotted 1px; }
+  border-bottom: 1px; }
   a:hover {
     color: #ff6600;
     border-bottom-color: transparent; }
@@ -2587,3 +2587,13 @@ form.leaflet-control-layers-list {
   margin-top: 2rem;
   margin-left: auto;
   margin-right: auto; }
+
+.fos_registration {
+  margin: 3rem auto;
+  padding: 1rem;
+  text-align: center; }
+}
+
+.padding_left {
+  padding-left: 10px;
+}

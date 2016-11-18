@@ -29,24 +29,26 @@ class ObservationType extends AbstractType
                 'label' => 'Longitude'
             ))
             ->add('comment', TextareaType::class, array(
-                'label' => 'commentaire',
+                'label' => 'Commentaire',
                 'required' => false
             ))
             ->add('date',  DateTimeType::class,
                 array(
-                    'label'=> 'date d\'observation',
+                    'label'=> 'Date d\'observation',
                     'date_widget' => "single_text", 'time_widget' => "single_text",
                     'data' => new \DateTime())
             )
             ->add('bird', TextType::class, array(
-                'label' => 'nom de l\'oiseau'
+                'label' => 'Nom de l\'oiseau'
 
             ))
             ->add('image', FileType::class, array(
                 'label' => 'Image',
                 'required' => false
             ))
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, array(
+                'label' => 'Soumettre'
+            ))
         ;
     }
     
