@@ -129,30 +129,35 @@
             
             $(".addSpecies").on("click", function(){
 
-            var speciesToAdd = "<span class='addedSpecies button' id='" +$observation_bird.val() + "' >" + $observation_bird.val() + "<span class='remove'>&nbsp;&nbsp;X</span></span>";
-            $(".showingSpecies").append(speciesToAdd);
-                $(".remove").on('click', function () {
-                    refLayer[ $(this).parent().attr("id") ].clearLayers();
-                    getRefToLayerControl.removeLayer( refLayer[ $(this).parent().attr("id") ] )  ;
-                    $(this).parent().remove();
+
+                if( valInCache( $observation_bird.val(), cache )) {
+
+                    var speciesToAdd = "<span class='addedSpecies button' id='" +$observation_bird.val() + "' >" + $observation_bird.val() + "<span class='remove'>&nbsp;&nbsp;X</span></span>";
+                    $(".showingSpecies").append(speciesToAdd);
+                        $(".remove").on('click', function () {
+                            refLayer[ $(this).parent().attr("id") ].clearLayers();
+                            getRefToLayerControl.removeLayer( refLayer[ $(this).parent().attr("id") ] )  ;
+                            $(this).parent().remove();
 
 
-                });
-            data = "bird=" + $observation_bird.val().replace(/ /gi,"%20");
-            $.ajax({
-  				method: "POST",
-  				url: "{{ path('nao_app_get_observations_by_bird') }}",
-  				data: data,
-  				cache: false
-			})
-  			.done(function( response ) {
-                fillMap(response);
-   				//console.log("résultats :" + JSON.stringify(response));
-                $observation_bird.val('');
-            })
-                    .error(function(){console.log("error")});
-            
-            });
+                        });
+                    data = "bird=" + $observation_bird.val().replace(/ /gi,"%20");
+                    $.ajax({
+                        method: "POST",
+                        url: "{{ path('nao_app_get_observations_by_bird') }}",
+                        data: data,
+                        cache: false
+                    })
+                    .done(function( response ) {
+                        fillMap(response);
+                        //console.log("résultats :" + JSON.stringify(response));
+                        $observation_bird.val('');
+                    })
+                            .error(function(){console.log("error")});
+
+                    }
+                }
+            );
 
 
 

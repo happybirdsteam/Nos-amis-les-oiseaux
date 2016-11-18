@@ -8,6 +8,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\Type\ObservationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -128,14 +129,12 @@ class HomeController extends Controller
     
     public function viewObservationAction( $theBird= null ){
 
-    
-    $DB_response = $this->getDoctrine()->getManager()
+        $DB_response = $this->getDoctrine()->getManager()
     			->getRepository('AppBundle:Observation')->findBy(array("bird"=> $theBird));
-
     
-    	 return $this->render('AppBundle:Home:viewAllObservations.html.twig', 
-    	 					  array("birds" => $DB_response, "statut" =>'accepted') 
-    	 					);
+        return $this->render('AppBundle:Home:viewAllObservations.html.twig',
+            array("birds" => $DB_response, "statut" =>'accepted')
+        );
     }
     
     public function viewMyObservationsAction( User $user ){
@@ -152,11 +151,11 @@ class HomeController extends Controller
     		->findBy( array("user" => $user) );
     	return $this->render('AppBundle:Home:viewMyObservations.html.twig', 
     						array( "observations" => $query,
-    								'server' => $server, 
+    								'server' => $server,
             	  					'folder'=> $img,
             	  					'option_value' => $this->possibleStatus
             	  			) );
-    
+
     }
     
     public function ajaxGetObservationsByBirdAction( Request $request){
